@@ -1,6 +1,9 @@
 """wgu — wargame_utils command line.
 
     wgu init [--id ID --short ABBR]          create wgu.yaml in the current directory
+    wgu init --setup [--pdf F] [--image F…] [--no-git]
+                                             also sort sources into docs/ png/, measure the PDF, write
+                                             .gitignore, .claude/settings.json (enables the plugin), git init
     wgu config                               print the resolved project configuration
     wgu pdf analyze|extract|images|render …  PDF tools (fonts/colours, text with markup, images, page renders)
     wgu kb import-legacy DIR [--specs DIR]   convert an old Markdown index (docs/indeks) to the YAML KB
@@ -35,6 +38,12 @@ def _forward(module: str, argv: list[str]):
 
 def cmd_init(a):
     from .config import CONFIG_NAME, INIT_TEMPLATE
+    if a.setup:
+        from .project_setup import setup
+        for line in setup(Path.cwd(), a.id, a.short, Path(a.pdf).resolve() if a.pdf else None,
+                          [Path(x).resolve() for x in a.image], git=not a.no_git):
+            print(line)
+        return
     p = Path.cwd() / CONFIG_NAME
     if p.exists():
         raise SystemExit(f"{p} already exists")
@@ -174,6 +183,8 @@ def main(argv=None):
     ap = argparse.ArgumentParser(prog="wgu", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sp = ap.add_subparsers(dest="cmd", required=True)
     p = sp.add_parser("init"); p.add_argument("--id"); p.add_argument("--short"); p.set_defaults(fn=cmd_init)
+    p.add_argument("--setup", action="store_true"); p.add_argument("--pdf"); p.add_argument("--image", action="append", default=[])
+    p.add_argument("--no-git", action="store_true")
     p = sp.add_parser("config"); p.set_defaults(fn=cmd_config)
     p = sp.add_parser("kb"); p.set_defaults(fn=cmd_kb)
     p.add_argument("action", choices=["import-legacy", "lint", "render", "show", "stats", "export"])

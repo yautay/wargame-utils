@@ -250,7 +250,7 @@ flowchart LR
 ## ⌨️ CLI
 
 ```text
-wgu init | config
+wgu init [--setup --pdf F --image F… --no-git] | config
 wgu pdf    analyze | extract | images | render | layout | compare
 wgu kb     import-legacy | lint | render | show ID… | stats | export
 wgu terms  lint | show | check TEX… | impact ID --tex … --src … | for-chunk SRC | glossary-tex OUT | import-md
