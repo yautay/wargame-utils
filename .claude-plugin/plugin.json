@@ -1,0 +1,9 @@
+{
+  "name": "wgu",
+  "displayName": "wargame_utils",
+  "version": "0.1.0",
+  "description": "Analiza zasad gier planszowych/wargame'ów: atomowa baza reguł (YAML), errata i wersje, tłumaczenie LaTeX, wydanie o lepszej czytelności, pomoce do gry (algorytmy, schematy, karty) i eksport pod digitalizację.",
+  "author": {"name": "Michal Pielaszkiewicz"},
+  "repository": "https://github.com/yautay/wargame-utils",
+  "keywords": ["wargame", "boardgame", "rules", "translation", "latex", "digitization"]
+}

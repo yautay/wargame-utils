@@ -1,0 +1,245 @@
+%! Szablon stylu tłumaczenia instrukcji — wargame_utils (skill /wgu:tlumaczenie).
+%! Skopiuj jako <projekt>-style.sty i dostosuj: fonty, kolory, \seriatytul, \stopkatekst, numerację.
+%! Kolory mają prefiks wg (wgczern, wgniebieski = kolor zmian wersji, …); wartości z `wgu pdf analyze`.
+%! Domyślne wartości pochodzą z pierwszego projektu (oprawa MMP, GCACW-PL) — zmień je dla nowej gry.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{gry-style}[2026/10/03 szablon tlumaczenia instrukcji]
+
+% --- Język i fonty -----------------------------------------------------------
+\RequirePackage[polish]{babel}
+\RequirePackage{fontspec}
+\setmainfont{EB Garamond}[
+  Numbers=Lining,
+  SmallCapsFeatures={Letters=SmallCaps},
+]
+\setsansfont{SourceSans3}[
+  Extension=.otf,
+  UprightFont=*-Regular,
+  BoldFont=*-Semibold,
+  ItalicFont=*-RegularIt,
+  BoldItalicFont=*-SemiboldIt,
+]
+\newfontfamily\naglowekfont{SourceSans3}[
+  Extension=.otf,
+  UprightFont=*-Semibold,
+  BoldFont=*-Bold,
+  ItalicFont=*-SemiboldIt,
+  BoldItalicFont=*-BoldIt,
+  SmallCapsFeatures={Letters=SmallCaps},
+]
+\RequirePackage{microtype}
+
+% --- Teksty pagin (nadpisz \renewcommand w pliku głównym przed \begin{document}) ---
+\newcommand{\seriatytul}{Tytuł gry}
+\newcommand{\stopkatekst}{Zasady · tłumaczenie nieoficjalne}
+
+% --- Kolory (wartości z `wgu pdf analyze`) -------------------------------------
+\RequirePackage[svgnames,table]{xcolor}
+\definecolor{wgczern}{HTML}{231F20}     % czarny (paski, nagłówki tabel)
+\definecolor{wgniebieski}{HTML}{24408E} % kolor zmian wersji
+\definecolor{wgszary}{HTML}{D1D3D4}     % tło przykładów, wiersze tabel
+\definecolor{wgjasny}{HTML}{E6E7E8}
+\definecolor{wgziel}{HTML}{6F8B5B}      % pasek okładki
+\definecolor{wgfiolet}{HTML}{5B2C83}    % zasady opcjonalne (konwencja tłumacza)
+\definecolor{wgbraz}{HTML}{7A4A1E}      % zasady specjalne tytułów (konwencja tłumacza)
+\definecolor{wgpergamin}{HTML}{F4EBD3}  % notatki tłumacza
+\definecolor{wgsepia}{HTML}{6B4F2E}
+
+% --- Strona ------------------------------------------------------------------
+\RequirePackage[a4paper,top=20mm,bottom=20mm,inner=14mm,outer=14mm,
+  headheight=16pt,headsep=7mm,footskip=11mm]{geometry}
+\RequirePackage{multicol}
+\setlength{\columnsep}{7mm}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt plus 1pt}
+\AtBeginDocument{\fontsize{9.6}{11.4}\selectfont}
+\renewcommand{\normalsize}{\fontsize{9.6}{11.4}\selectfont}
+\RequirePackage{graphicx}
+\RequirePackage{wrapfig}
+\RequirePackage{tikz}
+\usetikzlibrary{shapes.geometric,positioning,calc}
+\RequirePackage{pgfornament}
+\RequirePackage[most]{tcolorbox}
+\RequirePackage{enumitem}
+\RequirePackage{array,tabularx,multirow,makecell}
+\RequirePackage{etoolbox}
+\RequirePackage{import}
+\RequirePackage[hidelinks]{hyperref}
+
+\setlist{nosep,leftmargin=*,itemsep=1pt,topsep=2pt}
+\setlist[itemize]{label=\textbullet,leftmargin=1.6em}
+\setlist[enumerate]{leftmargin=1.8em,itemsep=2pt}
+\newlist{kroki}{enumerate}{2}           % procedury: 1. 2. 3.
+\setlist[kroki]{label=\arabic*.,leftmargin=1.8em,itemsep=2pt,topsep=2pt}
+\newlist{podkroki}{enumerate}{2}        % a. b. c.
+\setlist[podkroki]{label=\alph*.,leftmargin=1.6em,itemsep=1pt,topsep=1pt}
+
+% --- Nagłówki (titlesec) -------------------------------------------------------
+\RequirePackage{titlesec}
+\renewcommand{\thesection}{\arabic{section}.0}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{3}
+
+% 1.0 WSTĘP — biały kapitalik na czarnym pasku
+\titleformat{\section}[block]
+  {\naglowekfont\fontsize{13}{15}\selectfont}
+  {}{0pt}
+  {\wgpasek}
+% Długi tytuł, który nie mieści się w kolumnie, zawija się wewnątrz paska.
+\newsavebox{\wgpasekbox}
+\newcommand{\wgpasek}[1]{%
+  \sbox{\wgpasekbox}{\color{white}\strut\hspace{1pt}\thesection\hspace{1.4em}\scshape #1\hspace{4pt}}%
+  \ifdim\wd\wgpasekbox>\dimexpr\linewidth-2\fboxsep\relax
+    \colorbox{wgczern}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\raggedright
+      \color{white}\hangindent=2.95em\hangafter=1\strut\hspace{1pt}\thesection\hspace{1.4em}\scshape #1\strut}}%
+  \else
+    \colorbox{wgczern}{\usebox{\wgpasekbox}}%
+  \fi}
+\titlespacing*{\section}{0pt}{10pt plus 2pt}{5pt}
+
+% Wersja nienumerowana (np. Ograniczony wywiad)
+\titleformat{name=\section,numberless}[block]
+  {\naglowekfont\fontsize{13}{15}\selectfont}{}{0pt}
+  {\wgpaseknn}
+\newcommand{\wgpaseknn}[1]{\colorbox{wgczern}{\color{white}\strut\hspace{1pt}\scshape #1\hspace{4pt}}}
+
+% 2.1 KOMPONENTY GRY
+\titleformat{\subsection}[hang]
+  {\naglowekfont\fontsize{11}{13}\selectfont}
+  {\thesubsection}{1.4em}{\scshape}
+\titlespacing*{\subsection}{0pt}{8pt plus 2pt}{3pt}
+
+% JEDNOSTKI WOJSKOWE (podtytuł bez numeru)
+\titleformat{\subsubsection}[hang]
+  {\naglowekfont\fontsize{10}{12}\selectfont}{}{0pt}{\scshape}
+\titlespacing*{\subsubsection}{0pt}{6pt plus 2pt}{2pt}
+\setcounter{secnumdepth}{2}
+
+% Fazy w rozdziale 3.0 („1. Faza wydarzeń losowych”)
+\newcommand{\faza}[1]{\par\addvspace{4pt}{\naglowekfont\fontsize{10}{12}\selectfont\scshape #1}\par\nopagebreak}
+
+% --- Paginy ------------------------------------------------------------------
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\newcommand{\wgpagina}{%
+  \colorbox{wgczern}{\color{white}\naglowekfont\fontsize{10}{12}\selectfont
+    \hspace{6pt}\scshape \seriatytul\hspace{10pt}}}
+\newcommand{\wgnumer}{%
+  \colorbox{wgczern}{\color{white}\naglowekfont\fontsize{11}{13}\selectfont
+    \rule[-5pt]{0pt}{17pt}\hspace{8pt}\thepage\hspace{8pt}}}
+\fancyhead[LE]{\wgpagina}
+\fancyhead[RO]{\wgpagina}
+\fancyfoot[LE,RO]{\wgnumer}
+\fancyfoot[RE,LO]{\naglowekfont\fontsize{8.5}{10}\selectfont\scshape \stopkatekst}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[LE,RO]{\wgnumer}}
+
+% --- Makra semantyczne ---------------------------------------------------------
+% Tekst dodany lub zmieniony w wersji 1.6 (jak w oryginale: niebieski)
+\newcommand{\nowe}[1]{\textcolor{wgniebieski}{#1}}
+\newenvironment{nowyblok}{\color{wgniebieski}}{}
+
+% Skrót tytułu gry, np. \gra{RTG}
+\newcommand{\gra}[1]{\textit{#1}}
+% Termin oryginalny: zmęczenie\ang{fatigue} -> zmęczenie/fatigue
+\newcommand{\ang}[1]{/\textit{#1}}
+% Wyróżnienia regulaminowe
+\newcommand{\wyjatek}{\textbf{Wyjątek}: }
+\newcommand{\wyjatki}{\textbf{Wyjątki}: }
+\newcommand{\uwaga}{\textbf{Uwaga}: }
+\newcommand{\opcja}{\textbf{(Opcjonalnie)} }
+\newcommand{\odsylacz}[1]{[#1]}
+
+% Ramka przykładu (szare tło, jak „Example” w oryginale)
+\newtcolorbox{przyklad}[1][]{enhanced,breakable,colback=wgjasny,colframe=wgjasny,
+  boxrule=0pt,arc=0pt,left=4pt,right=4pt,top=3pt,bottom=3pt,
+  before upper={\textbf{Przykład\ifstrempty{#1}{}{ (#1)}:}\ }}
+
+% Ramka przykładu z tytułem (np. „Przykład walki (z HSN)”)
+\newtcolorbox{przykladtytul}[1]{enhanced,breakable,colback=wgjasny,colframe=wgczern,
+  boxrule=0.6pt,arc=0pt,left=5pt,right=5pt,top=4pt,bottom=4pt,
+  title={\naglowekfont\scshape #1},fonttitle=\fontsize{10}{12}\selectfont,
+  coltitle=wgczern,colbacktitle=wgjasny,titlerule=0pt,attach title to upper={\par}}
+
+% Ramka zasady specjalnej (biała z czarną obwódką, jak „Special Rule for…”)
+\newtcolorbox{specjalna}[1]{enhanced,breakable,colback=white,colframe=wgczern,
+  boxrule=0.6pt,arc=0pt,left=5pt,right=5pt,top=4pt,bottom=4pt,
+  title={\naglowekfont\scshape #1},fonttitle=\fontsize{10}{12}\selectfont,
+  coltitle=wgczern,colbacktitle=white,titlerule=0pt,attach title to upper={\par\smallskip}}
+
+% Ramka podsumowania (np. „Recovery Phase”, „Woods or Loess Hexside”)
+\newtcolorbox{podsumowanie}[1]{enhanced,breakable,colback=white,colframe=wgczern,
+  boxrule=1pt,arc=0pt,left=5pt,right=5pt,top=4pt,bottom=4pt,
+  title={\naglowekfont\scshape #1},fonttitle=\fontsize{12}{14}\selectfont,
+  coltitle=wgczern,colbacktitle=white,titlerule=0pt,attach title to upper={\par\smallskip}}
+
+% Zasada opcjonalna — konwencja tłumacza (fiolet), zachowana w spójnej formie
+\newtcolorbox{opcjonalna}[1][]{enhanced,breakable,colback=white,colframe=wgfiolet,
+  boxrule=0pt,leftrule=2pt,arc=0pt,left=5pt,right=2pt,top=1pt,bottom=1pt,
+  coltext=wgfiolet,
+  before upper={\textbf{(Opcjonalnie)\ifstrempty{#1}{}{ #1}}\ }}
+
+% Notatka tłumacza — wstawka dydaktyczna w duchu epoki (pergamin, ornament)
+\newtcolorbox{wskazowka}[1][Notatka tłumacza]{enhanced,breakable,
+  colback=wgpergamin,colframe=wgsepia,boxrule=0.5pt,arc=1pt,
+  left=6pt,right=6pt,top=3pt,bottom=4pt,coltext=wgsepia!70!black,
+  fontupper=\itshape,
+  before upper={{\centering\upshape\color{wgsepia}%
+    \pgfornament[width=1.3em,symmetry=v]{15}\hspace{0.5em}%
+    {\scshape\fontsize{10.5}{12}\selectfont #1}%
+    \hspace{0.5em}\pgfornament[width=1.3em]{15}\par\smallskip}}}
+
+% Żeton w tekście (oblewany), szerokość domyślna 12 mm jak w oryginale
+\newcommand{\zeton}[2][l]{%
+  \begin{wrapfigure}{#1}{13.5mm}\vspace{-10pt}
+    \includegraphics[width=12mm]{#2}\vspace{-14pt}
+  \end{wrapfigure}}
+\newcommand{\zetony}[3][l]{%
+  \begin{wrapfigure}{#1}{26mm}\vspace{-10pt}
+    \includegraphics[width=12mm]{#2}\hspace{1mm}\includegraphics[width=12mm]{#3}\vspace{-14pt}
+  \end{wrapfigure}}
+\newcommand{\zetonwiersz}[1]{\includegraphics[width=12mm]{#1}}
+
+% Tekst z żetonem po prawej w minipage — bezpieczne przed listami i ramkami
+% (wrapfigure przed itemize/tcolorbox w multicols daje błąd „missing \item”).
+\newcommand{\zetonobok}[2]{\begin{minipage}[t]{\dimexpr\linewidth-14mm\relax}#1\end{minipage}\hfill
+  \begin{minipage}[t]{12mm}\vspace{-0.75\baselineskip}\includegraphics[width=12mm]{#2}\end{minipage}}
+
+% Symbole NATO (TikZ) do opisu typów jednostek w tekście
+\newcommand{\natoramka}[1]{\tikz[baseline=-0.15ex,x=1mm,y=1mm]{\draw[line width=0.5pt] (0,0) rectangle (5,3.2); #1}}
+\newcommand{\natopiechota}{\natoramka{\draw[line width=0.5pt] (0,0) -- (5,3.2) (0,3.2) -- (5,0);}}
+\newcommand{\natokawaleria}{\natoramka{\draw[line width=0.5pt] (0,0) -- (5,3.2);}}
+\newcommand{\natoartyleria}{\natoramka{\fill (2.5,1.6) circle (0.55);}}
+
+% Element na całą szerokość strony (przerywa i wznawia układ dwukolumnowy).
+% Używać wyłącznie na najwyższym poziomie pliku rozdziału, poza innymi środowiskami.
+% Dla dużych ramek pewniejszy jest float \begin{figure*}[tbp]...\end{figure*}
+% (w multicols ląduje na górze kolejnej strony, tekst płynie dalej).
+\newcommand{\szerokostart}{\end{multicols}\vspace{-4pt}}
+\newcommand{\szerokostop}{\begin{multicols}{2}}
+
+% --- Tabele (styl oryginału) ------------------------------------------------------
+\newcommand{\tn}[1]{\leavevmode{\color{white}\naglowekfont\scshape #1}}
+\newcommand{\naglowektabeli}{\rowcolor{wgczern}}
+\newcommand{\szarywiersz}{\rowcolor{wgszary}}
+\renewcommand{\arraystretch}{1.15}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+
+% --- Spis treści ---------------------------------------------------------------
+\RequirePackage{tocloft}
+\renewcommand{\cfttoctitlefont}{\naglowekfont\fontsize{16}{18}\selectfont\scshape}
+\renewcommand{\cftsecfont}{\bfseries}
+\renewcommand{\cftsecpagefont}{\bfseries}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\setlength{\cftbeforesecskip}{3pt}
+\setlength{\cftsecnumwidth}{2.2em}
+\setlength{\cftsubsecnumwidth}{2.2em}
+\setlength{\cftsubsecindent}{1.2em}
+\setlength{\cftsubsubsecindent}{3.4em}
+\renewcommand{\cftsubsubsecfont}{\small}
+\renewcommand{\cftsubsubsecpagefont}{\small}
+
+\endinput

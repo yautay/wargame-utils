@@ -1,0 +1,134 @@
+%! Wspólne style TikZ dla pomocy do gry — szablon wargame_utils (templates/latex/pomoce-tikz.sty)
+%  Skopiuj do projektu jako <aids.tikz> i podłącz kolory projektu w sekcji „Kolory ról” (\colorlet).
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{pomoce/pomoce-tikz}[2026/10/04 wargame_utils aids]
+
+\RequirePackage{tikz}
+\usetikzlibrary{positioning,shapes.geometric,shapes.misc,arrows.meta,calc,fit,backgrounds,matrix}
+\RequirePackage{tcolorbox}
+\RequirePackage{colortbl}
+
+% ---- Kolory ról (domyślne; projekt nadpisuje PO załadowaniu, np. \colorlet{wgtekst}{gcczern}) ----
+\providecolor{wgtekst}{HTML}{231F20}      % tekst, linie, paski nagłówków
+\providecolor{wgtlo}{HTML}{D1D3D4}        % start/koniec, tabele z arkusza gry
+\providecolor{wgdecyzja}{HTML}{E6E7E8}    % decyzje, ramki
+\providecolor{wgprzyklad}{HTML}{6F8B5B}   % ścieżka przykładu
+\providecolor{wgopcja}{HTML}{5B2C83}      % zasady opcjonalne
+\providecolor{wgspecjalna}{HTML}{7A4A1E}  % zasady specjalne tytułów/scenariuszy
+% Font nagłówka karty (projekt może zdefiniować \naglowekfont w swoim .sty)
+\providecommand{\naglowekfont}{\sffamily\bfseries}
+% Tekst stopki (projekt nadpisuje: \renewcommand{\wgstopka}{…})
+\providecommand{\wgstopka}{pomoc nieoficjalna}
+
+% ID reguły: 7 pt, szarość 70 % (kontrast ok. 7:1)
+\newcommand{\rid}[1]{{\fontsize{7}{8}\selectfont\color{wgtekst!70}#1}}
+% mini-odsyłacz do karty
+\newcommand{\mini}[1]{\fcolorbox{wgtekst}{wgdecyzja}{\fontsize{7.5}{8}\selectfont\strut\,#1\,}}
+\newcommand{\pzfont}{\sffamily\fontsize{8}{9.4}\selectfont\hyphenpenalty=10000\exhyphenpenalty=10000\relax}
+
+\tikzset{
+  wezel/.style={font=\pzfont, text=wgtekst, align=left, inner sep=2.2pt,
+    draw=wgtekst, line width=0.6pt, fill=white},
+  start/.style={wezel, rounded rectangle, align=center, fill=wgtlo},
+  koniec/.style={start},
+  decyzja/.style={wezel, diamond, aspect=2, align=center, inner sep=0pt, fill=wgdecyzja},
+  akcja/.style={wezel, rectangle},
+  dane/.style={wezel, trapezium, trapezium left angle=70, trapezium right angle=110},
+  tabela/.style={wezel, rectangle, fill=wgtlo},
+  wyjatek/.style={wezel, rectangle, draw=wgspecjalna, dash pattern=on 3pt off 1.5pt, line width=0.8pt},
+  regula/.style={font=\sffamily\fontsize{7}{8}\selectfont, text=wgtekst!70, inner sep=1pt},
+  przyklad/.style={fill=wgprzyklad!20, draw=wgprzyklad!80!black, line width=1.5pt},
+  odsylacz/.style={wezel, rectangle},
+  kr/.style={-{Latex[length=2.2mm,width=1.8mm]}, line width=0.8pt, draw=wgtekst},
+  sciezka/.style={-{Latex[length=2.8mm,width=2.4mm]}, line width=2.2pt, draw=wgprzyklad},
+  et/.style={font=\sffamily\bfseries\fontsize{7.5}{8.6}\selectfont, text=wgtekst, fill=white, inner sep=0.7pt, align=center},
+  etn/.style={font=\sffamily\fontsize{7.5}{8.6}\selectfont, text=wgtekst, fill=white, inner sep=0.7pt, align=left},
+}
+
+% Dodatkowe style (P02+): opcjonalna, przeciwnik, ramka, dymek przykładu, doprecyzowanie
+\tikzset{
+  opc/.style={text=wgopcja, draw=wgopcja, line width=0.9pt},
+  przeciw/.style={wezel, double=white, double distance=0.9pt, line width=0.6pt, fill=white},
+  ramkan/.style={wezel, fill=wgdecyzja},
+  dopr/.style={wezel, draw=wgtekst!55, line width=0.4pt, fill=white},
+  dymek/.style={font=\sffamily\fontsize{7.5}{8.6}\selectfont, text=wgtekst, align=left, inner sep=1.8pt,
+    draw=wgprzyklad!80!black, fill=wgprzyklad!20, rounded corners=1.2pt, line width=0.7pt},
+  kro/.style={kr, draw=wgopcja},
+  zakaz/.style={wezel, rectangle, line width=1.6pt, align=left, fill=white},
+  decyzjad/.style={wezel, chamfered rectangle, chamfered rectangle xsep=5mm, align=center, fill=wgdecyzja,
+    chamfered rectangle corners={north west,south west,north east,south east}, inner xsep=6.5mm, inner ysep=2pt},
+  etf/.style={font=\sffamily\bfseries\fontsize{7.5}{8.6}\selectfont, text=wgopcja, fill=white, inner sep=0.7pt, align=left},
+}
+% znacznik zakazu (czarne kółko z krzyżykiem) przy lewym górnym rogu węzła
+\newcommand{\krzyzyk}[1]{%
+  \begin{scope}[shift={($(#1.west |- #1.north)+(0mm,0mm)$)}]
+    \fill[wgtekst] (0,0) circle (1.9mm);
+    \draw[white,line width=0.8pt] (-0.9mm,-0.9mm) -- (0.9mm,0.9mm) (-0.9mm,0.9mm) -- (0.9mm,-0.9mm);
+  \end{scope}}
+% numerowany znacznik przykładu (①②③) w prawym górnym rogu: \przykm{węzeł}{numer}{przesunięcie w mm}
+\newcommand{\przykm}[3]{%
+  \node[circle,draw=wgprzyklad!80!black,fill=white,line width=0.9pt,inner sep=0pt,minimum size=3.6mm,font=\sffamily\bfseries\fontsize{7}{7}\selectfont,text=wgtekst]
+    at ($(#1.west |- #1.north)+(#3 mm,1.4mm)$) {#2};}
+% kostka (ikona rzutu) przy prawym górnym rogu węzła
+\newcommand{\kostka}[1]{%
+  \begin{scope}[shift={($(#1.north east)+(-3.2mm,1.1mm)$)}]
+    \draw[fill=white,line width=0.4pt,rounded corners=0.4pt] (-1.8mm,-1.8mm) rectangle (1.8mm,1.8mm);
+    \foreach \px/\py in {-0.9/-0.9,0.9/-0.9,0/0,-0.9/0.9,0.9/0.9}{\fill[wgtekst] (\px mm,\py mm) circle (0.28mm);}
+  \end{scope}}
+
+% Zagięty róg węzła odsyłacza: \zagiecie[rozmiar]{nazwa} po narysowaniu węzła
+\newcommand{\zagiecie}[2][3mm]{%
+  \fill[white] ($(#2.north east)+(-#1,0)$) -- (#2.north east) -- ($(#2.north east)+(0,-#1)$) -- cycle;
+  \draw[wgtekst,fill=wgtlo,line width=0.5pt] ($(#2.north east)+(-#1,0)$) -- ($(#2.north east)+(0,-#1)$) -- ($(#2.north east)+(-#1,-#1)$) -- cycle;}
+
+% Nagłówek karty: czarny pasek jak w instrukcji
+\newcommand{\naglowekpomocy}[2]{%
+  \noindent\colorbox{wgtekst}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{%
+    \color{white}\naglowekfont\fontsize{12}{14}\selectfont\strut\scshape #1\hspace{1em}#2\strut}}\par}
+
+% Stopka: źródło
+\newcommand{\stopkapomocy}[1]{%
+  {\sffamily\fontsize{7}{8}\selectfont\color{wgtekst!70}\noindent Źródło: reguły #1 · \wgstopka\par}}
+
+% Ramki
+\tcbset{pzbox/.style={enhanced, arc=0pt, boxrule=0.6pt, left=3pt,right=3pt,top=2pt,bottom=2pt,
+  fontupper=\sffamily\fontsize{7.4}{8.6}\selectfont, colback=white, colframe=wgtekst, coltext=wgtekst}}
+\newtcolorbox{ramkapz}{pzbox, colback=wgdecyzja}
+\newtcolorbox{ramkaopc}{pzbox, colframe=wgopcja, boxrule=0pt, leftrule=2pt, coltext=wgopcja}
+\newtcolorbox{ramkaspec}{pzbox, colframe=white, boxrule=0pt,
+  borderline={0.8pt}{0pt}{wgspecjalna,dash pattern=on 3pt off 1.5pt}}
+
+% Legenda kształtów i kolorów: polecenia rysujące (2 wiersze x 4) do użycia wewnątrz tikzpicture/scope
+\newcommand{\legendapomocyrysuj}{%
+  \begin{scope}[every node/.append style={font=\sffamily\fontsize{7}{8}\selectfont}]
+    \node[start,minimum width=7mm,minimum height=3.2mm,inner sep=0pt,line width=0.4pt] at (3.5,-0.0) {};
+    \node[anchor=west] at (8,-0.0) {start / koniec};
+    \node[decyzja,minimum width=7mm,minimum height=3.2mm,inner sep=0pt,line width=0.4pt] at (32.5,-0.0) {};
+    \node[anchor=west] at (37,-0.0) {decyzja};
+    \node[akcja,minimum width=7mm,minimum height=3.2mm,inner sep=0pt,line width=0.4pt] at (53.5,-0.0) {};
+    \node[anchor=west] at (58,-0.0) {akcja};
+    \node[akcja,przyklad,minimum width=7mm,minimum height=3.2mm,inner sep=0pt] at (71.5,-0.0) {};
+    \node[anchor=west] at (76,-0.0) {ścieżka przykładu};
+    \node[odsylacz,minimum width=7mm,minimum height=3.2mm,inner sep=0pt,line width=0.4pt] (legodsyl) at (3.5,-4.5) {};\zagiecie[1.3mm]{legodsyl}
+    \node[anchor=west] at (8,-4.5) {odsyłacz};
+    \node[tabela,minimum width=7mm,minimum height=3.2mm,inner sep=0pt,line width=0.4pt] at (32.5,-4.5) {};
+    \node[anchor=west] at (37,-4.5) {arkusz gry};
+    \node[wyjatek,minimum width=7mm,line width=0.8pt,minimum height=3.2mm,inner sep=0pt] at (53.5,-4.5) {};
+    \node[anchor=west] at (58,-4.5) {specjalna};
+    \draw[wgopcja,line width=2pt] (71.5,-6.1) -- (71.5,-2.9);
+    \node[anchor=west,text=wgopcja] at (76,-4.5) {opcjonalna};
+  \end{scope}}
+\newcommand{\legendapomocy}{\begin{tikzpicture}[x=1mm,y=1mm]\legendapomocyrysuj\end{tikzpicture}}
+% Legenda rozszerzona (3 wiersze): dodatkowy wiersz z decyzją o długim warunku, zakazem i numerowanym przykładem
+\newcommand{\legendapomocyrysujD}{%
+  \legendapomocyrysuj
+  \begin{scope}[every node/.append style={font=\sffamily\fontsize{7}{8}\selectfont}]
+    \node[decyzjad,minimum width=7mm,minimum height=3.2mm,inner sep=0pt,inner xsep=1mm,chamfered rectangle xsep=1.2mm,line width=0.4pt] at (3.5,-9) {};
+    \node[anchor=west] at (8,-9) {decyzja (długi warunek)};
+    \node[zakaz,minimum width=7mm,minimum height=3.2mm,inner sep=0pt,line width=1.2pt] at (43.5,-9) {};
+    \node[anchor=west] at (48,-9) {zakaz (nie wolno)};
+    \node[circle,draw=wgprzyklad!80!black,fill=white,line width=0.9pt,inner sep=0pt,minimum size=3.2mm] at (75,-9) {\bfseries\fontsize{6.5}{7}\selectfont 1};
+    \node[anchor=west] at (78,-9) {numer przykładu};
+  \end{scope}}
+
+\endinput

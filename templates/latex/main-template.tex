@@ -1,0 +1,61 @@
+%! Author = <autor tłumaczenia>
+%! Kompilacja: lualatex "<plik>.tex" (2-3 razy, dla spisu treści)
+\documentclass[10pt,twoside,a4paper]{article}
+\usepackage{<projekt>-style}   % kopia assets/gry-style.sty
+\graphicspath{{./png/<wersja>/}{./png/}}
+
+\renewcommand{\seriatytul}{<Nazwa serii / gry jak w paginie oryginału>}
+\renewcommand{\stopkatekst}{<Tytuł instrukcji> v<wersja> · tłumaczenie nieoficjalne}
+
+\title{<Tytuł> -- <podtytuł PL>}
+\author{<autor tłumaczenia>}
+
+\begin{document}
+
+% --- Okładka (ilustracja z oryginału, bez logo wydawcy) ------------------------
+\begin{titlepage}
+  \thispagestyle{empty}
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=south,inner sep=0pt] at (current page.south)
+      {\includegraphics[width=\paperwidth,height=0.78\paperheight,keepaspectratio=false]{cover}};
+    \fill[top color=wgziel!75!black,bottom color=wgziel!70!white]
+      (current page.north west) rectangle ([yshift=-0.22\paperheight]current page.north east);
+    \node[anchor=north,align=center,text=white,font=\naglowekfont\bfseries]
+      at ([yshift=-14mm]current page.north)
+      {\fontsize{34}{38}\selectfont <Tytuł linia 1>\\[2pt]
+       \fontsize{34}{38}\selectfont <Tytuł linia 2>\\[8pt]
+       \fontsize{24}{28}\selectfont <Podtytuł PL>\\[6pt]
+       \fontsize{24}{28}\selectfont Wersja <wersja>};
+    \node[anchor=south east,align=right,fill=white,fill opacity=.82,text opacity=1,
+      inner sep=6pt,font=\naglowekfont\small]
+      at ([xshift=-8mm,yshift=8mm]current page.south east)
+      {Nieoficjalne tłumaczenie na język polski\\<autor tłumaczenia>};
+  \end{tikzpicture}
+\end{titlepage}
+
+% --- Wstęp / przedmowa (poza multicols; plik sam zarządza kolumnami) ----------
+\import{./tex/}{00_powitanie.tex}
+
+% --- Spis treści (zwarty, ma się zmieścić na 1 stronie) -------------------------
+\clearpage
+\begin{multicols}{2}
+  \fontsize{8.6}{10}\selectfont
+  \setlength{\cftbeforesecskip}{2pt}
+  \tableofcontents
+\end{multicols}
+\clearpage
+
+% --- Zasady (wszystkie rozdziały w jednym multicols) -----------------------------
+\begin{multicols}{2}
+  \import{./tex/}{01_wstep.tex}
+  % \import{./tex/}{02_....tex}
+  % ...
+\end{multicols}
+
+% --- Dodatki -----------------------------------------------------------------
+\clearpage
+\import{./tex/}{15_tabele.tex}       % tabele z ostatniej strony oryginału (poza multicols)
+\clearpage
+\import{./tex/}{14_slowniczek.tex}   % generowany: scripts/gen_glossary.py
+
+\end{document}

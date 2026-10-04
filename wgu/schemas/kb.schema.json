@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/yautay/wargame-utils/schemas/kb.schema.json",
+  "title": "wargame_utils knowledge base (wgu/kb@1)",
+  "description": "Contract between the analysis tool (wargame_utils) and digitization projects. Each $defs/*File entry describes one YAML file of kb/. Free text is Markdown in the KB language; field names are English.",
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[A-Z][A-Za-z0-9]*(-[A-Za-z0-9.]+)*$"},
+    "ids": {"type": "array", "items": {"type": "string"}},
+    "md": {"type": "string", "description": "Markdown text"},
+    "strength": {"enum": ["certain", "probable", "speculative"]},
+
+    "source": {
+      "type": "object",
+      "properties": {
+        "text": {"$ref": "#/$defs/md", "description": "human-readable citation"},
+        "pages": {"type": "string", "description": "page(s) of the original rulebook"},
+        "section": {"type": "string"},
+        "document": {"type": "string", "description": "path of the source document if not the current rules"},
+        "translation": {"type": "array", "items": {"type": "object", "properties": {"file": {"type": "string"}, "lines": {"type": "string"}}, "required": ["file"]}}
+      }
+    },
+
+    "rule": {
+      "type": "object",
+      "required": ["id", "title"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "title": {"type": "string"},
+        "section": {"type": "string", "description": "rule number in the rulebook"},
+        "source": {"$ref": "#/$defs/source"},
+        "when": {"$ref": "#/$defs/md", "description": "conditions / trigger"},
+        "effect": {"$ref": "#/$defs/md", "description": "what happens (the FACT)"},
+        "exceptions": {"$ref": "#/$defs/md"},
+        "see": {"$ref": "#/$defs/md", "description": "cross references"},
+        "keywords": {"type": "array", "items": {"type": "string"}},
+        "notes": {"$ref": "#/$defs/md", "description": "analyst notes; inferences marked [wniosek]/[inference]"},
+        "flags": {"type": "array", "items": {"enum": ["changed", "optional", "title-specific", "summary", "inference", "errata", "removed"]}},
+        "version": {"type": "object", "properties": {"introduced": {"type": "string"}, "changed_in": {"type": "string"}}},
+        "digital": {"type": "object", "description": "hints for digitization (filled by /wgu:digitalizacja)",
+          "properties": {
+            "kind": {"enum": ["definition", "procedure-step", "constraint", "modifier", "table-lookup", "state-change", "decision", "reaction", "random", "hidden-info", "victory", "setup", "presentation"]},
+            "decision_by": {"type": "string"}, "randomness": {"type": "string"}, "state": {"type": "array", "items": {"type": "string"}}
+          }},
+        "refs": {"$ref": "#/$defs/ids"},
+        "extra": {"type": "object"},
+        "body": {"$ref": "#/$defs/md"}
+      }
+    },
+    "rulesFile": {
+      "type": "object", "required": ["chapter", "rules"],
+      "properties": {
+        "chapter": {"type": "object", "required": ["title"], "properties": {"id": {"type": "string"}, "title": {"type": "string"}}},
+        "rules": {"type": "array", "items": {"$ref": "#/$defs/rule"}}
+      }
+    },
+
+    "term": {
+      "type": "object", "required": ["en"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"}, "en": {"type": "string"}, "pl": {"type": "string"},
+        "kind": {"type": "string", "description": "technical | descriptive"},
+        "definition": {"$ref": "#/$defs/md"}, "defined_at": {"type": "string"}, "used_in": {"type": "string"},
+        "refs": {"$ref": "#/$defs/ids"}
+      }
+    },
+    "termsFile": {"type": "object", "properties": {"terms": {"type": "array", "items": {"$ref": "#/$defs/term"}}, "confusables": {"type": "array"}, "notes": {"$ref": "#/$defs/md"}}},
+
+    "table": {
+      "type": "object", "required": ["id", "title"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"}, "title": {"type": "string"},
+        "tables": {"type": "array", "items": {"type": "object", "properties": {"columns": {"type": "array"}, "rows": {"type": "array", "items": {"type": "array"}}}}},
+        "notes": {"$ref": "#/$defs/md"}, "refs": {"$ref": "#/$defs/ids"},
+        "data": {"description": "machine-readable form for engines (filled by /wgu:digitalizacja)"},
+        "complete": {"type": "boolean", "description": "false when values live outside the KB (e.g. a missing charts sheet)"}
+      }
+    },
+    "tablesFile": {"type": "object", "properties": {"tables": {"type": "array", "items": {"$ref": "#/$defs/table"}}}},
+
+    "step": {"type": "object", "required": ["n", "text"], "properties": {
+      "n": {"type": "string"}, "text": {"$ref": "#/$defs/md"},
+      "markers": {"type": "array", "items": {"enum": ["decision", "reaction", "roll", "pitfall"]}},
+      "refs": {"$ref": "#/$defs/ids"}}},
+    "procedure": {
+      "type": "object", "required": ["id", "title"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"}, "title": {"type": "string"},
+        "steps": {"type": "array", "items": {"$ref": "#/$defs/step"}},
+        "subprocedures": {"type": "array", "items": {"$ref": "#/$defs/procedure"}},
+        "notes": {"$ref": "#/$defs/md"}, "refs": {"$ref": "#/$defs/ids"}
+      }
+    },
+    "proceduresFile": {"type": "object", "properties": {"legend": {"$ref": "#/$defs/md"}, "procedures": {"type": "array", "items": {"$ref": "#/$defs/procedure"}}}},
+
+    "relation": {
+      "type": "object", "required": ["from", "to", "type"],
+      "properties": {
+        "from": {"type": "string"}, "to": {"type": "string"},
+        "type": {"enum": ["overrides", "exception-to", "requires", "modifies", "precedes", "replaces", "see"]},
+        "when": {"$ref": "#/$defs/md"}, "note": {"$ref": "#/$defs/md"},
+        "status": {"enum": ["imported", "verified", "inferred"], "description": "imported = parsed automatically, needs analyst check"}
+      }
+    },
+    "relationsFile": {"type": "object", "properties": {"relations": {"type": "array", "items": {"$ref": "#/$defs/relation"}}}},
+
+    "ambiguity": {
+      "type": "object", "required": ["id", "title"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"}, "title": {"type": "string"}, "group": {"type": "string"},
+        "scope": {"enum": ["original", "translation", "errata", "digital"]},
+        "quotes": {"$ref": "#/$defs/md"}, "description": {"$ref": "#/$defs/md"}, "readings": {"$ref": "#/$defs/md"},
+        "recommendation": {"$ref": "#/$defs/md"}, "strength": {"$ref": "#/$defs/strength"},
+        "resolution_source": {"$ref": "#/$defs/md"}, "impact": {"$ref": "#/$defs/md"},
+        "status": {"enum": ["open", "resolved", "house-rule", "wont-fix"]},
+        "resolution": {"$ref": "#/$defs/md", "description": "how/when resolved (errata, FAQ, owner decision)"},
+        "refs": {"$ref": "#/$defs/ids"}, "extra": {"type": "object"}, "body": {"$ref": "#/$defs/md"}
+      }
+    },
+    "ambiguitiesFile": {"type": "object", "properties": {"ambiguities": {"type": "array", "items": {"$ref": "#/$defs/ambiguity"}}}},
+
+    "change": {
+      "type": "object", "required": ["id"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"}, "group": {"type": "string"}, "from_version": {"type": "string"}, "to_version": {"type": "string"},
+        "kind": {"enum": ["version", "errata", "faq", "clarification", "translation-fix", "readability"]},
+        "place": {"type": "string"}, "change": {"$ref": "#/$defs/md"}, "effect": {"$ref": "#/$defs/md"},
+        "rules": {"type": "string"}, "refs": {"$ref": "#/$defs/ids"}, "source": {"$ref": "#/$defs/source"}, "extra": {"type": "object"}
+      }
+    },
+    "changesFile": {"type": "object", "properties": {"changes": {"type": "array", "items": {"$ref": "#/$defs/change"}}, "notes": {"$ref": "#/$defs/md"}}},
+
+    "scenario": {
+      "type": "object", "required": ["id", "question"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"}, "question": {"$ref": "#/$defs/md"}, "answer": {"$ref": "#/$defs/md"},
+        "chain": {"$ref": "#/$defs/md"}, "refs": {"$ref": "#/$defs/ids"}, "group": {"type": "string"},
+        "given": {"description": "structured initial state (digitization golden test)"},
+        "when": {"description": "action/decisions/dice"},
+        "then": {"description": "expected state/result"}
+      }
+    },
+    "scenariosFile": {"type": "object", "properties": {"scenarios": {"type": "array", "items": {"$ref": "#/$defs/scenario"}}}},
+
+    "node": {"type": "object", "required": ["id", "shape", "text"], "properties": {
+      "id": {"type": "string"}, "shape": {"type": "string", "description": "start | end/koniec | decision/decyzja | action/akcja | note/notatka | data | table | exception"},
+      "text": {"$ref": "#/$defs/md"}, "rules": {"type": "string"}, "refs": {"$ref": "#/$defs/ids"}}},
+    "edge": {"type": "object", "required": ["from", "to"], "properties": {"from": {"type": "string"}, "to": {"type": "string"}, "label": {"type": "string"}}},
+    "aid": {
+      "type": "object", "required": ["id", "title"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^P\\d+"}, "title": {"type": "string"}, "header": {"type": "string"}, "kind": {"type": "string"},
+        "type": {"type": "string"}, "format": {"type": "string"}, "priority": {"type": "integer"}, "complexity": {"type": "string"},
+        "use_moment": {"$ref": "#/$defs/md"}, "sources": {"$ref": "#/$defs/md"},
+        "nodes": {"type": "array", "items": {"$ref": "#/$defs/node"}}, "edges": {"type": "array", "items": {"$ref": "#/$defs/edge"}},
+        "sections": {"type": "object", "additionalProperties": {"type": "string"}},
+        "acceptance": {"type": "array", "items": {"type": "string"}},
+        "status": {"enum": ["spec", "in-progress", "done", "issues"]},
+        "refs": {"$ref": "#/$defs/ids"}
+      }
+    },
+
+    "manifest": {
+      "type": "object", "required": ["schema", "game"],
+      "properties": {
+        "schema": {"const": "wgu/kb@1"}, "game": {"type": "object"}, "sources": {"type": "array"}, "language": {"type": "object"},
+        "interpretation_protocol": {"$ref": "#/$defs/md"}, "warnings": {"$ref": "#/$defs/md"}, "analysis": {"$ref": "#/$defs/md"},
+        "legacy_conventions": {"type": "object"}, "history": {"type": "array"}
+      }
+    }
+  }
+}

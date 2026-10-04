@@ -1,0 +1,8 @@
+{
+  "name": "wargame-utils",
+  "owner": {"name": "Michal Pielaszkiewicz"},
+  "description": "Narzędzia do analizy zasad gier i przygotowania digitalizacji",
+  "plugins": [
+    {"name": "wgu", "source": "./", "description": "Baza wiedzy o zasadach, tłumaczenie, pomoce do gry, eksport pod digitalizację"}
+  ]
+}
