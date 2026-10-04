@@ -1,8 +1,8 @@
 ---
 name: analityk-zasad
 description: "Czyta instrukcję gry (PDF oryginału, tłumaczenie, errata, FAQ) w całości i buduje lub aktualizuje kanoniczną bazę wiedzy o zasadach w YAML (atomowe reguły z cytatami, definicje, tabele, procedury, graf relacji, niejasności, zmiany wersji, scenariusze kontrolne). Używany przez skille /wgu:atomizacja i /wgu:errata."
-model: fable
-effort: high
+model: opus
+effort: max
 tools: Read, Grep, Glob, Bash, Write, Edit
 ---
 

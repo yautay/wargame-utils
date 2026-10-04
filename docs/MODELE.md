@@ -6,8 +6,8 @@
 | ekstrakcja PDF, render, kompilacja LaTeX, sprzątanie | **CLI** (`wgu pdf`, `wgu tex build`, `wgu aids build`) | deterministyczne; wcześniej kosztowało wiele tur modelu |
 | import starej bazy, lint, widoki, eksport, walidacja grafów | **CLI** | jw.; lint zastępuje „ręczną” kontrolę jakości przez model |
 | wyszukanie reguły | **Haiku** (`/wgu:regula`) | to tylko wywołanie `kb show` i streszczenie |
-| atomizacja: relacje, niejasności, scenariusze, protokół | **Fable** (`wgu:analityk-zasad`) | rozumowanie przekrojowe; tu jest prawdziwa wartość analizy |
-| atomizacja: ekstrakcja reguł rozdziału | Fable (domyślnie) lub **Sonnet** (do sprawdzenia benchmarkiem) | praca lokalna, dobrze ustrukturyzowana |
+| atomizacja: relacje, niejasności, scenariusze, protokół | **Opus, effort max** (`wgu:analityk-zasad`) | rozumowanie przekrojowe; tu jest prawdziwa wartość analizy (decyzja właściciela 2026-10-04, zamiast Fable) |
+| atomizacja: ekstrakcja reguł rozdziału | Opus max (domyślnie) lub **Sonnet** (do sprawdzenia benchmarkiem) | praca lokalna, dobrze ustrukturyzowana |
 | projekt pomocy | **Fable** (`wgu:projektant-pomocy`) | logika decyzji, poprawność gałęzi |
 | rysowanie pomocy | **Sonnet** (`wgu:grafik`) | wierna implementacja specyfikacji, walidator pilnuje grafu |
 | tłumaczenie | `inherit` (`wgu:tlumacz`) | jakość języka; ustaw model świadomie przy uruchomieniu |
@@ -15,7 +15,7 @@
 | fundament digitalizacji | **Fable** (`wgu:architekt-digitalizacji`) | model stanu i kompletność decyzji |
 
 ## Benchmark przed zmianą modelu
-Wzorzec: baza GCACW-PL (238 reguł, 36 scenariuszy, zbudowana przez Fable 2026-10-03).
+Wzorzec: baza GCACW-PL (238 reguł, 36 scenariuszy, zbudowana przez Fable 2026-10-03; Opus max nie był jeszcze porównany).
 1. Wybierz jeden rozdział (np. 7.0 Walka). Zbuduj bazę rozdziału tańszym modelem do osobnego katalogu
    (`kb.dir` w kopii `wgu.yaml`).
 2. Porównaj ze wzorcem: pokrycie ID reguł, liczby w tabelach, `refs`, liczba ostrzeżeń lintu.
