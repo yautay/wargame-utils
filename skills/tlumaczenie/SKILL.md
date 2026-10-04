@@ -50,10 +50,28 @@ Na podstawie `przewodnik_stylu_szablon.md` i `styl-przepisow.md`. Istniejące t�
 (szablon, „Jak analizować styl”). Glosariusz **nie** jest już tabelą w przewodniku. Przewodnik odsyła do warstw
 terminologii, a słowniczek do druku generuje `wgu terms glossary-tex`.
 
-## Faza 4: oprawa LaTeX
-`gry-style.sty` → `<projekt>-style.sty` (`translation.style`); `main-template.tex` → `translation.main`. Fonty, kolory `wg*`,
-paginy, okładka bez logo wydawcy z dopiskiem „Nieoficjalne tłumaczenie”. Plik testowy wszystkich ramek →
-`wgu tex build test.tex --render 80` → porównaj z oryginałem.
+## Faza 4: analiza oprawy oryginału i styl projektu
+Przekład ma wyglądać **jak oryginał tej konkretnej instrukcji**: format, kolumny, fonty, nagłówki, ramki, paginy,
+grafiki. Nie przenoś oprawy z innego projektu.
+1. **Pomiar:** `wgu pdf layout <oryginał.pdf> translation/layout.yaml --pages <strony z typową treścią>` mierzy format,
+   marginesy, kolumny i odstęp, font i interlinię tekstu, akapity, poziomy nagłówków (rozmiar, grubość, kolor,
+   wersaliki), styl numerów reguł i etykiet („Exception:”), ramki z kolorami i etykietami (Design/Historical/Play Note,
+   Example), paginę i stopkę, grafiki. Proponuje też wolne zamienniki fontów.
+2. **Obejrzyj** renders oryginału (`wgu pdf render --montage 6`, 2–3 strony w powiększeniu) i uzupełnij lub popraw
+   sekcję `spec` w `layout.yaml`: fonty zastępcze (gdy `?`, dobierz wzrokowo), wielkość liter nagłówków,
+   polskie etykiety ramek (`label_pl`), tekst paginy (`header.title_pl`) i stopki (`footer.text_pl`: bez znaków
+   wydawcy, z dopiskiem „tłumaczenie nieoficjalne”), styl przykładów (ramka czy akapit kursywą), tabele, żetony
+   (`\wgzetonszer`), ornamenty. Elementy, których generator nie obsługuje, dopisz w `<projekt>-extra.sty`.
+3. **Styl:** `wgu tex style translation/layout.yaml <projekt>-style.sty` generuje styl na wspólnym API makr
+   `wgu-base.sty` (kopiowanym obok). Tekst przekładu używa tylko makr API (`\regula`, `\wyjatek`, `przyklad`,
+   `uwagahist`, `uwagaprojektanta`, `uwagagra`, `wskazowka`, `\nowe`, `\ang`, `\zeton`…), więc zmiana oprawy nie wymaga
+   zmian w tekście.
+4. **Porównanie:** plik testowy z każdym elementem (nagłówki, reguła, wyjątek, przykład, każda ramka, tabela, żeton)
+   → `wgu tex build test.tex` → `wgu pdf compare <oryginał.pdf> <strona> test.pdf 1 porownanie.png` → obejrzyj obok siebie,
+   popraw `spec`, wygeneruj ponownie. Powtarzaj, aż różnice będą tylko w treści.
+5. `main-template.tex` → `translation.main`: okładka z ilustracją oryginału **bez logo wydawcy**, z dopiskiem
+   „Nieoficjalne tłumaczenie”. Szablon `gry-style.sty` to dawna oprawa MMP z GCACW-PL: zostaje dla zgodności,
+   nowe projekty używają generatora.
 
 ## Faza 5: przygotowanie fragmentów
 1. `wgu pdf extract <pdf> <scratch>/src.md --accent … --heading-font …`, potem `wgu text mark <scratch>/src.md <scratch>/src.marked.md`.

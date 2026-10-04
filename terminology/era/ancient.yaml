@@ -2,37 +2,81 @@ layer:
   id: era/ancient
   level: era
   title: Starożytność (Grecja, Rzym, okres hellenistyczny) — realia wojskowe i nazwy własne
-  scope: {era: ancient}
-  sources: [POLIB-BPzLA, LIW-BPzLA, MEKA, GMT-SPQR-PL3, PHX-HH-PL]
-# Realia historyczne, nie mechaniki. Jeśli gra używa nazwy realiów jako typu jednostki, rekord gry/serii może je doprecyzować.
+  scope:
+    era: ancient
+  sources:
+  - POLIB-BPzLA
+  - LIW-BPzLA
+  - MEKA
+  - GMT-SPQR-PL3
+  - PHX-HH-PL
 concepts:
 - id: ancient.cynoscephalae
   source_term: Cynoscephalae
   sense: Pole bitwy w Tesalii (197 p.n.e.), bitwa Rzymian z Filipem V Macedońskim. Nazwa własna.
   pl: Kynoskefalaj
-  pl_forms: [Kynoskefalaj, Kynoskefalach, Kynoskefalami, pod Kynoskefalami]
+  pl_forms:
+  - Kynoskefalaj
+  - Kynoskefalach
+  - Kynoskefalami
+  - pod Kynoskefalami
   status: proposal
   decided_by: analyst
   rationale: Polska historiografia używa transkrypcji greckiej (np. tytuł w serii Bellony „Historyczne Bitwy”, K. Kęciek). Odmiana mnoga (bitwa pod Kynoskefalami) do potwierdzenia w MEKA.
   evidence:
-  - {source: BELLONA-HB, where: "K. Kęciek, Kynoskefalaj (seria Historyczne Bitwy)", form: Kynoskefalaj, supports: military-usage, note: "stan S — tylko katalog/wyszukiwarka"}
+  - source: BELLONA-HB
+    where: K. Kęciek, Kynoskefalaj (seria Historyczne Bitwy)
+    form: Kynoskefalaj
+    supports: military-usage
+    note: stan S — tylko katalog/wyszukiwarka
 - id: ancient.flank
   source_term: flank
-  variants: [flanks]
+  variants:
+  - flanks
   sense: Skrzydło szyku (bok ugrupowania wojsk) w opisie historycznym.
   disambiguation: Komentarz historyczny. W przepisach gry „flank hex” to osobne pojęcie (heks boczny, zob. ukierunkowanie).
   pl: skrzydło
-  pl_forms: [skrzydło, skrzydła, skrzydle, skrzydłem, skrzydeł, skrzydłom, skrzydłami, skrzydłach]
+  pl_forms:
+  - skrzydło
+  - skrzydła
+  - skrzydle
+  - skrzydłem
+  - skrzydeł
+  - skrzydłom
+  - skrzydłami
+  - skrzydłach
   status: proposal
   decided_by: analyst
   rationale: W polskiej historiografii starożytnej mówi się o skrzydłach szyku. „Flanka” jest poprawna, ale nowsza i częstsza w języku XIX–XX w. Do decyzji, czy w komentarzach dopuszczamy oba.
+  evidence:
+  - source: WSJP
+    where: https://wsjp.pl/haslo/podglad/108843/flanka/5259470/w-bitwie
+    supports: sense
+    note: 'flanka: kwalifikator wojsk., syn. skrzydło; D.lm flanek/flank'
+    checked: '2026-10-04'
 - id: ancient.formation
   source_term: formation
-  variants: [formations]
+  variants:
+  - formations
   sense: Ugrupowanie oddziału lub armii do walki albo marszu (komentarz historyczny).
   pl: szyk
-  pl_forms: [szyk, szyku, szykiem, szyki, szyków, szykami, szykach]
+  pl_forms:
+  - szyk
+  - szyku
+  - szykiem
+  - szyki
+  - szyków
+  - szykami
+  - szykach
   status: proposal
   decided_by: analyst
   evidence:
-  - {source: AAP6-2005PL, where: "s. 356 (line astern → szyk w linię)", supports: against, note: "AAP-6 używa „szyk” dla ugrupowań współczesnych; nie przenosić znaczeń NATO"}
+  - source: AAP6-2005PL
+    where: s. 356 (line astern → szyk w linię)
+    supports: against
+    note: AAP-6 używa „szyk” dla ugrupowań współczesnych; nie przenosić znaczeń NATO
+  - source: WSJP
+    where: https://wsjp.pl/haslo/podglad/10219/szyk/3884119/pojazdów
+    supports: sense
+    note: 'szyk (bojowy) z kwalifikatorem książk.; kolokacje: szyk bojowy/marszowy, zwarty/luźny szyk'
+    checked: '2026-10-04'

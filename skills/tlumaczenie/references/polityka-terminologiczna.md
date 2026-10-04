@@ -56,7 +56,14 @@ Rejestr źródeł z oceną wiarygodności i skrótami: `zrodla.md`.
 3. Zbierz kandydatów i dowody: wydania polskie gier serii, polska literatura przedmiotu, słowniki. Dla każdego kandydata
    zapisz, co dowód potwierdza (`supports`).
 4. Odrzuć kandydatów z powodem (`rejected`): anachronizm, kolizja z innym pojęciem, kalka, neologizm, niejednoznaczność.
-5. Ustal formy odmiany (`pl_forms`). Użyj WSJP, jeśli hasło tam jest. Formy służą do kontroli spójności.
+5. Ustal formy odmiany (`pl_forms`). Formy służą do kontroli spójności, a forma spoza listy nie zostanie znaleziona
+   przy zmianie terminu. Źródło form to WSJP (tabela odmiany z SGJP), jeśli hasło tam jest. Zasady korzystania z WSJP:
+   - adres **znaczenia** (nie samego hasła) znajdź wyszukiwarką `site:wsjp.pl <lemat>`;
+   - zapisz w `evidence` URL, kwalifikator i datę; definicji nie kopiuj (licencja niepotwierdzona);
+   - formy przepisz dosłownie z tabeli odmiany, z wariantami;
+   - co najwyżej jedno zapytanie na 5 minut (`Crawl-delay: 300`); nie pobieraj `/szukaj` ani ukrytego `haslo/json`;
+   - pamiętaj: brak kwalifikatora nie oznacza słowa współczesnego, a istnienie hasła nie przesądza o odpowiedniku
+     (*harcownik* w WSJP ≠ *skirmisher*).
 6. Ustal zapis (`notation`): pierwsze użycie, wielkie litery, tekst na komponentach.
 7. Zapisz rekord jako `proposal` i przedstaw właścicielowi do decyzji.
 

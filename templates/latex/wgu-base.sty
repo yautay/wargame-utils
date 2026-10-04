@@ -1,0 +1,165 @@
+%! wgu-base.sty — wspólne API makr tłumaczenia (wargame_utils).
+%! Ten plik definiuje ZNACZENIE elementów (przepis, przykład, wyjątek, uwagi autora, notatka tłumacza, żetony,
+%! tabele), a nie ich wygląd. Wygląd ustawia styl projektu generowany ze specyfikacji oprawy:
+%!   wgu pdf layout ORYGINAŁ.pdf layout.yaml  →  (weryfikacja)  →  wgu tex style layout.yaml <projekt>-style.sty
+%! Styl projektu ładuje ten plik i nadpisuje: fonty, stronę, kolory ról, nagłówki, paginy i style ramek (\tcbset{wg/...}).
+%! Tłumaczenie używa wyłącznie makr z tego pliku, więc zmiana oprawy nie wymaga zmian w tekście.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{wgu-base}[2026/10/04 wargame_utils: API makr tlumaczenia]
+
+\RequirePackage[polish]{babel}
+\RequirePackage{fontspec}
+\RequirePackage{microtype}
+\RequirePackage[svgnames,table]{xcolor}
+\RequirePackage{multicol}
+\RequirePackage{graphicx}
+\RequirePackage{wrapfig}
+\RequirePackage{tikz}
+\usetikzlibrary{shapes.geometric,positioning,calc}
+\RequirePackage{pgfornament}
+\RequirePackage[most]{tcolorbox}
+\RequirePackage{enumitem}
+\RequirePackage{array,tabularx,multirow,makecell}
+\RequirePackage{etoolbox}
+\RequirePackage{import}
+\RequirePackage{titlesec}
+\RequirePackage{fancyhdr}
+\RequirePackage{tocloft}
+\RequirePackage[hidelinks]{hyperref}
+
+% --- Kolory ról (domyślne; styl projektu definiuje własne przed lub po załadowaniu) ---------
+\providecolor{wgtekst}{HTML}{231F20}       % tekst
+\providecolor{wgnaglowek}{HTML}{231F20}    % nagłówki rozdziałów
+\providecolor{wgzmiana}{HTML}{24408E}      % tekst zmieniony w bieżącej wersji (\nowe)
+\providecolor{wgtabnagl}{HTML}{231F20}     % nagłówek tabeli
+\providecolor{wgtabwiersz}{HTML}{E6E7E8}   % co drugi wiersz tabeli
+\providecolor{wgprzyklad}{HTML}{E6E7E8}    % tło przykładu (jeśli ramka)
+\providecolor{wguwproj}{HTML}{E6E7E8}      % Design Note
+\providecolor{wguwhist}{HTML}{E6E7E8}      % Historical Note
+\providecolor{wguwgra}{HTML}{E6E7E8}       % Play Note
+\providecolor{wgopcja}{HTML}{5B2C83}       % zasady opcjonalne
+\providecolor{wgspecjalna}{HTML}{231F20}   % ramka zasady specjalnej
+\providecolor{wgpergamin}{HTML}{F4EBD3}    % notatka tłumacza
+\providecolor{wgsepia}{HTML}{6B4F2E}
+% zgodność wsteczna z nazwami starego szablonu (gry-style.sty)
+\colorlet{wgczern}{wgtekst}\colorlet{wgniebieski}{wgzmiana}\colorlet{wgszary}{wgtabwiersz}\colorlet{wgjasny}{wgprzyklad}
+
+% --- Fonty ról (styl projektu ustawia \setmainfont oraz \naglowekfont) ---------------------
+\providecommand{\naglowekfont}{\normalfont}
+\providecommand{\wgetykietastyl}{\bfseries}             % „Wyjątek:”, „Uwaga:” (np. \bfseries\itshape)
+\providecommand{\wgregulastyl}{\bfseries}               % numer reguły w tekście (np. 6.11)
+\providecommand{\wgkomentarzstyl}{\upshape\naglowekfont\scshape}  % etykieta uwagi autora
+
+% --- Teksty stałe (polskie etykiety; styl projektu może zmienić) ----------------------------
+\providecommand{\seriatytul}{Tytuł gry}
+\providecommand{\wydanie}{}
+\providecommand{\stopkatekst}{tłumaczenie nieoficjalne}
+\providecommand{\wgnazwaprzyklad}{Przykład}
+\providecommand{\wgnazwahist}{Tło historyczne}
+\providecommand{\wgnazwaproj}{Uwaga projektanta}
+\providecommand{\wgnazwagra}{Uwaga do gry}
+\providecommand{\wgnazwatlum}{Notatka tłumacza}
+\providecommand{\wgetykietacase}[1]{#1}                 % np. \MakeUppercase dla „PRZYKŁAD:”
+
+% --- Listy i procedury --------------------------------------------------------------------
+\setlist{nosep,leftmargin=*,itemsep=1pt,topsep=2pt}
+\setlist[itemize]{label=\textbullet,leftmargin=1.6em}
+\setlist[enumerate]{leftmargin=1.8em,itemsep=2pt}
+\newlist{kroki}{enumerate}{2}
+\setlist[kroki]{label=\arabic*.,leftmargin=1.8em,itemsep=2pt,topsep=2pt}
+\newlist{podkroki}{enumerate}{2}
+\setlist[podkroki]{label=\alph*.,leftmargin=1.6em,itemsep=1pt,topsep=1pt}
+
+% --- Numeracja rozdziałów (styl projektu ustawia wygląd \titleformat) ------------------------
+\renewcommand{\thesection}{\arabic{section}.0}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{3}
+% pasek nagłówka (wariant „bar”, np. MMP): biały tekst na kolorze wgnaglowek, zawija długie tytuły
+\newsavebox{\wgpasekbox}
+\newcommand{\wgpasek}[1]{%
+  \sbox{\wgpasekbox}{\color{white}\strut\hspace{1pt}\thesection\hspace{1.4em}\scshape #1\hspace{4pt}}%
+  \ifdim\wd\wgpasekbox>\dimexpr\linewidth-2\fboxsep\relax
+    \colorbox{wgnaglowek}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\raggedright
+      \color{white}\hangindent=2.95em\hangafter=1\strut\hspace{1pt}\thesection\hspace{1.4em}\scshape #1\strut}}%
+  \else\colorbox{wgnaglowek}{\usebox{\wgpasekbox}}\fi}
+\newcommand{\wgpaseknn}[1]{\colorbox{wgnaglowek}{\color{white}\strut\hspace{1pt}\scshape #1\hspace{4pt}}}
+\newcommand{\faza}[1]{\par\addvspace{4pt}{\naglowekfont\bfseries #1}\par\nopagebreak}
+
+% --- Makra semantyczne -----------------------------------------------------------------------
+\newcommand{\regula}[1]{{\wgregulastyl #1}\ }                % \regula{6.11} Tekst przepisu…
+\newcommand{\nowe}[1]{\textcolor{wgzmiana}{#1}}
+\newenvironment{nowyblok}{\color{wgzmiana}}{}
+\newcommand{\gra}[1]{\textit{#1}}
+\newcommand{\ang}[1]{/\textit{#1}}
+\newcommand{\wgetykieta}[1]{{\wgetykietastyl #1:}\ }
+\newcommand{\wyjatek}{\wgetykieta{Wyjątek}}
+\newcommand{\wyjatki}{\wgetykieta{Wyjątki}}
+\newcommand{\uwaga}{\wgetykieta{Uwaga}}
+\newcommand{\opcja}{\textbf{(Opcjonalnie)} }
+\newcommand{\odsylacz}[1]{[#1]}
+
+% --- Ramki: znaczenie stałe, wygląd przez style wg/... (styl projektu: \tcbset{wg/uwagahist/.style={...}}) ---
+\tcbset{
+  wg/ramka/.style={enhanced,breakable,arc=0pt,boxrule=0pt,left=4pt,right=4pt,top=3pt,bottom=3pt,
+    colframe=white,colback=white,coltext=wgtekst},
+  wg/przyklad/.style={wg/ramka,colback=wgprzyklad},
+  wg/przykladtytul/.style={wg/ramka,colback=wgprzyklad,colframe=wgtekst,boxrule=0.6pt},
+  wg/specjalna/.style={wg/ramka,colframe=wgspecjalna,boxrule=0.6pt},
+  wg/podsumowanie/.style={wg/ramka,colframe=wgtekst,boxrule=1pt},
+  wg/opcjonalna/.style={wg/ramka,colframe=wgopcja,leftrule=2pt,coltext=wgopcja},
+  wg/uwaga/.style={wg/ramka,fontupper=\itshape},
+  wg/uwagahist/.style={wg/uwaga,colback=wguwhist},
+  wg/uwagaprojektanta/.style={wg/uwaga,colback=wguwproj},
+  wg/uwagagra/.style={wg/uwaga,colback=wguwgra},
+  wg/wskazowka/.style={wg/ramka,colback=wgpergamin,colframe=wgsepia,boxrule=0.5pt,arc=1pt,
+    left=6pt,right=6pt,coltext=wgsepia!70!black,fontupper=\itshape},
+}
+\newcommand{\wgkomentarz}[1]{{\wgkomentarzstyl\wgetykietacase{#1}:}\ }
+% Przykład: ramka albo sam akapit kursywą (wariant ustawia styl projektu: \wgprzykladramkafalse)
+\newif\ifwgprzykladramka \wgprzykladramkatrue
+\newenvironment{przykladtekst}[1][]{\par\itshape\wgkomentarz{\wgnazwaprzyklad\ifstrempty{#1}{}{ (#1)}}}{\par}
+\newtcolorbox{przykladramka}[1][]{wg/przyklad,before upper={\wgkomentarz{\wgnazwaprzyklad\ifstrempty{#1}{}{ (#1)}}}}
+\newenvironment{przyklad}[1][]{\ifwgprzykladramka\begin{przykladramka}[#1]\else\begin{przykladtekst}[#1]\fi}
+  {\ifwgprzykladramka\end{przykladramka}\else\end{przykladtekst}\fi}
+\newtcolorbox{przykladtytul}[1]{wg/przykladtytul,title={\naglowekfont\scshape #1},
+  coltitle=wgtekst,colbacktitle=wgprzyklad,titlerule=0pt,attach title to upper={\par}}
+\newtcolorbox{specjalna}[1]{wg/specjalna,title={\naglowekfont\scshape #1},
+  coltitle=wgtekst,colbacktitle=white,titlerule=0pt,attach title to upper={\par\smallskip}}
+\newtcolorbox{podsumowanie}[1]{wg/podsumowanie,title={\naglowekfont\scshape #1},
+  coltitle=wgtekst,colbacktitle=white,titlerule=0pt,attach title to upper={\par\smallskip}}
+\newtcolorbox{opcjonalna}[1][]{wg/opcjonalna,before upper={\textbf{(Opcjonalnie)\ifstrempty{#1}{}{ #1}}\ }}
+\newtcolorbox{uwagahist}[1][\wgnazwahist]{wg/uwagahist,before upper={\wgkomentarz{#1}}}
+\newtcolorbox{uwagaprojektanta}[1][\wgnazwaproj]{wg/uwagaprojektanta,before upper={\wgkomentarz{#1}}}
+\newtcolorbox{uwagagra}[1][\wgnazwagra]{wg/uwagagra,before upper={\wgkomentarz{#1}}}
+\newtcolorbox{wskazowka}[1][\wgnazwatlum]{wg/wskazowka,
+  before upper={{\centering\upshape\color{wgsepia}%
+    \pgfornament[width=1.3em,symmetry=v]{15}\hspace{0.5em}{\scshape #1}\hspace{0.5em}\pgfornament[width=1.3em]{15}\par\smallskip}}}
+
+% --- Żetony i grafiki --------------------------------------------------------------------------
+\providecommand{\wgzetonszer}{12mm}
+\newcommand{\zeton}[2][l]{\begin{wrapfigure}{#1}{\dimexpr\wgzetonszer+1.5mm}\vspace{-10pt}
+    \includegraphics[width=\wgzetonszer]{#2}\vspace{-14pt}\end{wrapfigure}}
+\newcommand{\zetony}[3][l]{\begin{wrapfigure}{#1}{\dimexpr2\wgzetonszer+2mm}\vspace{-10pt}
+    \includegraphics[width=\wgzetonszer]{#2}\hspace{1mm}\includegraphics[width=\wgzetonszer]{#3}\vspace{-14pt}\end{wrapfigure}}
+\newcommand{\zetonwiersz}[1]{\includegraphics[width=\wgzetonszer]{#1}}
+\newcommand{\zetonobok}[2]{\begin{minipage}[t]{\dimexpr\linewidth-\wgzetonszer-2mm\relax}#1\end{minipage}\hfill
+  \begin{minipage}[t]{\wgzetonszer}\vspace{-0.75\baselineskip}\includegraphics[width=\wgzetonszer]{#2}\end{minipage}}
+\newcommand{\natoramka}[1]{\tikz[baseline=-0.15ex,x=1mm,y=1mm]{\draw[line width=0.5pt] (0,0) rectangle (5,3.2); #1}}
+\newcommand{\natopiechota}{\natoramka{\draw[line width=0.5pt] (0,0) -- (5,3.2) (0,3.2) -- (5,0);}}
+\newcommand{\natokawaleria}{\natoramka{\draw[line width=0.5pt] (0,0) -- (5,3.2);}}
+\newcommand{\natoartyleria}{\natoramka{\fill (2.5,1.6) circle (0.55);}}
+\providecommand{\wgkolumny}{2}
+\newcommand{\szerokostart}{\end{multicols}\vspace{-4pt}}
+\newcommand{\szerokostop}{\begin{multicols}{\wgkolumny}}
+
+% --- Tabele -------------------------------------------------------------------------------------
+\newcommand{\tn}[1]{\leavevmode{\color{white}\naglowekfont\bfseries #1}}
+\newcommand{\naglowektabeli}{\rowcolor{wgtabnagl}}
+\newcommand{\szarywiersz}{\rowcolor{wgtabwiersz}}
+\renewcommand{\arraystretch}{1.15}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+
+\setlength{\parindent}{0pt}
+\endinput

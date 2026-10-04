@@ -54,7 +54,7 @@ Cytuj go jako „AAP-6(2005) PL, s. N” wyłącznie przy rozróżnianiu znacze�
 ## 4. Słowniki języka ogólnego (`supports: existence` / `sense`)
 | Skrót | Źródło | Stan | Ocena |
 |---|---|---|---|
-| WSJP | *Wielki słownik języka polskiego PAN*, wsjp.pl | <uzupełnij> | <uzupełnij po analizie> |
+| WSJP | *Wielki słownik języka polskiego PAN*, wsjp.pl (IJP PAN) | V | Słownik w budowie (ok. 100 tys. haseł w 01.2026, teksty po 1945 r.). Strona znaczenia podaje definicję, kwalifikator (np. *wojsk.*, *książk.*), dziedzinę, synonimy, kolokacje i datowane cytaty. Pełna odmiana pochodzi z SGJP, z wariantami (*flanek/flank*, *harcownicy/harcowniki*). **Archaizmy rzeczowe (kohorta, harcownik) nie mają kwalifikatora chronologicznego**; *hist.* oznacza tylko terminologię historiografii. Licencja: tylko „Copyright IJP PAN” (CC BY-SA niepotwierdzone), więc **nie kopiuj definicji**, zapisuj URL znaczenia, kwalifikator i formy. Brak API. robots.txt: `Crawl-delay: 300`, zablokowane `/szukaj`, `/autocomplete`, `/pobierz_hasla`. Ukryty link `haslo/json` jest pułapką na boty i nie wolno go pobierać. Adres hasła znajduj przez wyszukiwarkę (`site:wsjp.pl <lemat>`) lub sitemap. WebFetch streszcza strony, więc o tabelę odmiany proś dosłownie. | `existence`, `sense`, formy odmiany do `pl_forms`, kolokacje. Przykład pułapki: *harcownik* w WSJP to uczestnik pojedynku przed bitwą, **nie** *skirmisher*; *rozsypka* nie ma znaczenia taktycznego. Co najwyżej jedno zapytanie na 5 minut. |
 
 ## 5. Narzędzia i wzorce procesu (nie terminologia)
 | Źródło | Licencja | Co przejęliśmy | Czego nie |

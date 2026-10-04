@@ -107,6 +107,11 @@ def cmd_aids(a):
 
 
 def cmd_tex(a):
+    if a.action == "style":
+        from .latex.style import generate
+        out = generate(Path(a.file), Path(a.out or "projekt-style.sty"))
+        print(f"style -> {out} (+ wgu-base.sty)")
+        return
     from .latex import build
     sys.exit(build.cli_build(Path(a.file), runs=a.runs, outdir=a.outdir, render_dpi=a.render))
 
@@ -159,9 +164,9 @@ def main(argv=None):
     argv = sys.argv[1:] if argv is None else argv
     if argv and argv[0] == "pdf":
         sub = {"analyze": "pdf.analyze", "extract": "pdf.extract_source", "images": "pdf.extract_images",
-               "render": "pdf.render_pages"}
+               "render": "pdf.render_pages", "layout": "pdf.layout", "compare": "pdf.compare"}
         if len(argv) < 2 or argv[1] not in sub:
-            raise SystemExit("usage: wgu pdf {analyze|extract|images|render} …  (--help per command)")
+            raise SystemExit("usage: wgu pdf {analyze|extract|images|render|layout|compare} …  (--help per command)")
         return _forward(sub[argv[1]], argv[2:])
     if argv and argv[0] == "glossary":
         return _forward("latex.glossary", argv[1:])
@@ -179,7 +184,7 @@ def main(argv=None):
     p.add_argument("action", choices=["validate", "build"]); p.add_argument("ids", nargs="*")
     p.add_argument("--dpi", type=int, default=110)
     p = sp.add_parser("tex"); p.set_defaults(fn=cmd_tex)
-    p.add_argument("action", choices=["build"]); p.add_argument("file")
+    p.add_argument("action", choices=["build", "style"]); p.add_argument("file"); p.add_argument("out", nargs="?")
     p.add_argument("--runs", type=int, default=2); p.add_argument("--outdir")
     p.add_argument("--render", type=int, default=0, help="render pages to PNG at this DPI (0 = no)")
     p = sp.add_parser("terms"); p.set_defaults(fn=cmd_terms)

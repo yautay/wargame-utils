@@ -23,6 +23,7 @@ własne repozytorium z plikiem `wgu.yaml`, źródłami, bazą `kb/`, tłumaczeni
 | CLI `wgu` (Python) | `wgu/`, `wgu.py` | wszystko, co nie wymaga modelu: PDF, LaTeX, import, lint, render, eksport, walidacja grafów |
 | Kontrakt danych | `wgu/schemas/kb.schema.json` | JSON Schema bazy: wspólny język narzędzia i projektów digitalizacji |
 | Terminologia wspólna | `terminology/common.yaml`, `terminology/era/*.yaml`, `terminology/series/*.yaml` | warstwy glosariusza pojęciowego (`wgu/terms@1`, `wgu/schemas/terminology.schema.json`); warstwa gry w repo gry |
+| Oprawa | `wgu pdf layout` → `layout.yaml` (wgu/layout@1) → `wgu tex style` → `<gra>-style.sty` na API `templates/latex/wgu-base.sty`; `wgu pdf compare` | styl każdego przekładu odwzorowuje oryginał tej instrukcji; tekst używa wyłącznie makr API |
 | Szablony | `templates/latex/`, `templates/docs/` | styl LaTeX instrukcji i pomocy (kolory ról `wg*`), pułapki środowiska |
 
 Skille są **cienkimi orkiestratorami** w sesji głównej. Uruchamiają agentów pluginu (`subagent_type: "wgu:…"`)

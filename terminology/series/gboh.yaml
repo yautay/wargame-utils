@@ -2,277 +2,620 @@ layer:
   id: series/gboh
   level: series
   title: Great Battles of History (GMT) — pojęcia serii; pierwsze rekordy z próby SPQR Deluxe 5. ed.
-  scope: {series: GBoH, era: ancient}
-  sources: [GMT-SPQR-PL3, SPQR-EN5]
-# Wszystkie rekordy mają status `proposal`: wymagają decyzji właściciela (zob. raport z próby, lista decyzji).
-# Strony GMT-SPQR-PL3 = polska instrukcja SPQR 3. edycji (2008); SPQR-EN5 = SPQR Deluxe 5th Ed. (© 2026).
+  scope:
+    series: GBoH
+    era: ancient
+  sources:
+  - GMT-SPQR-PL3
+  - SPQR-EN5
 concepts:
 - id: gboh.leader
   source_term: Leader
-  variants: [Leaders, leader, leaders]
+  variants:
+  - Leaders
+  - leader
+  - leaders
   sense: Żeton dowódcy (OC, SC, trybun, prefekt). Wydaje rozkazy, ma parametry Initiative, Command Range i inne.
-  rules: [SPQR-4.1]
+  rules:
+  - SPQR-4.1
   pl: dowódca
-  pl_forms: [dowódca, dowódcy, dowódcę, dowódcą, dowódco, dowódców, dowódcom, dowódcami, dowódcach]
+  pl_forms:
+  - dowódca
+  - dowódcy
+  - dowódcę
+  - dowódcą
+  - dowódco
+  - dowódców
+  - dowódcom
+  - dowódcami
+  - dowódcach
   rejected:
-  - {pl: wódz, forms: [wodza, wodzowi, wodzem, wodzowie], reason: "PL3 (s. 4) używa zamiennie „dowódca/wódz”; w przepisach jedno pojęcie = jeden termin. „Wódz” zostaje tylko w komentarzach historycznych i nazwie Słonia Wodza, jeśli właściciel tak zdecyduje"}
+  - pl: wódz
+    forms:
+    - wodza
+    - wodzowi
+    - wodzem
+    - wodzowie
+    reason: PL3 (s. 4) używa zamiennie „dowódca/wódz”; w przepisach jedno pojęcie = jeden termin. „Wódz” zostaje tylko w komentarzach historycznych i nazwie Słonia Wodza, jeśli właściciel tak zdecyduje
   status: proposal
   decided_by: analyst
   evidence:
-  - {source: GMT-SPQR-PL3, where: "s. 4 (słowniczek)", form: "dowódca / wódz", supports: usage-in-games}
-  - {source: GCACW-PL, where: "§6", form: dowódca, supports: usage-in-games}
+  - source: GMT-SPQR-PL3
+    where: s. 4 (słowniczek)
+    form: dowódca / wódz
+    supports: usage-in-games
+  - source: GCACW-PL
+    where: §6
+    form: dowódca
+    supports: usage-in-games
 - id: gboh.line-command
   source_term: Line Command
-  variants: [Line Commands, LC, LCs]
+  variants:
+  - Line Commands
+  - LC
+  - LCs
   sense: Rozkaz wydany przez dowódcę całej linii (grupie jednostek określonego typu ustawionych w linii), zamiast rozkazów indywidualnych.
   disambiguation: Nazwa rozkazu. Samo „line” (bez Command) to grupa jednostek objętych rozkazem, zob. gboh.line.
-  rules: [SPQR-4.31, SPQR-4.32, SPQR-4.33, SPQR-4.34]
+  rules:
+  - SPQR-4.31
+  - SPQR-4.32
+  - SPQR-4.33
+  - SPQR-4.34
   pl: rozkaz liniowy
-  pl_forms: [rozkaz liniowy, rozkazu liniowego, rozkazowi liniowemu, rozkazem liniowym, rozkazie liniowym, rozkazy liniowe, rozkazów liniowych, rozkazami liniowymi]
+  pl_forms:
+  - rozkaz liniowy
+  - rozkazu liniowego
+  - rozkazowi liniowemu
+  - rozkazem liniowym
+  - rozkazie liniowym
+  - rozkazy liniowe
+  - rozkazów liniowych
+  - rozkazami liniowymi
   pl_abbrev: LC
-  notation: {first_use: "rozkaz liniowy\\ang{Line Command, LC}"}
-  related: [gboh.line, gboh.individual-order]
+  notation:
+    first_use: rozkaz liniowy\ang{Line Command, LC}
+  related:
+  - gboh.line
+  - gboh.individual-order
   status: proposal
   decided_by: analyst
   rationale: Forma spójna w PL3 (LC 58×). Para z „rozkazem indywidualnym” jest przejrzysta.
   evidence:
-  - {source: GMT-SPQR-PL3, where: "s. 8; LC 58×", form: Rozkaz Liniowy (LC), supports: usage-in-games}
+  - source: GMT-SPQR-PL3
+    where: s. 8; LC 58×
+    form: Rozkaz Liniowy (LC)
+    supports: usage-in-games
 - id: gboh.line
   source_term: line
-  variants: [Line, lines]
+  variants:
+  - Line
+  - lines
   sense: Grupa sąsiadujących jednostek bojowych tego samego typu, które mogą otrzymać wspólny rozkaz liniowy (definicja w zasadach gry).
   disambiguation: „line” jako obiekt rozkazu liniowego („units in that line”). Nie szyk w sensie ogólnym, nie linia widzenia (LOS), nie „Line Command”.
-  rules: [SPQR-4.31]
+  rules:
+  - SPQR-4.31
   pl: linia
-  pl_forms: [linia, linii, linię, linią, linie, linii, liniom, liniami, liniach]
-  related: [gboh.line-command]
+  pl_forms:
+  - linia
+  - linii
+  - linię
+  - linią
+  - linie
+  - linii
+  - liniom
+  - liniami
+  - liniach
+  related:
+  - gboh.line-command
   status: proposal
   decided_by: analyst
   evidence:
-  - {source: GMT-SPQR-PL3, where: "s. 5 (słowniczek: Linia)", form: linia, supports: usage-in-games}
+  - source: GMT-SPQR-PL3
+    where: 's. 5 (słowniczek: Linia)'
+    form: linia
+    supports: usage-in-games
 - id: gboh.individual-order
   source_term: Individual Order
-  variants: [Individual Orders, IO, IOs]
+  variants:
+  - Individual Orders
+  - IO
+  - IOs
   sense: Rozkaz dla jednej jednostki (lub stosu) wydawany przez aktywnego dowódcę. Liczba rozkazów zależy od Initiative.
-  rules: [SPQR-4.22, SPQR-5.22]
+  rules:
+  - SPQR-4.22
+  - SPQR-5.22
   pl: rozkaz indywidualny
-  pl_forms: [rozkaz indywidualny, rozkazu indywidualnego, rozkazem indywidualnym, rozkazy indywidualne, rozkazów indywidualnych]
+  pl_forms:
+  - rozkaz indywidualny
+  - rozkazu indywidualnego
+  - rozkazem indywidualnym
+  - rozkazy indywidualne
+  - rozkazów indywidualnych
   pl_abbrev: IO
   status: proposal
   decided_by: analyst
   evidence:
-  - {source: GMT-SPQR-PL3, where: "s. 5; IO 34×", form: Rozkaz Indywidualny (IO), supports: usage-in-games}
+  - source: GMT-SPQR-PL3
+    where: s. 5; IO 34×
+    form: Rozkaz Indywidualny (IO)
+    supports: usage-in-games
 - id: gboh.orders-phase
   source_term: Orders Phase
-  variants: [Orders Phases]
+  variants:
+  - Orders Phases
   sense: Faza, w której aktywowany dowódca wydaje rozkazy. Może się powtarzać w turze (Momentum, kolejni dowódcy).
-  rules: [SPQR-3.0, SPQR-4.22]
+  rules:
+  - SPQR-3.0
+  - SPQR-4.22
   pl: Faza Rozkazów
-  pl_forms: [Faza Rozkazów, Fazy Rozkazów, Fazie Rozkazów, Fazę Rozkazów, Fazą Rozkazów, Fazach Rozkazów, faza rozkazów, fazy rozkazów, fazie rozkazów, fazę rozkazów]
-  notation: {capitalisation: "Wielka litera w nazwach faz: preferencja właściciela z GCACW-PL (do potwierdzenia dla serii). Norma ogólna: małe litery"}
+  pl_forms:
+  - Faza Rozkazów
+  - Fazy Rozkazów
+  - Fazie Rozkazów
+  - Fazę Rozkazów
+  - Fazą Rozkazów
+  - Fazach Rozkazów
+  - faza rozkazów
+  - fazy rozkazów
+  - fazie rozkazów
+  - fazę rozkazów
+  notation:
+    capitalisation: 'Wielka litera w nazwach faz: preferencja właściciela z GCACW-PL (do potwierdzenia dla serii). Norma ogólna: małe litery'
   status: proposal
   decided_by: analyst
   evidence:
-  - {source: GMT-SPQR-PL3, where: "55×", form: Faza Rozkazów, supports: usage-in-games}
+  - source: GMT-SPQR-PL3
+    where: 55×
+    form: Faza Rozkazów
+    supports: usage-in-games
 - id: gboh.game-turn
   source_term: Game Turn
-  variants: [Game Turns, turn]
+  variants:
+  - Game Turns
+  - turn
   sense: Pełny cykl sekwencji gry (aktywacje dowódców, fazy rozkazów, ucieczka i przeładowanie, wycofanie armii).
   pl: tura
-  pl_forms: [tura, tury, turze, turę, turą, tur, turom, turami, turach]
+  pl_forms:
+  - tura
+  - tury
+  - turze
+  - turę
+  - turą
+  - tur
+  - turom
+  - turami
+  - turach
   rejected:
-  - {pl: etap, forms: [etapu, etapie, etapy, etapów], reason: "PL3 używa „etap” (~40×) obok „tura”; „etap” w polszczyźnie oznacza część procesu, a nie zamknięty cykl gry; niespójne z GCACW-PL (tura)"}
+  - pl: etap
+    forms:
+    - etapu
+    - etapie
+    - etapy
+    - etapów
+    reason: PL3 używa „etap” (~40×) obok „tura”; „etap” w polszczyźnie oznacza część procesu, a nie zamknięty cykl gry; niespójne z GCACW-PL (tura)
   status: proposal
   decided_by: analyst
   evidence:
-  - {source: GMT-SPQR-PL3, where: "etap ~40×; tura s. 12, 16, 29", form: "etap / tura", supports: against}
-  - {source: GCACW-PL, where: "§6 (Turn Track → tor tur)", form: tura, supports: usage-in-games}
+  - source: GMT-SPQR-PL3
+    where: etap ~40×; tura s. 12, 16, 29
+    form: etap / tura
+    supports: against
+  - source: GCACW-PL
+    where: §6 (Turn Track → tor tur)
+    form: tura
+    supports: usage-in-games
 - id: gboh.combat-unit
   source_term: combat unit
-  variants: [combat units, Combat Unit]
+  variants:
+  - combat units
+  - Combat Unit
   sense: Jednostka bojowa (każdy żeton jednostki wojsk), w odróżnieniu od dowódców i znaczników.
   pl: jednostka bojowa
-  pl_forms: [jednostka bojowa, jednostki bojowej, jednostkę bojową, jednostką bojową, jednostce bojowej, jednostki bojowe, jednostek bojowych, jednostkom bojowym, jednostkami bojowymi]
+  pl_forms:
+  - jednostka bojowa
+  - jednostki bojowej
+  - jednostkę bojową
+  - jednostką bojową
+  - jednostce bojowej
+  - jednostki bojowe
+  - jednostek bojowych
+  - jednostkom bojowym
+  - jednostkami bojowymi
   status: proposal
   decided_by: analyst
 - id: gboh.movement-allowance
   source_term: Movement Allowance
-  variants: [MA, Movement Allowances]
+  variants:
+  - MA
+  - Movement Allowances
   sense: Wydrukowany na żetonie parametr — liczba punktów ruchu dostępna jednostce na jeden rozkaz (SPQR 6.11).
   disambiguation: Parametr, nie koszt (punkty ruchu) i nie odległość. W GCACW MA jest wynikiem rzutu (pojęcie pokrewne, warstwa gcacw).
-  rules: [SPQR-6.11]
+  rules:
+  - SPQR-6.11
   pl: limit punktów ruchu
-  pl_forms: [limit punktów ruchu, limitu punktów ruchu, limitem punktów ruchu, limicie punktów ruchu, limity punktów ruchu]
+  pl_forms:
+  - limit punktów ruchu
+  - limitu punktów ruchu
+  - limitem punktów ruchu
+  - limicie punktów ruchu
+  - limity punktów ruchu
   pl_abbrev: MA
-  related: [gboh.movement-point]
+  related:
+  - gboh.movement-point
   rejected:
-  - {pl: ruchliwość, reason: "PL3 (s. 13) „Ruchliwość (MA)” — słowo ogólne, używane też w sensie potocznym (s. 5–6); nie oddaje, że to limit punktów"}
+  - pl: ruchliwość
+    reason: PL3 (s. 13) „Ruchliwość (MA)” — słowo ogólne, używane też w sensie potocznym (s. 5–6); nie oddaje, że to limit punktów
   status: proposal
   decided_by: analyst
   rationale: Ujednolicenie z decyzją właściciela w GCACW-PL (limit punktów ruchu) i jednoznaczność. Alternatywa do decyzji to „punkty ruchu”, jak na diagramie żetonu PL3 s. 4.
   evidence:
-  - {source: GMT-SPQR-PL3, where: "s. 13; diagram s. 4", form: "Ruchliwość (MA); punkty ruchu", supports: against}
-  - {source: GCACW-PL, where: "§6", form: limit punktów ruchu (MA), supports: usage-in-games}
+  - source: GMT-SPQR-PL3
+    where: s. 13; diagram s. 4
+    form: Ruchliwość (MA); punkty ruchu
+    supports: against
+  - source: GCACW-PL
+    where: §6
+    form: limit punktów ruchu (MA)
+    supports: usage-in-games
 - id: gboh.movement-point
   source_term: Movement Point
-  variants: [Movement Points, MP, MPs]
+  variants:
+  - Movement Points
+  - MP
+  - MPs
   sense: Jednostka kosztu ruchu i zmiany ukierunkowania.
   pl: punkt ruchu
-  pl_forms: [punkt ruchu, punktu ruchu, punkty ruchu, punktów ruchu, punktami ruchu, punktach ruchu]
+  pl_forms:
+  - punkt ruchu
+  - punktu ruchu
+  - punkty ruchu
+  - punktów ruchu
+  - punktami ruchu
+  - punktach ruchu
   pl_abbrev: MP
   rejected:
-  - {pl: PR, reason: "PL3 s. 14 — skrót koliduje z PR = principes (s. 17) i Pr. = prefekt (s. 9)"}
+  - pl: PR
+    reason: PL3 s. 14 — skrót koliduje z PR = principes (s. 17) i Pr. = prefekt (s. 9)
   status: proposal
   decided_by: analyst
   evidence:
-  - {source: GMT-SPQR-PL3, where: "s. 5, 14, 15", form: "punkt ruchu / MP / PR", supports: usage-in-games}
+  - source: GMT-SPQR-PL3
+    where: s. 5, 14, 15
+    form: punkt ruchu / MP / PR
+    supports: usage-in-games
 - id: gboh.cohesion
   source_term: Cohesion
-  variants: [cohesion]
+  variants:
+  - cohesion
   sense: Miara zorganizowania i sprawności jednostki. Jej utratę liczy się w trafieniach (Cohesion Hits) porównywanych z TQ.
-  rules: [SPQR-10.1]
+  rules:
+  - SPQR-10.1
   pl: spójność
-  pl_forms: [spójność, spójności, spójnością]
+  pl_forms:
+  - spójność
+  - spójności
+  - spójnością
   status: proposal
   decided_by: analyst
   evidence:
-  - {source: GMT-SPQR-PL3, where: "s. 4 (słowniczek), 32×", form: spójność, supports: usage-in-games}
+  - source: GMT-SPQR-PL3
+    where: s. 4 (słowniczek), 32×
+    form: spójność
+    supports: usage-in-games
 - id: gboh.cohesion-hit
   source_term: Cohesion Hit
-  variants: [Cohesion Hits, hit, hits, Hit, Hits]
+  variants:
+  - Cohesion Hits
+  - hit
+  - hits
+  - Hit
+  - Hits
   sense: Jednostka utraty spójności, zaznaczana znacznikiem liczbowym. Gdy liczba trafień ≥ TQ, jednostka ucieka (SPQR 10.14).
   disambiguation: „hit” w SPQR zawsze w tym sensie, chyba że mowa o trafieniu dowódcy (Leader Casualty).
-  rules: [SPQR-10.1, SPQR-10.12, SPQR-10.14]
+  rules:
+  - SPQR-10.1
+  - SPQR-10.12
+  - SPQR-10.14
   pl: trafienie
-  pl_forms: [trafienie, trafienia, trafieniu, trafieniem, trafień, trafieniom, trafieniami, trafieniach]
-  notation: {first_use: "trafienie (utrata spójności)\\ang{Cohesion Hit}", capitalisation: "mała litera (PL3 niekonsekwentnie: 33× wielka, 115× mała)"}
+  pl_forms:
+  - trafienie
+  - trafienia
+  - trafieniu
+  - trafieniem
+  - trafień
+  - trafieniom
+  - trafieniami
+  - trafieniach
+  notation:
+    first_use: trafienie (utrata spójności)\ang{Cohesion Hit}
+    capitalisation: 'mała litera (PL3 niekonsekwentnie: 33× wielka, 115× mała)'
   status: proposal
   decided_by: analyst
   rationale: Forma dominująca w PL3, krótka, zgodna z napisem na znacznikach („Hits”). Alternatywa do decyzji to „punkt utraty spójności” (dłuższa, opisowa).
   evidence:
-  - {source: GMT-SPQR-PL3, where: "s. 13–14, 29", form: "trafienie / trafienie na spójność", supports: usage-in-games}
+  - source: GMT-SPQR-PL3
+    where: s. 13–14, 29
+    form: trafienie / trafienie na spójność
+    supports: usage-in-games
 - id: gboh.tq-rating
   source_term: Troop Quality Rating
-  variants: [TQ rating, TQ, Troop Quality, printed TQ]
+  variants:
+  - TQ rating
+  - TQ
+  - Troop Quality
+  - printed TQ
   sense: Wydrukowany parametr jakości jednostki. Jest progiem testów TQ i limitem trafień.
   disambiguation: Parametr (wartość). Test to osobne pojęcie gboh.tq-check.
-  rules: [SPQR-2.21, SPQR-10.11]
+  rules:
+  - SPQR-2.21
+  - SPQR-10.11
   pl: wartość TQ
-  pl_forms: [wartość TQ, wartości TQ, wartością TQ]
+  pl_forms:
+  - wartość TQ
+  - wartości TQ
+  - wartością TQ
   pl_abbrev: TQ
-  notation: {first_use: "jakość wojska (TQ)\\ang{Troop Quality}"}
-  related: [gboh.tq-check]
+  notation:
+    first_use: jakość wojska (TQ)\ang{Troop Quality}
+  related:
+  - gboh.tq-check
   status: proposal
   decided_by: analyst
   rationale: PL3 rozwija TQ jako „Jakość Oddziału”, ale w przepisach używa skrótu. Skrót zostaje, bo widnieje na żetonach. Rozwinięcie przy pierwszym użyciu jest do decyzji.
   evidence:
-  - {source: GMT-SPQR-PL3, where: "s. 3", form: Jakość Oddziału (TQ), supports: usage-in-games}
+  - source: GMT-SPQR-PL3
+    where: s. 3
+    form: Jakość Oddziału (TQ)
+    supports: usage-in-games
 - id: gboh.tq-check
   source_term: TQ Check
-  variants: [TQ check, TQ checks, TQ Checks]
+  variants:
+  - TQ check
+  - TQ checks
+  - TQ Checks
   sense: Rzut kością porównywany z wartością TQ. Wynik wyższy od wartości daje trafienia według tabeli.
-  rules: [SPQR-10.11]
+  rules:
+  - SPQR-10.11
   pl: test TQ
-  pl_forms: [test TQ, testu TQ, teście TQ, testem TQ, testy TQ, testów TQ, testach TQ, testom TQ]
-  related: [gboh.tq-rating]
+  pl_forms:
+  - test TQ
+  - testu TQ
+  - teście TQ
+  - testem TQ
+  - testy TQ
+  - testów TQ
+  - testach TQ
+  - testom TQ
+  related:
+  - gboh.tq-rating
   rejected:
-  - {pl: rzut na TQ, reason: "wariant PL3 s. 29; jedno pojęcie = jeden termin"}
+  - pl: rzut na TQ
+    reason: wariant PL3 s. 29; jedno pojęcie = jeden termin
   status: proposal
   decided_by: analyst
   evidence:
-  - {source: GMT-SPQR-PL3, where: "s. 15", form: test TQ, supports: usage-in-games}
+  - source: GMT-SPQR-PL3
+    where: s. 15
+    form: test TQ
+    supports: usage-in-games
 - id: gboh.rout
   source_term: Rout
-  variants: [routs, Routed, routed, routing, Routing, rout]
+  variants:
+  - routs
+  - Routed
+  - routed
+  - routing
+  - Routing
+  - rout
   sense: Stan i ruch jednostki, która utraciła spójność (trafienia ≥ TQ). Ucieka w Segmencie Ucieczki i jest uwzględniana w punktach ucieczki.
   disambiguation: Nie mylić z uporządkowanym wycofaniem (Orderly Withdrawal) ani z wycofaniem armii (Army Withdrawal).
-  rules: [SPQR-10.2, SPQR-10.14]
+  rules:
+  - SPQR-10.2
+  - SPQR-10.14
   pl: ucieczka
-  pl_forms: [ucieczka, ucieczki, ucieczce, ucieczkę, ucieczką, ucieka, uciekają, uciekać, uciekająca, uciekającej, uciekającą, uciekające, uciekających]
-  related: [gboh.orderly-withdrawal]
+  pl_forms:
+  - ucieczka
+  - ucieczki
+  - ucieczce
+  - ucieczkę
+  - ucieczką
+  - ucieka
+  - uciekają
+  - uciekać
+  - uciekająca
+  - uciekającej
+  - uciekającą
+  - uciekające
+  - uciekających
+  related:
+  - gboh.orderly-withdrawal
   rejected:
-  - {pl: rozbicie, reason: "„rozbić” = pokonać przeciwnika; inny sens"}
+  - pl: rozbicie
+    reason: „rozbić” = pokonać przeciwnika; inny sens
   status: proposal
   decided_by: analyst
   rationale: Forma PL3 dla rout jest dobra. Błąd PL3 polega na rozszerzeniu „ucieczki” na OW i Withdrawal Level (s. 15, 31), więc tamte pojęcia dostają inne nazwy.
   evidence:
-  - {source: GMT-SPQR-PL3, where: "s. 23, 29", form: ucieczka, supports: usage-in-games}
-  - {source: GMT-SPQR-PL3, where: "s. 15, 31", form: "„rodzaj ucieczki” o OW; „Próg Ucieczki”", supports: against}
+  - source: GMT-SPQR-PL3
+    where: s. 23, 29
+    form: ucieczka
+    supports: usage-in-games
+  - source: GMT-SPQR-PL3
+    where: s. 15, 31
+    form: „rodzaj ucieczki” o OW; „Próg Ucieczki”
+    supports: against
 - id: gboh.rally
   source_term: Rally
-  variants: [Rallied, rallied, rally, rallies]
+  variants:
+  - Rallied
+  - rallied
+  - rally
+  - rallies
   sense: Próba przywrócenia uciekającej jednostki do walki przez dowódcę (rzut na Tabeli Rally). Po udanej próbie jednostka staje się osłabiona (Depleted).
   disambiguation: Inne pojęcie niż Recovery (SPQR 10.16, usuwanie trafień rozkazem).
-  rules: [SPQR-10.28, SPQR-10.31]
+  rules:
+  - SPQR-10.28
+  - SPQR-10.31
   pl: zebranie
-  pl_forms: [zebranie, zebrania, zebraniu, zebraniem, zebrać, zebrana, zebranej, zebraną, zebrane, zebranych, zbiera]
-  related: [gboh.rout, gboh.depleted]
+  pl_forms:
+  - zebranie
+  - zebrania
+  - zebraniu
+  - zebraniem
+  - zebrać
+  - zebrana
+  - zebranej
+  - zebraną
+  - zebrane
+  - zebranych
+  - zbiera
+  related:
+  - gboh.rout
+  - gboh.depleted
   status: disputed
   decided_by: analyst
-  rationale: "PL3 używa „reorganizacja”, ale w GCACW-PL to nazwa Recovery Phase. Ponadto SPQR ma osobne Recovery (10.16), więc „reorganizacja” groziłaby kolizją. „Zebrać uciekających” to tradycyjne polskie wyrażenie wojskowe (do potwierdzenia źródłem). DECYZJA WŁAŚCICIELA."
+  rationale: PL3 używa „reorganizacja”, ale w GCACW-PL to nazwa Recovery Phase. Ponadto SPQR ma osobne Recovery (10.16), więc „reorganizacja” groziłaby kolizją. „Zebrać uciekających” to tradycyjne polskie wyrażenie wojskowe (do potwierdzenia źródłem). DECYZJA WŁAŚCICIELA.
   evidence:
-  - {source: GMT-SPQR-PL3, where: "s. 30", form: reorganizacja / zreorganizować, supports: usage-in-games}
+  - source: GMT-SPQR-PL3
+    where: s. 30
+    form: reorganizacja / zreorganizować
+    supports: usage-in-games
 - id: gboh.depleted
   source_term: Depleted
-  variants: [Depletion, Depletions, depleted]
+  variants:
+  - Depletion
+  - Depletions
+  - depleted
   sense: Trwały stan jednostki po udanym zebraniu (lub od początku scenariusza), oznaczany odwróceniem żetonu. Pogarsza walkę wręcz, ostrzał i zebranie.
-  rules: [SPQR-10.31, SPQR-10.32, SPQR-10.33]
+  rules:
+  - SPQR-10.31
+  - SPQR-10.32
+  - SPQR-10.33
   pl: osłabiona
-  pl_forms: [osłabiona, osłabionej, osłabioną, osłabione, osłabionych, osłabionym, osłabionymi, osłabienie, osłabienia, osłabieniu, osłabieniem]
+  pl_forms:
+  - osłabiona
+  - osłabionej
+  - osłabioną
+  - osłabione
+  - osłabionych
+  - osłabionym
+  - osłabionymi
+  - osłabienie
+  - osłabienia
+  - osłabieniu
+  - osłabieniem
   rejected:
-  - {pl: ze stratami, forms: [poniosła straty, Straty], reason: "PL3 (s. 3, 4, 30) — kolizja ze „stratami wśród dowódców” (Leader Casualty, s. 10)"}
+  - pl: ze stratami
+    forms:
+    - poniosła straty
+    - Straty
+    reason: PL3 (s. 3, 4, 30) — kolizja ze „stratami wśród dowódców” (Leader Casualty, s. 10)
   status: disputed
   decided_by: analyst
-  rationale: "Kandydaci: „osłabiona / osłabienie” (naturalne, ale „osłabić” bywa używane ogólnie) albo „uszczuplona / uszczuplenie” (dokładniej oddaje ubytek ludzi; Design Note 10.3: „actual loss of men”). DECYZJA WŁAŚCICIELA."
+  rationale: 'Kandydaci: „osłabiona / osłabienie” (naturalne, ale „osłabić” bywa używane ogólnie) albo „uszczuplona / uszczuplenie” (dokładniej oddaje ubytek ludzi; Design Note 10.3: „actual loss of men”). DECYZJA WŁAŚCICIELA.'
   evidence:
-  - {source: GMT-SPQR-PL3, where: "s. 3, 4, 30; s. 10", form: "Straty / jednostka ze stratami; straty wśród dowódców", supports: against}
+  - source: GMT-SPQR-PL3
+    where: s. 3, 4, 30; s. 10
+    form: Straty / jednostka ze stratami; straty wśród dowódców
+    supports: against
 - id: gboh.orderly-withdrawal
   source_term: Orderly Withdrawal
-  variants: [OW]
+  variants:
+  - OW
   sense: Reakcja jednostki (zwykle lekkiej) wycofującej się przed nadchodzącym przeciwnikiem, bez utraty spójności.
   disambiguation: Nie ucieczka (Rout) i nie wycofanie armii.
-  rules: [SPQR-6.5]
+  rules:
+  - SPQR-6.5
   pl: uporządkowane wycofanie
-  pl_forms: [uporządkowane wycofanie, uporządkowanego wycofania, uporządkowanym wycofaniu, uporządkowanym wycofaniem]
+  pl_forms:
+  - uporządkowane wycofanie
+  - uporządkowanego wycofania
+  - uporządkowanym wycofaniu
+  - uporządkowanym wycofaniem
   pl_abbrev: OW
   rejected:
-  - {pl: uporządkowany odwrót, reason: "PL3 (s. 7, 14 i in.); dopuszczalne, ale „odwrót” w innych grach jest nazwą odrębnej mechaniki (retreat), a „wycofanie” lepiej oddaje withdrawal. Do decyzji"}
+  - pl: uporządkowany odwrót
+    reason: PL3 (s. 7, 14 i in.); dopuszczalne, ale „odwrót” w innych grach jest nazwą odrębnej mechaniki (retreat), a „wycofanie” lepiej oddaje withdrawal. Do decyzji
   status: disputed
   decided_by: analyst
   evidence:
-  - {source: GMT-SPQR-PL3, where: "s. 7, 14, 15, 24, 25, 31", form: Uporządkowany Odwrót (OW), supports: usage-in-games}
-  - {source: AAP6-2005PL, where: "s. 370 (withdrawal operation — w styczności z przeciwnikiem)", form: manewr wycofania, supports: sense}
+  - source: GMT-SPQR-PL3
+    where: s. 7, 14, 15, 24, 25, 31
+    form: Uporządkowany Odwrót (OW)
+    supports: usage-in-games
+  - source: AAP6-2005PL
+    where: s. 370 (withdrawal operation — w styczności z przeciwnikiem)
+    form: manewr wycofania
+    supports: sense
 - id: gboh.skirmisher
   source_term: Skirmisher
-  variants: [Skirmishers, skirmisher, skirmishers, SK]
+  variants:
+  - Skirmishers
+  - skirmisher
+  - skirmishers
+  - SK
   sense: Typ jednostki lekkiej piechoty (SK) walczącej w rozproszeniu bronią miotaną.
   pl: harcownik
-  pl_forms: [harcownik, harcownika, harcownikowi, harcownikiem, harcowniku, harcownicy, harcowników, harcownikom, harcownikami, harcownikach]
-  status: proposal
+  pl_forms:
+  - harcownik
+  - harcownika
+  - harcownikowi
+  - harcownikiem
+  - harcowniku
+  - harcownicy
+  - harcowników
+  - harcownikom
+  - harcownikami
+  - harcownikach
+  status: disputed
   decided_by: analyst
-  rationale: Ugruntowane w polszczyźnie historycznej (harce, harcownik). Używane w PL3.
+  rationale: 'PL3 używa „harcownicy”, ale WSJP definiuje harcownika jako żołnierza biorącego udział w pojedynku przed bitwą (harce), nie jako lekkiego piechura walczącego w szyku rozproszonym. Kandydaci do decyzji: harcownik (tradycja graczy i PL3; sens szerszy w historiografii), lekkozbrojny (opisowe), pozostawienie SK z opisem. DECYZJA WŁAŚCICIELA.'
   evidence:
-  - {source: GMT-SPQR-PL3, where: "passim", form: harcownicy, supports: usage-in-games}
+  - source: GMT-SPQR-PL3
+    where: passim
+    form: harcownicy
+    supports: usage-in-games
+  - source: WSJP
+    where: https://wsjp.pl/haslo/podglad/71290/harcownik/5183889/na-wojnie
+    supports: against
+    note: 'definicja: uczestnik pojedynku przed bitwą; brak kwalifikatora (archaizm rzeczowy)'
+    checked: '2026-10-04'
 - id: gboh.cohesion-tq-chart
   source_term: Cohesion Hit and TQ Check Chart
   sense: Tabela zbiorcza momentów, w których jednostka otrzymuje trafienia lub wykonuje test TQ (SPQR 8.75).
   pl: Tabela trafień i testów TQ
-  pl_forms: [Tabela trafień i testów TQ, Tabeli trafień i testów TQ, Tabelę trafień i testów TQ]
-  notation: {component_text: "Nazwa tabeli na arkuszu pomocy pozostaje angielska, jeśli arkusz nie jest tłumaczony. Wtedy przy pierwszym użyciu podaj nazwę oryginalną"}
+  pl_forms:
+  - Tabela trafień i testów TQ
+  - Tabeli trafień i testów TQ
+  - Tabelę trafień i testów TQ
+  notation:
+    component_text: Nazwa tabeli na arkuszu pomocy pozostaje angielska, jeśli arkusz nie jest tłumaczony. Wtedy przy pierwszym użyciu podaj nazwę oryginalną
   status: proposal
   decided_by: analyst
 - id: gboh.command-range
   source_term: Command Range
-  variants: [command range]
+  variants:
+  - command range
   sense: Parametr dowódcy — odległość w heksach, w jakiej jednostki mogą otrzymać jego rozkazy (ścieżka bez wrogich jednostek i ZOC).
   disambiguation: Nie zasięg ostrzału (Missile Range). PL3 używa samego „Zasięg” w obu znaczeniach.
-  rules: [SPQR-4.21]
+  rules:
+  - SPQR-4.21
   pl: zasięg dowodzenia
-  pl_forms: [zasięg dowodzenia, zasięgu dowodzenia, zasięgiem dowodzenia]
+  pl_forms:
+  - zasięg dowodzenia
+  - zasięgu dowodzenia
+  - zasięgiem dowodzenia
   rejected:
-  - {pl: zasięg, reason: "PL3: to samo słowo dla zasięgu dowodzenia i ostrzału; w przepisach zawsze pełna nazwa"}
+  - pl: zasięg
+    reason: 'PL3: to samo słowo dla zasięgu dowodzenia i ostrzału; w przepisach zawsze pełna nazwa'
   status: proposal
   decided_by: analyst
   evidence:
-  - {source: GCACW-PL, where: "§6 (Command radius)", form: zasięg dowodzenia, supports: usage-in-games}
-  - {source: GMT-SPQR-PL3, where: "s. 5", form: Zasięg, supports: against}
+  - source: GCACW-PL
+    where: §6 (Command radius)
+    form: zasięg dowodzenia
+    supports: usage-in-games
+  - source: GMT-SPQR-PL3
+    where: s. 5
+    form: Zasięg
+    supports: against
