@@ -87,3 +87,16 @@ def test_fidelity_regression_own_texts():
            "Osłabiona jednostka pozostaje w tym stanie. Jednostki już osłabione mogą podlegać kolejnemu osłabieniu.")
     flags = compare(en, bad)
     assert any(f.startswith("scope") for f in flags) and any(f.startswith("negation") for f in flags)
+
+
+def test_check_detects_capitalisation_change(tmp_path, capsys, monkeypatch):
+    c = {"id": "x.phase", "source_term": "Orders Phase", "sense": "s", "pl": "faza rozkazów",
+         "pl_forms": ["faza rozkazów", "fazie rozkazów"], "status": "approved",
+         "history": [{"date": "2026-10-04", "from": "Faza Rozkazów", "from_forms": ["Faza Rozkazów", "Fazie Rozkazów"]}]}
+    game = _layer(tmp_path, "game", "game", [c])
+    monkeypatch.setattr(ops, "layer_paths", lambda pr: [game])
+    tex = tmp_path / "a.tex"
+    tex.write_text("W Fazie Rozkazów gracz…\nFaza rozkazów zaczyna się…\nw fazie rozkazów\n", encoding="utf-8")
+    ops.check(None, [str(tex)])
+    out = capsys.readouterr().out
+    assert "a.tex:1" in out and "a.tex:2" not in out and "a.tex:3" not in out

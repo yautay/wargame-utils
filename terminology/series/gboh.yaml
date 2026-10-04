@@ -147,27 +147,50 @@ concepts:
   rules:
   - SPQR-3.0
   - SPQR-4.22
-  pl: Faza Rozkazów
+  pl: faza rozkazów
   pl_forms:
-  - Faza Rozkazów
-  - Fazy Rozkazów
-  - Fazie Rozkazów
-  - Fazę Rozkazów
-  - Fazą Rozkazów
-  - Fazach Rozkazów
   - faza rozkazów
   - fazy rozkazów
   - fazie rozkazów
   - fazę rozkazów
+  - fazą rozkazów
+  - fazach rozkazów
+  - Faza rozkazów
+  - Fazy rozkazów
+  - Fazie rozkazów
+  - Fazę rozkazów
   notation:
-    capitalisation: 'Wielka litera w nazwach faz: preferencja właściciela z GCACW-PL (do potwierdzenia dla serii). Norma ogólna: małe litery'
-  status: proposal
-  decided_by: analyst
+    capitalisation: małą literą (nazwa pospolita); wielka tylko na początku zdania
+  status: approved
+  decided_by: user
   evidence:
   - source: GMT-SPQR-PL3
     where: 55×
     form: Faza Rozkazów
     supports: usage-in-games
+  - source: decyzja właściciela
+    where: rozmowa 2026-10-04
+    supports: usage-in-games
+    checked: '2026-10-04'
+    form: faza rozkazów
+  history:
+  - date: '2026-10-04'
+    from: Faza Rozkazów
+    from_forms:
+    - Faza Rozkazów
+    - Fazy Rozkazów
+    - Fazie Rozkazów
+    - Fazę Rozkazów
+    - Fazą Rozkazów
+    - Fazach Rozkazów
+    - faza rozkazów
+    - fazy rozkazów
+    - fazie rozkazów
+    - fazę rozkazów
+    to: faza rozkazów
+    reason: 'zasada właściciela (2026-10-04): zawsze zgodnie z normą — nazwy faz to nazwy pospolite, małą literą'
+    by: user
+  rationale: 'Zasada właściciela: poprawność językowa ponad wcześniejsze konwencje.'
 - id: gboh.game-turn
   source_term: Game Turn
   variants:
@@ -193,8 +216,8 @@ concepts:
     - etapy
     - etapów
     reason: PL3 używa „etap” (~40×) obok „tura”; „etap” w polszczyźnie oznacza część procesu, a nie zamknięty cykl gry; niespójne z GCACW-PL (tura)
-  status: proposal
-  decided_by: analyst
+  status: approved
+  decided_by: user
   evidence:
   - source: GMT-SPQR-PL3
     where: etap ~40×; tura s. 12, 16, 29
@@ -204,6 +227,12 @@ concepts:
     where: §6 (Turn Track → tor tur)
     form: tura
     supports: usage-in-games
+  - source: decyzja właściciela
+    where: rozmowa 2026-10-04
+    supports: usage-in-games
+    checked: '2026-10-04'
+    form: tura
+  rationale: 'Decyzja właściciela (2026-10-04): „tura”, nie „etap”.'
 - id: gboh.combat-unit
   source_term: combat unit
   variants:
@@ -245,9 +274,9 @@ concepts:
   rejected:
   - pl: ruchliwość
     reason: PL3 (s. 13) „Ruchliwość (MA)” — słowo ogólne, używane też w sensie potocznym (s. 5–6); nie oddaje, że to limit punktów
-  status: proposal
-  decided_by: analyst
-  rationale: Ujednolicenie z decyzją właściciela w GCACW-PL (limit punktów ruchu) i jednoznaczność. Alternatywa do decyzji to „punkty ruchu”, jak na diagramie żetonu PL3 s. 4.
+  status: approved
+  decided_by: user
+  rationale: 'Decyzja właściciela (2026-10-04): ujednolicenie z GCACW-PL.'
   evidence:
   - source: GMT-SPQR-PL3
     where: s. 13; diagram s. 4
@@ -257,6 +286,11 @@ concepts:
     where: §6
     form: limit punktów ruchu (MA)
     supports: usage-in-games
+  - source: decyzja właściciela
+    where: rozmowa 2026-10-04
+    supports: usage-in-games
+    checked: '2026-10-04'
+    form: limit punktów ruchu
 - id: gboh.movement-point
   source_term: Movement Point
   variants:
@@ -452,34 +486,71 @@ concepts:
   - rally
   - rallies
   sense: Próba przywrócenia uciekającej jednostki do walki przez dowódcę (rzut na Tabeli Rally). Po udanej próbie jednostka staje się osłabiona (Depleted).
-  disambiguation: Inne pojęcie niż Recovery (SPQR 10.16, usuwanie trafień rozkazem).
+  disambiguation: Rally (przywrócenie uciekającej jednostki) — reorganizacja. Recovery (SPQR 10.16, usuwanie trafień rozkazem) to osobne pojęcie gboh.recovery i NIE może dostać nazwy „reorganizacja”.
   rules:
   - SPQR-10.28
   - SPQR-10.31
-  pl: zebranie
+  pl: reorganizacja
   pl_forms:
-  - zebranie
-  - zebrania
-  - zebraniu
-  - zebraniem
-  - zebrać
-  - zebrana
-  - zebranej
-  - zebraną
-  - zebrane
-  - zebranych
-  - zbiera
+  - reorganizacja
+  - reorganizacji
+  - reorganizację
+  - reorganizacją
+  - reorganizować
+  - reorganizuje
+  - reorganizują
+  - zreorganizować
+  - zreorganizowana
+  - zreorganizowanej
+  - zreorganizowaną
+  - zreorganizowane
+  - zreorganizowanych
+  - zreorganizowany
+  - zreorganizowanym
   related:
   - gboh.rout
   - gboh.depleted
-  status: disputed
-  decided_by: analyst
-  rationale: PL3 używa „reorganizacja”, ale w GCACW-PL to nazwa Recovery Phase. Ponadto SPQR ma osobne Recovery (10.16), więc „reorganizacja” groziłaby kolizją. „Zebrać uciekających” to tradycyjne polskie wyrażenie wojskowe (do potwierdzenia źródłem). DECYZJA WŁAŚCICIELA.
+  - gboh.recovery
+  status: approved
+  decided_by: user
+  rationale: 'Decyzja właściciela: termin powszechny w polskich instrukcjach gier wojennych (także PL3, s. 30). Kolizję z Recovery rozwiązuje osobny termin dla gboh.recovery.'
   evidence:
   - source: GMT-SPQR-PL3
     where: s. 30
     form: reorganizacja / zreorganizować
     supports: usage-in-games
+  - source: decyzja właściciela
+    where: rozmowa 2026-10-04
+    supports: usage-in-games
+    checked: '2026-10-04'
+    form: reorganizacja
+  history:
+  - date: '2026-10-04'
+    from: zebranie
+    from_forms:
+    - zebranie
+    - zebrania
+    - zebraniu
+    - zebraniem
+    - zebrać
+    - zebrana
+    - zebranej
+    - zebraną
+    - zebrane
+    - zebranych
+    - zbiera
+    to: reorganizacja
+    reason: 'decyzja właściciela: „reorganizacja” to utrwalony termin gier wojennych'
+    by: user
+  rejected:
+  - pl: zebranie
+    forms:
+    - zebrana
+    - zebranej
+    - zebraną
+    - zebrane
+    - zebranych
+    reason: propozycja analityka odrzucona przez właściciela (2026-10-04)
 - id: gboh.depleted
   source_term: Depleted
   variants:
@@ -510,14 +581,19 @@ concepts:
     - poniosła straty
     - Straty
     reason: PL3 (s. 3, 4, 30) — kolizja ze „stratami wśród dowódców” (Leader Casualty, s. 10)
-  status: disputed
-  decided_by: analyst
-  rationale: 'Kandydaci: „osłabiona / osłabienie” (naturalne, ale „osłabić” bywa używane ogólnie) albo „uszczuplona / uszczuplenie” (dokładniej oddaje ubytek ludzi; Design Note 10.3: „actual loss of men”). DECYZJA WŁAŚCICIELA.'
+  status: approved
+  decided_by: user
+  rationale: 'Decyzja właściciela (2026-10-04): „osłabiona / osłabienie”; „ze stratami” odrzucone (kolizja ze stratami dowódców).'
   evidence:
   - source: GMT-SPQR-PL3
     where: s. 3, 4, 30; s. 10
     form: Straty / jednostka ze stratami; straty wśród dowódców
     supports: against
+  - source: decyzja właściciela
+    where: rozmowa 2026-10-04
+    supports: usage-in-games
+    checked: '2026-10-04'
+    form: osłabiona
 - id: gboh.orderly-withdrawal
   source_term: Orderly Withdrawal
   variants:
@@ -533,11 +609,8 @@ concepts:
   - uporządkowanym wycofaniu
   - uporządkowanym wycofaniem
   pl_abbrev: OW
-  rejected:
-  - pl: uporządkowany odwrót
-    reason: PL3 (s. 7, 14 i in.); dopuszczalne, ale „odwrót” w innych grach jest nazwą odrębnej mechaniki (retreat), a „wycofanie” lepiej oddaje withdrawal. Do decyzji
-  status: disputed
-  decided_by: analyst
+  status: approved
+  decided_by: user
   evidence:
   - source: GMT-SPQR-PL3
     where: s. 7, 14, 15, 24, 25, 31
@@ -547,6 +620,15 @@ concepts:
     where: s. 370 (withdrawal operation — w styczności z przeciwnikiem)
     form: manewr wycofania
     supports: sense
+  - source: decyzja właściciela
+    where: rozmowa 2026-10-04
+    supports: usage-in-games
+    checked: '2026-10-04'
+    form: uporządkowane wycofanie
+  rejected:
+  - pl: uporządkowany odwrót
+    reason: 'decyzja właściciela (2026-10-04): „wycofanie” dla withdrawal; „odwrót” zarezerwowany dla retreat'
+  rationale: Decyzja właściciela (2026-10-04).
 - id: gboh.skirmisher
   source_term: Skirmisher
   variants:
@@ -567,9 +649,9 @@ concepts:
   - harcownikom
   - harcownikami
   - harcownikach
-  status: disputed
-  decided_by: analyst
-  rationale: 'PL3 używa „harcownicy”, ale WSJP definiuje harcownika jako żołnierza biorącego udział w pojedynku przed bitwą (harce), nie jako lekkiego piechura walczącego w szyku rozproszonym. Kandydaci do decyzji: harcownik (tradycja graczy i PL3; sens szerszy w historiografii), lekkozbrojny (opisowe), pozostawienie SK z opisem. DECYZJA WŁAŚCICIELA.'
+  status: approved
+  decided_by: user
+  rationale: 'Decyzja właściciela (2026-10-04): „harcownik” utrwalony w grach i w PL3. Świadoma rozbieżność z definicją WSJP (harcownik = uczestnik harców przed bitwą); w grze oznacza lekką piechotę walczącą w rozproszeniu.'
   evidence:
   - source: GMT-SPQR-PL3
     where: passim
@@ -580,6 +662,12 @@ concepts:
     supports: against
     note: 'definicja: uczestnik pojedynku przed bitwą; brak kwalifikatora (archaizm rzeczowy)'
     checked: '2026-10-04'
+  - source: decyzja właściciela
+    where: rozmowa 2026-10-04
+    supports: usage-in-games
+    checked: '2026-10-04'
+    form: harcownik
+  preference: true
 - id: gboh.cohesion-tq-chart
   source_term: Cohesion Hit and TQ Check Chart
   sense: Tabela zbiorcza momentów, w których jednostka otrzymuje trafienia lub wykonuje test TQ (SPQR 8.75).
@@ -619,3 +707,26 @@ concepts:
     where: s. 5
     form: Zasięg
     supports: against
+- id: gboh.recovery
+  source_term: Recovery
+  variants:
+  - recover
+  - recovers
+  sense: Usunięcie trafień (odzyskanie spójności) przez jednostkę, która otrzymała rozkaz i nie jest w strefie kontroli przeciwnika (SPQR 10.16).
+  disambiguation: Nie Rally (reorganizacja uciekającej jednostki).
+  rules:
+  - SPQR-10.16
+  pl: odzyskanie spójności
+  pl_forms:
+  - odzyskanie spójności
+  - odzyskania spójności
+  - odzyskaniu spójności
+  - odzyskaniem spójności
+  - odzyskuje spójność
+  - odzyskać spójność
+  related:
+  - gboh.rally
+  - gboh.cohesion
+  status: proposal
+  decided_by: analyst
+  rationale: Potrzebny osobny termin, bo „reorganizacja” = Rally (decyzja 2026-10-04). Opisowy, jednoznaczny, zgodny z pojęciem spójności.

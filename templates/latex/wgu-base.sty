@@ -41,6 +41,7 @@
 \providecolor{wgspecjalna}{HTML}{231F20}   % ramka zasady specjalnej
 \providecolor{wgpergamin}{HTML}{F4EBD3}    % notatka tłumacza
 \providecolor{wgsepia}{HTML}{6B4F2E}
+\providecolor{wgang}{HTML}{8A3B12}         % oryginalny termin angielski przy polskim (\ang) — stały kolor
 % zgodność wsteczna z nazwami starego szablonu (gry-style.sty)
 \colorlet{wgczern}{wgtekst}\colorlet{wgniebieski}{wgzmiana}\colorlet{wgszary}{wgtabwiersz}\colorlet{wgjasny}{wgprzyklad}
 
@@ -91,7 +92,10 @@
 \newcommand{\nowe}[1]{\textcolor{wgzmiana}{#1}}
 \newenvironment{nowyblok}{\color{wgzmiana}}{}
 \newcommand{\gra}[1]{\textit{#1}}
-\newcommand{\ang}[1]{/\textit{#1}}
+% Oryginalny termin przy polskim: zmęczenie\ang{fatigue} → „zmęczenie/fatigue” (oryginał kursywą, w stałym kolorze wgang).
+% Kolor ustawia spec.colors.gloss; \wgangbezkoloru przywraca zapis bez koloru.
+\newcommand{\ang}[1]{{\color{wgang}/\textit{#1}}}
+\newcommand{\wgangbezkoloru}{\renewcommand{\ang}[1]{/\textit{##1}}}
 \newcommand{\wgetykieta}[1]{{\wgetykietastyl #1:}\ }
 \newcommand{\wyjatek}{\wgetykieta{Wyjątek}}
 \newcommand{\wyjatki}{\wgetykieta{Wyjątki}}

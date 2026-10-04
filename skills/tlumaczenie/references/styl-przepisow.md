@@ -1,8 +1,12 @@
 # Styl polskiej instrukcji: reguły redakcyjne
 
 Obowiązuje razem z przewodnikiem stylu projektu (`translation.glossary`, zwykle `docs/przewodnik_stylu.md`).
-**Decyzje właściciela zapisane w przewodniku projektu mają pierwszeństwo przed tym dokumentem.** Jeśli przewodnik
-odbiega od poniższych reguł, nie zmieniaj go samodzielnie. Rozbieżność wpisz do listy decyzji do podjęcia.
+Hierarchia (decyzja właściciela 2026-10-04, `docs/decyzje.md`):
+1. **Normy polszczyzny** (ortografia, interpunkcja, fleksja, pisownia wielkich liter, skróty) obowiązują zawsze, także
+   wbrew wcześniejszym konwencjom projektu. Właściciel: „poprawiamy zawsze zgodnie z zasadami polszczyzny”.
+2. **Decyzje właściciela** (terminy, preferencje redakcyjne zgodne z normą) mają pierwszeństwo przed regułami tego dokumentu.
+3. Reguły tego dokumentu.
+Jeśli przewodnik projektu narusza normę, popraw tekst zgodnie z normą i zgłoś to w raporcie.
 
 ## 1. Cztery rodzaje tekstu, cztery rejestry
 | Rodzaj | Rejestr | Zasady |
@@ -21,10 +25,11 @@ i nie mieszaj znaczeń w jednym zdaniu.
   synonimem dla urozmaicenia tekstu.** W przepisach powtórzenie jest zaletą, a nie wadą stylu.
 - Słowo ogólne, które nie jest terminem gry, tłumacz swobodnie. Gdy przypomina termin, wybierz takie, którego czytelnik
   nie pomyli z mechaniką (np. nie pisz „wycofać” w znaczeniu ogólnym, jeśli „wycofanie” jest nazwą mechaniki).
-- Pierwsze użycie ważnego terminu w podrozdziale zapisuj zgodnie z `notation.first_use` (zwykle polski termin
-  i oryginał w makrze `\ang{}`). Glosa ma pomagać graczowi znaleźć oryginał na komponentach, w tabelach, skrótach
-  i angielskich materiałach. **Nie glosuj każdego terminu.** Terminy ogólne (dowódca, tura, jednostka bojowa) jej
-  nie potrzebują. Przewodnik projektu może to zmienić (np. GCACW-PL glosuje ważne terminy w każdym podrozdziale).
+- **Oryginał przy terminie** (decyzja właściciela 2026-10-04): przy pierwszym wystąpieniu w podrozdziale każdego
+  **pojęcia mechaniki gry** (nazwy akcji, stanów, faz, parametrów, testów, znaczników i tabel, np. uporządkowane
+  wycofanie, reorganizacja, test TQ) dodaj angielski oryginał makrem `\ang{}`. Makro drukuje go kursywą w **stałym
+  kolorze** (`wgang`), więc gracz od razu rozpoznaje nazwę z komponentów i angielskich materiałów. Zapis według
+  `notation.first_use`. Nie glosuj słów ogólnych (dowódca, tura, jednostka bojowa) ani kolejnych wystąpień w tym samym podrozdziale.
 - Skróty: tak, jak ustalono w glosariuszu (`pl_abbrev`). Nie twórz nowych. Skrót obcy (MA, TQ, DRM) zostawiaj tylko wtedy,
   gdy widnieje na komponentach lub tak zdecydował właściciel.
 - Nazwy widoczne na komponentach (żetony, tabele, plansza): zgodnie z `notation.component_text`. Gracz musi znaleźć
@@ -70,9 +75,16 @@ wyłącznie dla efektu. Współczesnego żargonu wojskowego (NATO) nie stosuj do
 
 ## 5. Typografia i zapis
 - Nagłówki: wielka litera tylko na początku i w nazwach własnych („Ruch i strefy kontroli”), nie *Title Case*.
-  Wyjątek: nazwy faz, tabel i znaczników, jeśli właściciel zdecydował inaczej (przewodnik projektu).
+  Wersaliki w nagłówku są dopuszczalne wyłącznie jako zabieg typograficzny oprawy (np. `\MakeUppercase` w stylu), nie w tekście źródłowym.
+- **Wielkie litery w terminach:** nazwy faz, akcji, stanów, rodzajów dowódców i wariantów gry to nazwy pospolite, więc
+  piszemy je małą literą („faza rozkazów”, „dowódca armii”, „gra podstawowa”). Tytuły dokumentów, tabel i arkuszy
+  piszemy wielką literą tylko w pierwszym wyrazie („Tabela walki”, „Zasady systemowe”). Napis na żetonie przytaczamy
+  w cudzysłowie, tak jak jest wydrukowany („Moved”).
+- **Tytuły gier, modułów i serii zawsze w oryginale** (decyzja właściciela 2026-10-04): *SPQR: Great Battles of the
+  Roman Republic*, *Great Battles of History*, skróty tytułów (*RTG*, *HSN*), także w paginie. Polski opis może
+  stać obok (np. w uwadze tłumacza), ale nie zastępuje tytułu.
 - Cudzysłów „…”, wewnętrzny ‚…’. Półpauza ze spacjami jako myślnik, bez spacji w zakresach (1–4).
 - Liczby: wartości gry zawsze cyframi (3 heksy, +1, 1d10). Słownie tylko w tekście ogólnym i komentarzach.
-- Skróty z kropką według norm polszczyzny (np., tzw., tj., itd.). Skrót „wg” zapisujemy bez kropki.
-  Jeśli przewodnik projektu ma inną decyzję, stosuj przewodnik i zgłoś rozbieżność.
+- Skróty według norm polszczyzny: z kropką skróty, które nie kończą się ostatnią literą wyrazu (np., tzw., tj., itd., m.in.),
+  bez kropki ściągnięcia zawierające ostatnią literę wyrazu (wg, nr, pkt, dr). Zatem **„wg”, nie „wg.”** i „pkt 3”, nie „pt.3”.
 - Liczebnik i rzeczownik: „2 heksy”, „5 heksów”, „22 heksy”. Uzgadniaj formy.

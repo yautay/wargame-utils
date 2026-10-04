@@ -80,6 +80,8 @@ def generate(layout_path: Path, out: Path, name: str | None = None) -> Path:
     ]
     if col.get("change"):
         lines.append(rf"\definecolor{{wgzmiana}}{{HTML}}{{{col['change']}}}")
+    # stały kolor oryginalnych terminów angielskich (\ang); domyślnie ciemna czerwień, różna od koloru zmian wersji
+    lines.append(rf"\definecolor{{wgang}}{{HTML}}{{{col.get('gloss', '8A3B12')}}}")
     for role, b in (spec.get("boxes") or {}).items():
         if role in COLOR_ROLE and b.get("fill"):
             lines.append(rf"\definecolor{{{COLOR_ROLE[role]}}}{{HTML}}{{{b['fill']}}}")
@@ -153,8 +155,10 @@ def generate(layout_path: Path, out: Path, name: str | None = None) -> Path:
     lines.append(rf"\fancyfoot[{pos}]{{\fontsize{{{ft.get('size_pt', 8)}}}{{10}}\selectfont{fshape}\stopkatekst}}")
     lines.append(r"\fancypagestyle{plain}{}")
     lines += [r"\renewcommand{\stopkatekst}{" + (ft.get("text_pl") or "tłumaczenie nieoficjalne") + "}"]
-    if hdr.get("title_pl"):
-        lines.append(r"\renewcommand{\seriatytul}{" + hdr["title_pl"] + "}")
+    # Tytuł gry zawsze w oryginale (decyzja właściciela 2026-10-04): domyślnie tytuł zmierzony w paginie oryginału.
+    title = hdr.get("title_pl") or hdr.get("title")
+    if title:
+        lines.append(r"\renewcommand{\seriatytul}{" + title + "}")
     lines.append(r"\endinput")
     out.write_text("\n".join(l for l in lines if l is not None) + "\n", encoding="utf-8", newline="\n")
     base = out.parent / "wgu-base.sty"

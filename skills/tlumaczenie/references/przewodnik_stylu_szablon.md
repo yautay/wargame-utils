@@ -12,7 +12,7 @@ Dokument opisuje styl tłumaczenia i obowiązuje przy każdym nowym lub poprawia
   „Niniejsze zasady”, „w gestii gracza”, „determinuje”, „kwalifikująca się do aktywacji jednostka”.
 - Podmiotem jest „gracz”, „gracz z inicjatywą”, „aktywny gracz”, „gracz <strony A/B>” albo konstrukcja
   bezosobowa. Chętnie strona bierna i „zostaje + imiesłów”: „jednostka zostaje zdezorganizowana”.
-- Skróty urzędowe: „wg.”, „ww.”, „pt.3” (punkt procedury), „np.”, „tzw.”.
+- Skróty zgodne z normą: „wg”, „ww.”, „pkt 3” (punkt procedury), „np.”, „tzw.” (zob. `styl-przepisow.md` §5).
 - Zdania średniej długości; zdanie złożone dzielimy, jeśli ma więcej niż ~2 przecinkowe wtrącenia.
 - Wyjątek: wstępy, przedmowy, eseje autorów — rejestr literacki, ciepły, ale wierny.
 
@@ -71,7 +71,7 @@ poleceniem `wgu terms import-md`.
 
 ## Jak analizować styl istniejącego tłumaczenia
 Przeczytaj **wszystkie** pliki tłumaczenia i odpowiedz na pytania (z cytatami-przykładami):
-1. **Rejestr**: urzędowy / potoczny / techniczny? Charakterystyczne zwroty i skróty („wg.”, „ww.”, „pt.”)?
+1. **Rejestr**: urzędowy / potoczny / techniczny? Charakterystyczne zwroty i skróty? Zapis niezgodny z normą (np. „wg.”, „pt.3”) poprawiamy zawsze.
 2. **Składnia**: strona bierna czy czynna? Podmiot („gracz”, bezosobowo)? Długość zdań?
 3. **Wierność**: dosłownie czy objaśniająco? Czy autor dopowiada sens, dzieli zdania na kroki?
 4. **Terminy**: jak zapisuje oryginał (ukośnik „pl/en”, nawias, kursywa)? Co zostawia nieprzetłumaczone?

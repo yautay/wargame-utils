@@ -8,7 +8,7 @@ concepts:
 - id: gcacw.standard-series-rules
   source_term: Standard (Series) Rules
   sense: wspólne zasady Gry Podstawowej serii, v1.6; „oficjalne”
-  pl: Zasady Systemowe (ZS)
+  pl: Zasady systemowe (ZS)
   status: approved
   decided_by: user
   evidence:
@@ -22,10 +22,20 @@ concepts:
     supports: sense
   rules:
   - R-1.0.1
+  history:
+  - date: '2026-10-04'
+    from: Zasady Systemowe (ZS)
+    from_forms: []
+    to: Zasady systemowe (ZS)
+    reason: 'zasada właściciela (2026-10-04): wielkie litery zgodnie z normą — nazwy faz, gier i dowódców to nazwy pospolite; tytuł dokumentu tylko pierwszym wyrazem'
+    by: user
+  pl_forms:
+  - Zasady systemowe (ZS)
+  rationale: Korekta pisowni do normy polszczyzny (decyzja właściciela 2026-10-04).
 - id: gcacw.basic-game
   source_term: Basic Game
   sense: scenariusze jedno-/kilkudniowe vs kampanie z dodatkowymi zasadami modułu
-  pl: Gra Podstawowa
+  pl: gra podstawowa
   status: approved
   decided_by: user
   evidence:
@@ -40,10 +50,20 @@ concepts:
   rules: &id001
   - R-1.0.1
   - R-3.0.1
+  history:
+  - date: '2026-10-04'
+    from: Gra Podstawowa
+    from_forms: []
+    to: gra podstawowa
+    reason: 'zasada właściciela (2026-10-04): wielkie litery zgodnie z normą — nazwy faz, gier i dowódców to nazwy pospolite; tytuł dokumentu tylko pierwszym wyrazem'
+    by: user
+  pl_forms:
+  - gra podstawowa
+  rationale: Korekta pisowni do normy polszczyzny (decyzja właściciela 2026-10-04).
 - id: gcacw.advanced-game
   source_term: Advanced Game
   sense: scenariusze jedno-/kilkudniowe vs kampanie z dodatkowymi zasadami modułu
-  pl: Gra Zaawansowana
+  pl: gra zaawansowana
   status: approved
   decided_by: user
   evidence:
@@ -56,6 +76,16 @@ concepts:
     where: s. 2, 4 / `00_powitanie.tex:13-16`
     supports: sense
   rules: *id001
+  history:
+  - date: '2026-10-04'
+    from: Gra Zaawansowana
+    from_forms: []
+    to: gra zaawansowana
+    reason: 'zasada właściciela (2026-10-04): wielkie litery zgodnie z normą — nazwy faz, gier i dowódców to nazwy pospolite; tytuł dokumentu tylko pierwszym wyrazem'
+    by: user
+  pl_forms:
+  - gra zaawansowana
+  rationale: Korekta pisowni do normy polszczyzny (decyzja właściciela 2026-10-04).
 - id: gcacw.scenario
   source_term: scenario
   sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
@@ -148,7 +178,7 @@ concepts:
 - id: gcacw.army
   source_term: Army
   sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
-  pl: Dowódca Armii
+  pl: dowódca armii
   status: approved
   decided_by: user
   evidence:
@@ -157,10 +187,20 @@ concepts:
     form: Dowódca Armii
     supports: usage-in-games
     checked: '2026-10-04'
+  history:
+  - date: '2026-10-04'
+    from: Dowódca Armii
+    from_forms: []
+    to: dowódca armii
+    reason: 'zasada właściciela (2026-10-04): wielkie litery zgodnie z normą — nazwy faz, gier i dowódców to nazwy pospolite; tytuł dokumentu tylko pierwszym wyrazem'
+    by: user
+  pl_forms:
+  - dowódca armii
+  rationale: Korekta pisowni do normy polszczyzny (decyzja właściciela 2026-10-04).
 - id: gcacw.district
   source_term: District
   sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
-  pl: Dowódca Regionalny
+  pl: dowódca regionalny
   status: approved
   decided_by: user
   evidence:
@@ -169,6 +209,16 @@ concepts:
     form: Dowódca Regionalny
     supports: usage-in-games
     checked: '2026-10-04'
+  history:
+  - date: '2026-10-04'
+    from: Dowódca Regionalny
+    from_forms: []
+    to: dowódca regionalny
+    reason: 'zasada właściciela (2026-10-04): wielkie litery zgodnie z normą — nazwy faz, gier i dowódców to nazwy pospolite; tytuł dokumentu tylko pierwszym wyrazem'
+    by: user
+  pl_forms:
+  - dowódca regionalny
+  rationale: Korekta pisowni do normy polszczyzny (decyzja właściciela 2026-10-04).
 - id: gcacw.corps
   source_term: Corps
   sense: dwie liczby; aktywuje i szturmuje; przydzielony do jednostki własnego związku
@@ -606,7 +656,7 @@ concepts:
 - id: gcacw.activate-army-leader
   source_term: Activate Army Leader
   sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
-  pl: aktywacja Dowódcy Armii
+  pl: aktywacja dowódcy armii
   status: approved
   decided_by: user
   evidence:
@@ -615,6 +665,16 @@ concepts:
     form: aktywacja Dowódcy Armii
     supports: usage-in-games
     checked: '2026-10-04'
+  history:
+  - date: '2026-10-04'
+    from: aktywacja Dowódcy Armii
+    from_forms: []
+    to: aktywacja dowódcy armii
+    reason: 'zasada właściciela (2026-10-04): wielkie litery zgodnie z normą — nazwy faz, gier i dowódców to nazwy pospolite; tytuł dokumentu tylko pierwszym wyrazem'
+    by: user
+  pl_forms:
+  - aktywacja dowódcy armii
+  rationale: Korekta pisowni do normy polszczyzny (decyzja właściciela 2026-10-04).
 - id: gcacw.assault
   source_term: Assault
   sense: 'akcja dowódcy: atak grupą z jego heksu; +1; bez MP'
@@ -901,7 +961,7 @@ concepts:
 - id: gcacw.random-events-phase
   source_term: Random Events Phase
   sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
-  pl: Faza wydarzeń losowych
+  pl: faza wydarzeń losowych
   status: approved
   decided_by: user
   evidence:
@@ -910,10 +970,20 @@ concepts:
     form: Faza wydarzeń losowych
     supports: usage-in-games
     checked: '2026-10-04'
+  history:
+  - date: '2026-10-04'
+    from: Faza wydarzeń losowych
+    from_forms: []
+    to: faza wydarzeń losowych
+    reason: 'zasada właściciela (2026-10-04): wielkie litery zgodnie z normą — nazwy faz, gier i dowódców to nazwy pospolite; tytuł dokumentu tylko pierwszym wyrazem'
+    by: user
+  pl_forms:
+  - faza wydarzeń losowych
+  rationale: Korekta pisowni do normy polszczyzny (decyzja właściciela 2026-10-04).
 - id: gcacw.leader-transfer-phase
   source_term: Leader Transfer Phase
   sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
-  pl: Faza przemieszczania dowódców
+  pl: faza przemieszczania dowódców
   status: approved
   decided_by: user
   evidence:
@@ -922,6 +992,16 @@ concepts:
     form: Faza przemieszczania dowódców
     supports: usage-in-games
     checked: '2026-10-04'
+  history:
+  - date: '2026-10-04'
+    from: Faza przemieszczania dowódców
+    from_forms: []
+    to: faza przemieszczania dowódców
+    reason: 'zasada właściciela (2026-10-04): wielkie litery zgodnie z normą — nazwy faz, gier i dowódców to nazwy pospolite; tytuł dokumentu tylko pierwszym wyrazem'
+    by: user
+  pl_forms:
+  - faza przemieszczania dowódców
+  rationale: Korekta pisowni do normy polszczyzny (decyzja właściciela 2026-10-04).
 - id: gcacw.leader-transfer
   source_term: leader transfer
   sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
@@ -937,7 +1017,7 @@ concepts:
 - id: gcacw.recovery-phase
   source_term: Recovery Phase
   sense: 6 kroków w stałej kolejności
-  pl: Faza Reorganizacji
+  pl: faza reorganizacji
   status: approved
   decided_by: user
   evidence:
@@ -956,10 +1036,20 @@ concepts:
   - R-8.0.4
   - R-8.0.5
   - R-8.0.6
+  history:
+  - date: '2026-10-04'
+    from: Faza Reorganizacji
+    from_forms: []
+    to: faza reorganizacji
+    reason: 'zasada właściciela (2026-10-04): wielkie litery zgodnie z normą — nazwy faz, gier i dowódców to nazwy pospolite; tytuł dokumentu tylko pierwszym wyrazem'
+    by: user
+  pl_forms:
+  - faza reorganizacji
+  rationale: Korekta pisowni do normy polszczyzny (decyzja właściciela 2026-10-04).
 - id: gcacw.turn-indication-phase
   source_term: Turn Indication Phase
   sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
-  pl: Faza oznaczenia tury (Koniec tury)
+  pl: faza oznaczenia tury (koniec tury)
   status: approved
   decided_by: user
   evidence:
@@ -968,6 +1058,16 @@ concepts:
     form: Faza oznaczenia tury (Koniec tury)
     supports: usage-in-games
     checked: '2026-10-04'
+  history:
+  - date: '2026-10-04'
+    from: Faza oznaczenia tury (Koniec tury)
+    from_forms: []
+    to: faza oznaczenia tury (koniec tury)
+    reason: 'zasada właściciela (2026-10-04): wielkie litery zgodnie z normą — nazwy faz, gier i dowódców to nazwy pospolite; tytuł dokumentu tylko pierwszym wyrazem'
+    by: user
+  pl_forms:
+  - faza oznaczenia tury (koniec tury)
+  rationale: Korekta pisowni do normy polszczyzny (decyzja właściciela 2026-10-04).
 - id: gcacw.active-unit
   source_term: active unit
   sense: wybrany do akcji; jego właściciel
@@ -2094,7 +2194,7 @@ concepts:
 - id: gcacw.attachment-phase
   source_term: Attachment Phase
   sense: faza Advanced (łączenie jednostek); moment automatycznego zniszczenia pontonu
-  pl: Faza przydziału
+  pl: faza przydziału
   status: approved
   decided_by: user
   evidence:
@@ -2108,6 +2208,16 @@ concepts:
     supports: sense
   rules:
   - R-10.2.2
+  history:
+  - date: '2026-10-04'
+    from: Faza przydziału
+    from_forms: []
+    to: faza przydziału
+    reason: 'zasada właściciela (2026-10-04): wielkie litery zgodnie z normą — nazwy faz, gier i dowódców to nazwy pospolite; tytuł dokumentu tylko pierwszym wyrazem'
+    by: user
+  pl_forms:
+  - faza przydziału
+  rationale: Korekta pisowni do normy polszczyzny (decyzja właściciela 2026-10-04).
 - id: gcacw.naval-battery
   source_term: Naval Battery
   sense: (do uzupełnienia — import z tabeli 2-kolumnowej)

@@ -109,8 +109,16 @@ def check(project, paths: list[str]) -> int:
                 for form, reason in rejected_forms(c):
                     if word_re(form).search(line) and not any(word_re(ok).search(line) and form.lower() in ok.lower() for ok in forms(c)):
                         findings.append(("ERROR", f, i, c["id"], f"rejected form '{form}' ({reason}); approved: '{c.get('pl')}'"))
-                olds = sorted({form for form, h in old_forms(c) if word_re(form).search(line)})
-                if olds and not any(word_re(ok).search(line) for ok in forms(c)):
+                rejected_here = {x[4] for x in findings if x[0] == "ERROR" and x[1] == f and x[2] == i and x[3] == c["id"]}
+                # case-sensitive: a change of capitalisation only (Faza Rozkazów → faza rozkazów) must be found too;
+                # an approved form may start with a capital letter at the beginning of a sentence
+                ok_forms = [v for ok in forms(c) for v in {ok, ok[:1].upper() + ok[1:]}]
+                line_wo_ok = line
+                for ok in ok_forms:
+                    line_wo_ok = word_re(ok, ignore_case=False).sub(" ", line_wo_ok)
+                olds = sorted({form for form, h in old_forms(c) if word_re(form, ignore_case=False).search(line_wo_ok)
+                               and not any(f"'{form}'" in m for m in rejected_here)})
+                if olds:
                     date = (c.get("history") or [{}])[-1].get("date")
                     findings.append(("update", f, i, c["id"], f"old equivalent {', '.join(repr(o) for o in olds)} (changed {date} → '{c.get('pl')}')"))
                 if c["status"] == "disputed":
