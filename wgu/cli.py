@@ -5,6 +5,7 @@
                                              also sort sources into docs/ png/, measure the PDF, write
                                              .gitignore, .claude/settings.json, installs the plugin (project scope), git init
     wgu config                               print the resolved project configuration
+    wgu help [TOPIC]                         short procedures (e.g. `wgu help nowa-gra`: start a new game)
     wgu pdf analyze|extract|images|render …  PDF tools (fonts/colours, text with markup, images, page renders)
     wgu kb import-legacy DIR [--specs DIR]   convert an old Markdown index (docs/indeks) to the YAML KB
     wgu kb lint [--strict]                   schema + referential integrity + coverage checks
@@ -50,6 +51,11 @@ def cmd_init(a):
     gid = a.id or Path.cwd().name.lower().split("-")[0]
     p.write_text(INIT_TEMPLATE.format(id=gid, short=a.short or gid.upper()), encoding="utf-8", newline="\n")
     print(f"created {p}")
+
+
+def cmd_help(a):
+    from .help import render
+    print(render(a.topic))
 
 
 def cmd_config(a):
@@ -186,6 +192,7 @@ def main(argv=None):
     p.add_argument("--setup", action="store_true"); p.add_argument("--pdf"); p.add_argument("--image", action="append", default=[])
     p.add_argument("--no-git", action="store_true"); p.add_argument("--no-plugin", action="store_true")
     p = sp.add_parser("config"); p.set_defaults(fn=cmd_config)
+    p = sp.add_parser("help"); p.add_argument("topic", nargs="?"); p.set_defaults(fn=cmd_help)
     p = sp.add_parser("kb"); p.set_defaults(fn=cmd_kb)
     p.add_argument("action", choices=["import-legacy", "lint", "render", "show", "stats", "export"])
     p.add_argument("dir", nargs="?"); p.add_argument("ids", nargs="*")
