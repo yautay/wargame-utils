@@ -59,3 +59,26 @@ def test_measure_ignores_style_variants_of_body_font(tmp_path):
     pg.insert_text((50, 30), "HEAD", fontname="hebo", fontsize=18)
     d.save(tmp_path / "a.pdf")
     assert measure_pdf(tmp_path / "a.pdf")["heading_font"].lower().startswith("helvetica")
+
+
+def test_help_topics(capsys):
+    import pytest
+    from wgu import cli
+    cli.main(["help"])
+    assert "nowa-gra" in capsys.readouterr().out
+    cli.main(["help", "nowa-gra"])
+    out = capsys.readouterr().out
+    assert "init --setup" in out and "LOCALAPPDATA" in out
+    with pytest.raises(SystemExit):
+        cli.main(["help", "nie-ma"])
+
+
+def test_find_claude_msix_location(tmp_path, monkeypatch):
+    from wgu import project_setup
+    exe = tmp_path / "Packages" / "Claude_abc" / "LocalCache" / "Roaming" / "Claude" / "claude-code" / "1.0" / "h" / "claude.exe"
+    exe.parent.mkdir(parents=True)
+    exe.write_text("")
+    monkeypatch.setattr(project_setup.shutil, "which", lambda _: None)
+    monkeypatch.delenv("APPDATA", raising=False)
+    monkeypatch.setenv("LOCALAPPDATA", str(tmp_path))
+    assert project_setup.find_claude() == str(exe)

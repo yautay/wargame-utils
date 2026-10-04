@@ -50,16 +50,21 @@ def measure_pdf(pdf: Path, max_pages: int = 12) -> dict:
 
 
 def find_claude() -> str | None:
-    """`claude` on PATH, else the newest copy bundled with the Claude desktop app (Windows)."""
+    """`claude` on PATH, else the newest copy bundled with the Claude desktop app (Windows).
+
+    The MSIX build of the app virtualizes %APPDATA%: a plain shell sees the copy only under
+    %LOCALAPPDATA%/Packages/Claude_*/LocalCache/Roaming, so both locations are searched."""
     exe = shutil.which("claude")
     if exe:
         return exe
-    appdata = os.environ.get("APPDATA")
-    if appdata:
-        found = sorted((Path(appdata) / "Claude" / "claude-code").glob("*/*/claude.exe"),
-                       key=lambda p: p.stat().st_mtime)
-        if found:
-            return str(found[-1])
+    roots = []
+    if os.environ.get("APPDATA"):
+        roots.append(Path(os.environ["APPDATA"]) / "Claude" / "claude-code")
+    if os.environ.get("LOCALAPPDATA"):
+        roots += sorted((Path(os.environ["LOCALAPPDATA"]) / "Packages").glob("Claude_*/LocalCache/Roaming/Claude/claude-code"))
+    found = [p for r in roots for p in r.glob("*/*/claude.exe")]
+    if found:
+        return str(max(found, key=lambda p: p.stat().st_mtime))
     return None
 
 
