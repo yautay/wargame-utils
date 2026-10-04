@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import collections
 import json
+import os
 import shutil
 import subprocess
 from pathlib import Path
@@ -34,7 +35,9 @@ def measure_pdf(pdf: Path, max_pages: int = 12) -> dict:
                     fonts[s["font"]] += n
                     colors[s["color"]] += n
     body = fonts.most_common(1)[0][0] if fonts else ""
-    family = lambda f: f.split("-")[0].split("+")[-1]
+    def family(f):   # TimesNewRomanPSMT / TimesNewRomanPS-ItalicMT / TimesNewRomanPS-BoldMT -> one family
+        f = f.split("+")[-1].split("-")[0]
+        return f[:-2] if f.endswith("MT") else f
     others = collections.Counter({f: c for f, c in fonts.items() if family(f) != family(body)})
     heading = others.most_common(1)[0][0].rstrip("-") if others else ""
     accent = ""
@@ -44,6 +47,38 @@ def measure_pdf(pdf: Path, max_pages: int = 12) -> dict:
             accent = f"{col:06X}"
             break
     return {"pages": len(doc), "body_font": body, "heading_font": heading, "accent_color": accent}
+
+
+def find_claude() -> str | None:
+    """`claude` on PATH, else the newest copy bundled with the Claude desktop app (Windows)."""
+    exe = shutil.which("claude")
+    if exe:
+        return exe
+    appdata = os.environ.get("APPDATA")
+    if appdata:
+        found = sorted((Path(appdata) / "Claude" / "claude-code").glob("*/*/claude.exe"),
+                       key=lambda p: p.stat().st_mtime)
+        if found:
+            return str(found[-1])
+    return None
+
+
+def install_plugin(root: Path, plugin_path: Path, log: list[str]) -> None:
+    """Register the marketplace and install `wgu` in project scope (settings.json alone does not load it)."""
+    manual = (f"zainstaluj plugin ręcznie w katalogu gry: `claude plugin marketplace add {plugin_path.as_posix()} "
+              "--scope project` i `claude plugin install wgu@wargame-utils --scope project`")
+    exe = find_claude()
+    if not exe:
+        log.append(f"nie znaleziono `claude` — {manual}")
+        return
+    for args in (["marketplace", "add", plugin_path.as_posix(), "--scope", "project"],
+                 ["install", "wgu@wargame-utils", "--scope", "project"]):
+        r = subprocess.run([exe, "plugin", *args], cwd=root, capture_output=True, text=True)
+        if r.returncode != 0:
+            log.append(f"`claude plugin {args[0]}` nie powiodło się ({(r.stderr or r.stdout).strip()[:200]}) — {manual}")
+            return
+    log.append("zainstalowano plugin wgu@wargame-utils (zakres: projekt) — uruchom NOWĄ sesję Claude Code w tym "
+               "katalogu; po zmianach w narzędziu: `claude plugin update wgu@wargame-utils`")
 
 
 def _move(src: Path, dst_dir: Path, log: list[str]) -> Path:
@@ -58,7 +93,7 @@ def _move(src: Path, dst_dir: Path, log: list[str]) -> Path:
 
 
 def setup(root: Path, gid: str | None, short: str | None, pdf: Path | None, images: list[Path],
-          git: bool = True, plugin_path: Path = PLUGIN_ROOT) -> list[str]:
+          git: bool = True, plugin_path: Path = PLUGIN_ROOT, plugin: bool = True) -> list[str]:
     log: list[str] = []
     if (root / CONFIG_NAME).exists():
         raise SystemExit(f"{root / CONFIG_NAME} już istnieje — nic nie zmieniono")
@@ -104,6 +139,9 @@ def setup(root: Path, gid: str | None, short: str | None, pdf: Path | None, imag
                "enabledPlugins": {"wgu@wargame-utils": True}}
         st.write_text(json.dumps(cfg, indent=2) + "\n", encoding="utf-8", newline="\n")
         log.append(f"utworzono .claude/settings.json (plugin z {plugin_path.as_posix()})")
+
+    if plugin:
+        install_plugin(root, plugin_path, log)
 
     if git and not (root / ".git").exists():
         r = subprocess.run(["git", "init", "-q", "-b", "main"], cwd=root, capture_output=True, text=True)

@@ -12,11 +12,12 @@ CLI: `python "${CLAUDE_PLUGIN_ROOT}/wgu.py"` (dalej `wgu`). Zależności: `pip i
 1. Sprawdź katalog: `git status`, lista PDF-ów i obrazów (w katalogu głównym, `docs/`, `sources/`), istniejące
    tłumaczenie (`*.tex`), stara baza (`docs/indeks/`).
 2. Część mechaniczna jedną komendą (nie nadpisuje, przy istniejącym `wgu.yaml` odmawia):
-   `wgu init --setup [--id … --short …] [--pdf <plik.pdf>] [--image <plik>…] [--no-git]`.
+   `wgu init --setup [--id … --short …] [--pdf <plik.pdf>] [--image <plik>…] [--no-git] [--no-plugin]`.
    Przenosi PDF do `docs/`, obrazy (mapa, żetony) do `png/`, tworzy `wgu.yaml` ze zmierzonym `pdf.accent_color`
-   i `pdf.heading_font`, `.gitignore`, `.claude/settings.json` (włącza plugin) oraz `git init`, a także puste `kb/`
+   i `pdf.heading_font`, `.gitignore`, `.claude/settings.json`, instaluje plugin w zakresie projektu (`claude plugin marketplace add` +
+   `install`; bez tego skille `/wgu:*` się nie ładują) oraz robi `git init`, a także puste `kb/`
    i `translation/`. Bez `--pdf` i `--image` wykrywa pliki w katalogu głównym (PDF musi być jeden).
-   Potem uzupełnij ręcznie w `wgu.yaml`: `game.title`, `game.rules_version`, `game.publisher`, `sources.rules[].version`
+   Po instalacji pluginu trzeba otworzyć nową sesję w katalogu gry. Potem uzupełnij ręcznie w `wgu.yaml`: `game.title`, `game.rules_version`, `game.publisher`, `sources.rules[].version`
    (ze strony tytułowej PDF-u), `sources.errata`, `sources.charts`, `translation.*`, jeśli istnieje tłumaczenie.
 3. Zweryfikuj pomiar: `wgu pdf analyze <pdf> --pages 3-6` i render strony (`wgu pdf render`). Kolor zmian wersji
    (`pdf.accent_color`: kolor inny niż czarny i szary, zwykle zmiany wersji), `pdf.heading_font`, `pdf.columns`
