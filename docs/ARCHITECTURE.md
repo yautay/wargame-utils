@@ -22,6 +22,7 @@ własne repozytorium z plikiem `wgu.yaml`, źródłami, bazą `kb/`, tłumaczeni
 | Plugin Claude Code `wgu` | `.claude-plugin/`, `skills/`, `agents/` | orkiestracja pracy modeli: skille `/wgu:*`, agenci `wgu:*` |
 | CLI `wgu` (Python) | `wgu/`, `wgu.py` | wszystko, co nie wymaga modelu: PDF, LaTeX, import, lint, render, eksport, walidacja grafów |
 | Kontrakt danych | `wgu/schemas/kb.schema.json` | JSON Schema bazy: wspólny język narzędzia i projektów digitalizacji |
+| Terminologia wspólna | `terminology/common.yaml`, `terminology/era/*.yaml`, `terminology/series/*.yaml` | warstwy glosariusza pojęciowego (`wgu/terms@1`, `wgu/schemas/terminology.schema.json`); warstwa gry w repo gry |
 | Szablony | `templates/latex/`, `templates/docs/` | styl LaTeX instrukcji i pomocy (kolory ról `wg*`), pułapki środowiska |
 
 Skille są **cienkimi orkiestratorami** w sesji głównej. Uruchamiają agentów pluginu (`subagent_type: "wgu:…"`)

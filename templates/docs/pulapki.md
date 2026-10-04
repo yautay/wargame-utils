@@ -13,6 +13,12 @@
 | `Set-Content -Encoding UTF8` w PS 5.1 dodaje BOM | Unikaj; zapisuj przez Write/Python (`encoding='utf-8'`). Usuń BOM, jeśli się pojawi. |
 | Git: „LF will be replaced by CRLF” | Tylko ostrzeżenie. |
 
+## Ekstrakcja PDF
+| Problem | Rozwiązanie |
+|---|---|
+| Ekstrakcja daje puste strony lub brak fragmentów, choć render strony pokazuje tekst | PDF edytowany np. w Infix ma nakładki `/ActualText` (spacja) na kolumnach tekstu (tak jest w polskim SPQR 3 ed.). Usuń `/ActualText` ze strumieni przed `get_text()` albo porównaj z renderem strony. |
+| Słowa przeniesione na końcu linii („Skir-” / „misher”) nie pasują do glosariusza | `wgu terms for-chunk` i `wgu check fidelity` łączą przeniesienia automatycznie. Przy ręcznym grepie pamiętaj o nich. |
+
 ## Fonty (fontspec / LuaLaTeX)
 | Problem | Rozwiązanie |
 |---|---|

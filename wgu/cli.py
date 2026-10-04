@@ -12,7 +12,11 @@
     wgu aids validate [ID…]                  check decision graphs of aid specs
     wgu aids build ID… [--dpi N]             compile aid .tex (LuaLaTeX ×2), render PNG, report errors
     wgu tex build FILE [--runs N]            compile any .tex with LuaLaTeX and summarise the log
-    wgu glossary MD OUT                      LaTeX glossary chapter from the style guide table
+    wgu glossary MD OUT                      LaTeX glossary chapter from the style guide table (legacy)
+    wgu terms lint | show Q | check TEX… | impact ID --tex T… [--src S…] | for-chunk SRC
+    wgu terms glossary-tex OUT | import-md MD OUT --layer ID --level L --prefix P --label SRC
+    wgu text mark SRC OUT [--pattern RX]     insert `%@ KEY` segment markers before numbered rule headings
+    wgu check fidelity SRC TEX… [--no-terms] numbers / cross-refs / modality cues / terms per aligned segment
 """
 from __future__ import annotations
 
@@ -107,6 +111,50 @@ def cmd_tex(a):
     sys.exit(build.cli_build(Path(a.file), runs=a.runs, outdir=a.outdir, render_dpi=a.render))
 
 
+def cmd_terms(a):
+    from .config import find_project
+    from .terms import ops
+    pr = None
+    try:
+        pr = find_project()
+    except SystemExit:
+        if a.action not in ("import-md",):
+            raise
+    if a.action == "lint":
+        sys.exit(ops.lint(pr))
+    if a.action == "show":
+        sys.exit(ops.show(pr, " ".join(a.args)))
+    if a.action == "check":
+        sys.exit(ops.check(pr, a.args))
+    if a.action == "impact":
+        sys.exit(ops.impact(pr, a.args[0], a.tex or [], a.src or []))
+    if a.action == "for-chunk":
+        from .terms.chunk import for_chunk
+        sys.exit(for_chunk(pr, Path(a.args[0])))
+    if a.action == "glossary-tex":
+        sys.exit(ops.glossary_tex(pr, Path(a.args[0]), author=a.author or ""))
+    if a.action == "import-md":
+        sys.exit(ops.import_md(Path(a.args[0]), Path(a.args[1]), a.layer, a.level, a.prefix, a.label))
+
+
+def cmd_text(a):
+    from .check.segments import DEFAULT_HEADING, mark
+    sys.exit(mark(Path(a.src), Path(a.out), a.pattern or DEFAULT_HEADING))
+
+
+def cmd_check(a):
+    from .check import fidelity
+    terms = None
+    if not a.no_terms:
+        try:
+            from .config import find_project
+            from .terms.store import layer_paths, load
+            terms = load(layer_paths(find_project()))
+        except SystemExit:
+            terms = None
+    sys.exit(fidelity.run(Path(a.src), [Path(x) for x in a.tex], terms))
+
+
 def main(argv=None):
     argv = sys.argv[1:] if argv is None else argv
     if argv and argv[0] == "pdf":
@@ -134,6 +182,16 @@ def main(argv=None):
     p.add_argument("action", choices=["build"]); p.add_argument("file")
     p.add_argument("--runs", type=int, default=2); p.add_argument("--outdir")
     p.add_argument("--render", type=int, default=0, help="render pages to PNG at this DPI (0 = no)")
+    p = sp.add_parser("terms"); p.set_defaults(fn=cmd_terms)
+    p.add_argument("action", choices=["lint", "show", "check", "impact", "for-chunk", "glossary-tex", "import-md"])
+    p.add_argument("args", nargs="*"); p.add_argument("--tex", nargs="*"); p.add_argument("--src", nargs="*")
+    p.add_argument("--author"); p.add_argument("--layer"); p.add_argument("--level"); p.add_argument("--prefix")
+    p.add_argument("--label")
+    p = sp.add_parser("text"); p.set_defaults(fn=cmd_text)
+    p.add_argument("action", choices=["mark"]); p.add_argument("src"); p.add_argument("out"); p.add_argument("--pattern")
+    p = sp.add_parser("check"); p.set_defaults(fn=cmd_check)
+    p.add_argument("action", choices=["fidelity"]); p.add_argument("src"); p.add_argument("tex", nargs="+")
+    p.add_argument("--no-terms", action="store_true")
     a = ap.parse_args(argv)
     if a.cmd == "kb" and a.action == "show" and a.dir:
         a.ids = [a.dir] + a.ids

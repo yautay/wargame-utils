@@ -182,6 +182,19 @@
   before upper={\textbf{(Opcjonalnie)\ifstrempty{#1}{}{ #1}}\ }}
 
 % Notatka tłumacza — wstawka dydaktyczna w duchu epoki (pergamin, ornament)
+% --- Komentarze autora (nie przepisy): tło historyczne, uwaga projektanta, uwaga do gry ---
+% Oryginalne „Historical Note / Design Note / Play Note”. Rejestr staranny, nie regulaminowy (styl-przepisow.md §1).
+\newcommand{\wgkomentarz}[1]{{\upshape\naglowekfont\scshape #1:}\ }
+\newtcolorbox{uwagahist}[1][Tło historyczne]{enhanced,breakable,colback=white,colframe=wgszary,
+  boxrule=0pt,leftrule=1.2pt,arc=0pt,left=5pt,right=2pt,top=1pt,bottom=1pt,
+  fontupper=\itshape,before upper={\wgkomentarz{#1}}}
+\newtcolorbox{uwagaprojektanta}[1][Uwaga projektanta]{enhanced,breakable,colback=white,colframe=wgszary,
+  boxrule=0pt,leftrule=1.2pt,arc=0pt,left=5pt,right=2pt,top=1pt,bottom=1pt,
+  fontupper=\itshape,before upper={\wgkomentarz{#1}}}
+\newtcolorbox{uwagagra}[1][Uwaga do gry]{enhanced,breakable,colback=white,colframe=wgszary,
+  boxrule=0pt,leftrule=1.2pt,arc=0pt,left=5pt,right=2pt,top=1pt,bottom=1pt,
+  fontupper=\itshape,before upper={\wgkomentarz{#1}}}
+
 \newtcolorbox{wskazowka}[1][Notatka tłumacza]{enhanced,breakable,
   colback=wgpergamin,colframe=wgsepia,boxrule=0.5pt,arc=1pt,
   left=6pt,right=6pt,top=3pt,bottom=4pt,coltext=wgsepia!70!black,

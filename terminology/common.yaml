@@ -1,0 +1,71 @@
+layer:
+  id: common
+  level: common
+  title: Pojęcia wspólne dla gier wojennych (heksowe gry planszowe)
+  sources: [GCACW-PL, AAP6-2005PL, GMT-SPQR-PL3]
+# Status: wszystkie pojęcia tej warstwy są PROPOZYCJAMI, dopóki właściciel nie zatwierdzi ich dla wszystkich gier.
+# Zatwierdzenia z konkretnych projektów (np. GCACW-PL) są dowodem, nie decyzją dla warstwy wspólnej.
+concepts:
+- id: common.zoc
+  source_term: Zone of Control
+  variants: [ZOC, ZOCs, zone of control, Zones of Control]
+  sense: Heksy przyległe do jednostki (zwykle frontowe), w których jednostki przeciwnika podlegają ograniczeniom ruchu
+    lub obowiązkom walki. Konkretne skutki określa każda gra.
+  disambiguation: Mechanika gry. Nie mylić ze współczesną „strefą kontroli” przestrzeni powietrznej.
+  pl: strefa kontroli
+  pl_forms: [strefa kontroli, strefy kontroli, strefie kontroli, strefę kontroli, strefą kontroli, stref kontroli, strefom kontroli, strefach kontroli, strefami kontroli]
+  pl_abbrev: ZOC
+  notation:
+    first_use: strefa kontroli\ang{Zone of Control, ZOC}
+    typography: skrót ZOC zostaje, jeśli występuje na komponentach lub w tabelach
+  status: proposal
+  decided_by: analyst
+  rationale: Odpowiednik przyjęty przez właściciela w GCACW-PL. Brak lepszego kandydata, ugruntowany w polskiej społeczności graczy (do potwierdzenia).
+  evidence:
+  - {source: GCACW-PL, where: "docs/przewodnik_stylu.md §6", form: strefa kontroli (ZOC), supports: usage-in-games, checked: "2026-10-04"}
+  - {source: AAP6-2005PL, where: "s. 102 (control zone)", form: strefa kontroli, supports: against,
+     note: "w AAP-6 to strefa kontrolowanej przestrzeni powietrznej; homonim, nie źródło znaczenia", checked: "2026-10-04"}
+- id: common.hex
+  source_term: hex
+  variants: [hexes, hexagon]
+  sense: Pole planszy w kształcie sześciokąta. Podstawowa jednostka położenia i odległości.
+  pl: heks
+  pl_forms: [heks, heksu, heksowi, heksem, heksie, heksy, heksów, heksom, heksami, heksach]
+  status: proposal
+  decided_by: analyst
+  rationale: Utrwalone w polskich instrukcjach gier wojennych. „Sześciokąt” jest poprawny, ale nieużywany w tej funkcji.
+  evidence:
+  - {source: GCACW-PL, where: "§6", form: heks, supports: usage-in-games}
+- id: common.hexside
+  source_term: hexside
+  variants: [hexsides, hex side]
+  sense: Krawędź między dwoma sąsiednimi heksami (rzeka, strumień, grzbiet, mur itp. leżą na krawędzi).
+  pl: krawędź heksu
+  pl_forms: [krawędź heksu, krawędzi heksu, krawędzią heksu, krawędzie heksów, krawędziach heksów, krawędzi heksów]
+  related: [common.hex]
+  status: proposal
+  decided_by: analyst
+  evidence:
+  - {source: GCACW-PL, where: "§6", form: krawędź heksu, supports: usage-in-games}
+- id: common.drm
+  source_term: die roll modifier
+  variants: [DRM, DRMs, die-roll modifier]
+  sense: Wartość dodawana do wyniku rzutu kością albo od niego odejmowana.
+  disambiguation: Nie mylić z przesunięciem kolumny tabeli (column shift / adjustment), które jest osobnym pojęciem.
+  pl: modyfikator rzutu
+  pl_forms: [modyfikator rzutu, modyfikatora rzutu, modyfikatorem rzutu, modyfikatorze rzutu, modyfikatory rzutu, modyfikatorów rzutu, modyfikatorami rzutu]
+  pl_abbrev: DRM
+  status: proposal
+  decided_by: analyst
+  evidence:
+  - {source: GCACW-PL, where: "§6", form: modyfikator rzutu, supports: usage-in-games}
+- id: common.stack
+  source_term: stack
+  variants: [stacks, stacked, stacking]
+  sense: Kilka żetonów w jednym heksie. Stacking (układanie w stos) to zasady określające, ile i jakich jednostek może zajmować heks.
+  pl: stos
+  pl_forms: [stos, stosu, stosie, stosem, stosy, stosów, w stosie, układanie w stos, układania w stos]
+  status: proposal
+  decided_by: analyst
+  evidence:
+  - {source: GCACW-PL, where: "§6", form: "układanie w stos / stos", supports: usage-in-games}

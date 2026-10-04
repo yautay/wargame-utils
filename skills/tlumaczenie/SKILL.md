@@ -1,86 +1,97 @@
 ---
 name: tlumaczenie
-description: "Tłumaczenie instrukcji gier planszowych/wargame'ów (PDF, zwykle angielski) na polski jako dokument LaTeX (LuaLaTeX) odwzorowujący oprawę oryginału (fonty, nagłówki, ramki, tabele, żetony), z zachowaniem stylu literackiego tłumacza, słowniczkiem EN→PL, oznaczaniem zmian wersji i notatkami tłumacza. Używaj, gdy użytkownik chce przetłumaczyć, dokończyć lub zaktualizować do nowej wersji instrukcję gry albo przygotować polską wersję rulebooka."
-argument-hint: "[zakres stron/rozdziałów] [--aktualizacja WERSJA]"
+description: "Profesjonalne tłumaczenie instrukcji historycznych gier wojennych i planszowych (PDF, zwykle angielski) na polski jako dokument LaTeX (LuaLaTeX) w oprawie oryginału, z eksportem do PDF. Pojęciowy glosariusz w trzech warstwach (wspólna, epoka/seria, gra/wydanie), kontrola wierności przepisów (modalność, warunki, wyjątki, limity), trzy oddzielne przebiegi weryfikacji (terminologia, znaczenie zasad, redakcja językowa), dziennik decyzji i punktowa aktualizacja po zmianie terminu. Używaj, gdy użytkownik chce przetłumaczyć, dokończyć lub zaktualizować instrukcję gry."
+argument-hint: "[zakres stron/rozdziałów] [--wydanie X] [--proba] [--aktualizacja WERSJA]"
 ---
 
 # Tłumaczenie instrukcji gry
 
-Proces wypracowany przy *GCACW Standard Basic Game Rules v1.6* (repo GCACW-PL). Efekt to skompilowany PDF
-wyglądający jak oryginał wydawcy, z polskim tekstem w spójnym stylu.
+Cel: przekład, który polski gracz czyta jak dobrze napisaną polską instrukcję, a którego każdy przepis znaczy
+dokładnie to samo co w oryginale. **Płynność bez wierności jest błędem. Wierność bez dobrej polszczyzny nie wystarcza.**
 
-CLI: `python "${CLAUDE_PLUGIN_ROOT}/wgu.py"` (dalej `wgu`). Ustawienia projektu (źródła, kolor zmian, font nagłówków,
-katalogi tłumaczenia) są w `wgu.yaml` (`wgu config`). Brak pliku → najpierw `/wgu:nowy-projekt`.
+CLI: `python "${CLAUDE_PLUGIN_ROOT}/wgu.py"` (dalej `wgu`). Konfiguracja projektu: `wgu.yaml` (`wgu config`).
+Brak pliku → najpierw `/wgu:nowy-projekt`. Zalecana kolejność: `/wgu:atomizacja` → tłumaczenie (baza `kb/` daje
+weryfikatorowi sens reguł i ich ID).
 
-Zasoby:
-- `${CLAUDE_PLUGIN_ROOT}/templates/latex/gry-style.sty`: szablon stylu (makra semantyczne, ramki, tabele, paginy; kolory `wg*`).
-- `${CLAUDE_PLUGIN_ROOT}/templates/latex/main-template.tex`: plik główny (okładka, spis treści, import rozdziałów).
-- `${CLAUDE_PLUGIN_ROOT}/skills/tlumaczenie/references/przewodnik_stylu_szablon.md`: przewodnik stylu i bazowy słowniczek.
-- `${CLAUDE_PLUGIN_ROOT}/skills/tlumaczenie/references/prompt_agenta.md`: prompt dla równoległych agentów `wgu:tlumacz`.
-- `${CLAUDE_PLUGIN_ROOT}/templates/docs/pulapki.md`: znane problemy techniczne. **Przeczytaj przed startem.**
-- `wgu pdf analyze | extract | images | render`, `wgu tex build`, `wgu glossary` (`--help` przy każdym).
+## Materiały (przeczytaj przed startem)
+`${CLAUDE_PLUGIN_ROOT}/skills/tlumaczenie/references/`:
+- `polityka-terminologiczna.md`: pojęcie jako jednostka glosariusza, trzy warstwy, statusy, dowody, procedura dla nowego pojęcia.
+- `styl-przepisow.md`: rejestry (przepis, przykład, komentarz historyczny, uwaga tłumacza), zakaz synonimów, kalki i neologizmy, typografia.
+- `wiernosc-zasad.md`: lista kontrolna znaczenia przepisów (modalność, negacja, wyjątki, kolejność, limity, parametry).
+- `weryfikacja.md`: trzy przebiegi, pliki robocze, propozycje, dziennik decyzji, zmiana terminu, szablon raportu.
+- `zrodla.md`: rejestr źródeł terminologii z oceną wiarygodności i zakresem użycia.
+- `przewodnik_stylu_szablon.md`, `prompt_agenta.md`; `${CLAUDE_PLUGIN_ROOT}/templates/docs/pulapki.md` (środowisko LaTeX).
+Szablony: `${CLAUDE_PLUGIN_ROOT}/templates/latex/gry-style.sty`, `main-template.tex`.
 
-Jeśli projekt ma bazę wiedzy (`kb/`, z `/wgu:atomizacja`), tłumacze sprawdzają w niej sens reguł i terminy
-(`wgu kb show`). Kolejność „najpierw atomizacja, potem tłumaczenie” daje spójniejszą terminologię.
+## Faza 0: ustalenia z właścicielem (AskUserQuestion, tylko to, czego nie da się ustalić samemu)
+1. **Wydanie źródła**: które wydanie tłumaczymy. Czy uwzględniać erratę lub nowsze wydania i jak je oznaczać.
+2. **Zakres**: przepisy / + przykłady / + komentarze historyczne i uwagi autora / + scenariusze / + tabele / + słowniczek.
+3. **Wygląd**: oprawa jak w oryginale (domyślnie) czy styl projektu. Kompilacja lokalna (MiKTeX) czy inna.
+4. **Istniejące tłumaczenie lub glosariusz**: zachowujemy styl i decyzje autora. Konflikty z `styl-przepisow.md`
+   przedstaw jako osobną listę do decyzji, nie zmieniaj ich samodzielnie.
 
-## Faza 0: ustalenia z użytkownikiem (AskUserQuestion)
-Ustal tylko to, czego nie da się sprawdzić samemu:
-1. Kompilacja: lokalny MiKTeX (zalecane) / Overleaf / inna maszyna.
-2. Wygląd: zbliżony do oryginału 1:1 (domyślnie) czy obecny styl projektu.
-3. Wierność vs. istniejące tłumaczenie. Domyślnie tekst zasad jest wierny oryginałowi, a pomysły dydaktyczne tłumacza trafiają do ramek.
-4. Zakres: same zasady / + wstęp i eseje / + zasady opcjonalne / + słowniczek / + tabele końcowe.
+## Faza 1: środowisko i źródło
+- Gałąź robocza, nie `master`. LuaLaTeX (MiKTeX lub TeX Live), `pip install -r ${CLAUDE_PLUGIN_ROOT}/requirements.txt`.
+- **Identyfikacja wydania** ze stopki i strony tytułowej PDF-u (edycja, rok, wersja). Zapisz ją w `wgu.yaml`
+  (`sources.rules[].version`) i w `translation/source.json` razem ze skrótem SHA-256 pliku.
+- `wgu pdf analyze` → kolor zmian wersji, fonty, wypełnienia → `wgu.yaml` (`pdf.*`). `wgu pdf render --montage 6` → oprawa.
 
-## Faza 1: środowisko
-- Gałąź robocza (np. `v<wersja>`), nie `master`.
-- MiKTeX: `winget install --id MiKTeX.MiKTeX -e --silent --scope user --accept-source-agreements --accept-package-agreements`.
-  Włącz auto-instalację i **zmień mirror** (`pulapki.md`). Brakujące pakiety: `wgu tex build` wypisuje je w raporcie
-  → `miktex packages install <nazwa>`.
-- Silnik **LuaLaTeX** (fontspec). `latexmk` wymaga Perla, nie używaj go. `pip install -r ${CLAUDE_PLUGIN_ROOT}/requirements.txt`.
+## Faza 2: terminologia (przed tłumaczeniem)
+1. Warstwy: `wgu.yaml` → `terminology.layers` (np. `[common, era/ancient, series/gboh]`), warstwa gry `kb/terminology.yaml`.
+2. Zbuduj warstwę gry: pojęcia z `kb/terms.yaml` (jeśli jest baza), nazwy faz, znaczników, tabel i stanów jednostek,
+   homonimy (jedno słowo, kilka pojęć). Każde pojęcie według procedury z `polityka-terminologiczna.md` §6:
+   sens, reguły, kandydaci, dowody (`supports`), odrzuceni, formy odmiany, zapis. Status `proposal`.
+3. **Decyzje właściciela**: przedstaw kluczowe pojęcia w kilku turach (AskUserQuestion, do 4 pytań naraz, z sensem,
+   dowodami i rekomendacją). Zatwierdzone → `status: approved`, `decided_by: user`, wpis do `translation/decisions.yaml`.
+4. `wgu terms lint` → 0 błędów. Ostrzeżenia o homonimach i wspólnych formach wyjaśnij.
 
-## Faza 2: analiza oryginału
-1. `wgu pdf analyze <pdf> --pages 4-8` → fonty, kolory tekstu (kolor zmian wersji), wypełnienia, rozmiar strony.
-   Wpisz kolor zmian i font nagłówków do `wgu.yaml` (`pdf.accent_color`, `pdf.heading_font`).
-2. `wgu pdf render <pdf> <scratch> --dpi 70 --montage 6` → montaże + 2–3 strony w powiększeniu (`--page N --clip …`).
-3. Zamienniki fontów (MiKTeX): Garamond → EB Garamond; Myriad/Frutiger → Source Sans 3; Minion → Crimson Pro;
-   Times → TeX Gyre Termes; Helvetica/Arial → TeX Gyre Heros; Futura → TeX Gyre Adventor; Palatino → TeX Gyre Pagella.
-4. Zanotuj rozmiar tekstu, interlinię, układ kolumn, format numeracji, kapitaliki, kolor i kształt pasków.
+## Faza 3: przewodnik stylu projektu
+Na podstawie `przewodnik_stylu_szablon.md` i `styl-przepisow.md`. Istniejące tłumaczenie → opisz jego styl
+(szablon, „Jak analizować styl”). Glosariusz **nie** jest już tabelą w przewodniku. Przewodnik odsyła do warstw
+terminologii, a słowniczek do druku generuje `wgu terms glossary-tex`.
 
-## Faza 3: styl literacki i słowniczek
-- Istniejące tłumaczenie: przeczytaj wszystkie pliki, opisz styl według szablonu przewodnika i wypisz błędy do poprawy **bez zmiany stylu**.
-- Słowniczek EN→PL ustal **przed** tłumaczeniem (bazowa lista w szablonie + terminy gry; `kb/terms.yaml`, jeśli istnieje).
-- Zapisz jako `translation.glossary` (np. `docs/przewodnik_stylu.md`). To wiążąca instrukcja dla wszystkich tłumaczy.
+## Faza 4: oprawa LaTeX
+`gry-style.sty` → `<projekt>-style.sty` (`translation.style`); `main-template.tex` → `translation.main`. Fonty, kolory `wg*`,
+paginy, okładka bez logo wydawcy z dopiskiem „Nieoficjalne tłumaczenie”. Plik testowy wszystkich ramek →
+`wgu tex build test.tex --render 80` → porównaj z oryginałem.
 
-## Faza 4: oprawa
-1. Skopiuj `gry-style.sty` jako `<projekt>-style.sty` (zmień `\ProvidesPackage`), wpisz do `wgu.yaml` → `translation.style`.
-2. Ustaw fonty, kolory (`wgczern`, `wgniebieski` = kolor zmian, `wgszary`, `wgjasny`, …), `\seriatytul`, `\stopkatekst`,
-   numerację, marginesy, rozmiar tekstu.
-3. `main-template.tex` → plik główny (`translation.main`). Okładka: ilustracja z oryginału **bez logo wydawcy**,
-   dopisek „Nieoficjalne tłumaczenie na język polski” + autor.
-4. Plik testowy z każdą ramką i makrem → `wgu tex build test.tex --render 80` → porównaj z oryginałem → usuń.
+## Faza 5: przygotowanie fragmentów
+1. `wgu pdf extract <pdf> <scratch>/src.md --accent … --heading-font …`, potem `wgu text mark <scratch>/src.md <scratch>/src.marked.md`.
+   Sprawdź, że markery `%@ <nr reguły>` stoją przed każdym przepisem. Komentarze i przykłady bez numeru oznacz ręcznie
+   (`%@ hist-6.2`, `%@ ex-6.12`).
+2. Podziel na fragmenty o spójnej treści (rozdział lub podrozdział z przykładami, nie według liczby znaków) →
+   `translation/chunks/<tag>.src.md`.
+3. Dla każdego fragmentu `wgu terms for-chunk translation/chunks/<tag>.src.md > translation/chunks/<tag>.terms.md`.
+4. Grafiki: `wgu pdf images` / `wgu pdf render --clip` (zob. `pulapki.md`).
 
-## Faza 5: źródło i grafiki
-1. `wgu pdf extract <pdf> <scratch>/src.md --accent <kolor> --heading-font <font>`. Markup: `§…§` nagłówek,
-   `**…**`, `*…*`, `[[B:…]]` → `\nowe{}`. Indeks: `grep -n "===== PAGE" src.md`, `grep -n "^§[0-9]" src.md`.
-2. `wgu pdf images <pdf> <scratch>/img [--hires starsza.pdf] --sheet <scratch>/sheet.png` → nazwij pliki znacząco
-   → `translation.images/<wersja>/`. Dopasowanie hi-res **sprawdź wzrokowo**.
-3. Mapy rastrowe: `wgu pdf render --page N --clip x0,y0,x1,y1 --dpi 300`. Proste diagramy przerysuj w TikZ z polskimi opisami.
+## Faza 6: tłumaczenie (agenci `wgu:tlumacz`, równolegle w jednej wiadomości)
+Prompt z `prompt_agenta.md`: plik źródła fragmentu, tabela terminów, sąsiedni kontekst (ostatni akapit poprzedniego
+i pierwszy następnego fragmentu, tylko do odczytu), przewodnik, makra, PNG. Wynik: pliki `.tex` z markerami
+i `translation/proposals/<tag>.yaml`. Po każdej fali: scalanie propozycji i decyzje właściciela (`weryfikacja.md`).
 
-## Faza 6: tłumaczenie równoległe
-- Podziel oryginał na 5–7 części o podobnej objętości. Duże rozdziały dziel na pliki `07_1_…`, `07_2_…`.
-- Uruchom agentów `wgu:tlumacz` w tle, wszystkich w jednej wiadomości, z promptem z `prompt_agenta.md`
-  (uzupełnij `<WGU>`, ścieżki, zakres linii `src.md`, numer sekcji, pliki, listę PNG). Fragment z istniejącym
-  tłumaczeniem: „REVISE”. Wstęp i eseje: rejestr literacki.
-- Zbieraj ukute terminy do `<scratch>/new_terms.md`. Błędy stylu poprawiaj globalnie w `.sty`.
+## Faza 7: weryfikacja każdego fragmentu (trzy przebiegi, `weryfikacja.md`)
+1. **Terminologia**: `wgu terms check <pliki>`, `wgu check fidelity translation/chunks/<tag>.src.md <pliki>`.
+2. **Znaczenie zasad**: agent `wgu:weryfikator-zasad` (Fable) z flagami z kroku 1 i dostępem do `kb/`.
+3. **Redakcja językowa**: agent `wgu:redaktor-jezykowy`. Poprawki dotykające treści wracają do kroku 2.
+Raport: `translation/reports/<tag>.md` według szablonu, z sekcją „Nie zweryfikowano”.
 
-## Faza 7: złożenie i kontrola
-1. `wgu tex build "<translation.main>" --runs 3 --render 45` → błędy, Overfull, PNG wszystkich stron → przejrzyj.
-2. Ujednolić terminologię (grep wariantów). Ukute terminy do słowniczka → `wgu glossary <przewodnik> tex/14_slowniczek.tex`.
-3. `grep -rn "CDN\|TODO" <translation.dir>/`, kompletność nagłówków vs. spis treści oryginału, liczba `\nowe{`.
-4. Jeśli istnieje baza `kb/`: rozbieżności oryginał↔tłumaczenie dopisz do `kb/ambiguities.yaml` (`scope: translation`).
-5. Commit na gałęzi roboczej. Push lub PR tylko na prośbę użytkownika.
-6. Raport: co zrobione, decyzje terminologiczne do akceptacji, wątpliwości w źródle, czego nie zweryfikowano.
+## Faza 8: złożenie, kontrole końcowe, PDF
+- `wgu tex build "<translation.main>" --runs 3 --render 45` → przegląd wszystkich stron (ramki, tabele, żetony, sieroty).
+- `wgu terms lint`, `wgu terms check <translation.dir>` (0 błędów, 0 „update”), `wgu check fidelity` dla całości.
+- Słowniczek: `wgu terms glossary-tex <translation.dir>/14_slowniczek.tex`.
+- Rozbieżności oryginał↔przekład i niejasności → `kb/ambiguities.yaml` (`scope: translation` / `original`).
+- Commit na gałęzi roboczej. Push tylko na prośbę właściciela.
+- Raport dla właściciela: co zrobione, decyzje do podjęcia (terminy sporne, konflikty z przewodnikiem), niejasności oryginału,
+  czego nie zweryfikowano.
+
+## Tryb próbny (`--proba`)
+Przed pełnym przekładem nowej gry: 4–6 krótkich fragmentów obejmujących termin wieloznaczny, limit ruchu, wyjątek,
+stan jednostki i komentarz historyczny. Przeprowadź Fazy 5–7 i pokaż właścicielowi raporty. Na koniec przećwicz zmianę
+jednego terminu (`wgu terms impact`).
 
 ## Zasady nadrzędne
-- Treść zasad = oryginał. Dopowiedzenia → ramka `wskazowka`. Zmiany wersji → `\nowe{}` / `nowyblok`.
-- Pliki UTF-8 **bez BOM**, nagłówek `%! Author = …` / `%! Date = …`.
-- Nie podszywaj się pod wydawcę: bez logo, stopka „tłumaczenie nieoficjalne”.
+- Treść przepisów = oryginał wskazanego wydania. Niejasności rejestrujesz, nie rozstrzygasz w tekście.
+  Erratę wprowadzasz tylko jawnie.
+- Jedno pojęcie = jeden zatwierdzony termin. Bez synonimów, neologizmów i kalk. Propozycje nie są decyzjami.
+- Decyzje właściciela (przewodnik, glosariusz) mają pierwszeństwo przed regułami ogólnymi. Konflikty pokazujesz osobno.
+- Nie podszywaj się pod wydawcę: bez logo, stopka „tłumaczenie nieoficjalne”. Pliki UTF-8 bez BOM.

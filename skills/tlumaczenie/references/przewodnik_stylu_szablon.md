@@ -1,6 +1,6 @@
 # Przewodnik stylu tłumaczenia <GRA> PL (<tytuł instrukcji> v<wersja>)
 
-> Szablon z procesu GCACW-PL. Sekcje 1–5 opisują **domyślny styl** (wypracowany przez M. Pielaszkiewicza
+> Szablon z procesu GCACW-PL. Reguły ogólne: `styl-przepisow.md` (ten przewodnik zapisuje decyzje właściciela, które mają pierwszeństwo). Sekcje 1–5 opisują **domyślny styl** (wypracowany przez M. Pielaszkiewicza
 > w tłumaczeniu GCACW). Jeśli w projekcie istnieje wcześniejsze tłumaczenie — zastąp opisy faktycznymi
 > cechami jego stylu (patrz „Jak analizować styl” na końcu), zachowując strukturę dokumentu.
 > Gotowy plik zapisz w repo jako `docs/przewodnik_stylu.md`.
@@ -57,116 +57,15 @@ Dokument opisuje styl tłumaczenia i obowiązuje przy każdym nowym lub poprawia
 | ramka `przyklad` (szara) | przykład z oryginału |
 | ramka `wskazowka` (pergamin, sepia, ornament) | notatka tłumacza — wyłącznie treści spoza oryginału |
 
-## 6. Słowniczek (EN → PL)
-Obowiązujące tłumaczenia. Poniżej baza z GCACW (wargame heksowy, wojna secesyjna) — usuń zbędne,
-dopisz terminy nowej gry **przed** rozpoczęciem tłumaczenia. Tabela musi mieć dokładnie 2 kolumny
-(czyta ją `scripts/gen_glossary.py`).
-
-| English | Polski |
-|---|---|
-| Standard (Series) Rules | Zasady Systemowe (ZS) |
-| Basic Game / Advanced Game | Gra Podstawowa / Gra Zaawansowana |
-| scenario | scenariusz |
-| Union / Confederate (player) | Unia / Konfederacja (gracz Unii / gracz Konfederacji) |
-| counter / playing piece | żeton |
-| military unit | jednostka wojskowa (jednostka) |
-| leader | dowódca |
-| informational markers | żetony pomocnicze / znaczniki |
-| Army / District / Corps / Division Leader | Dowódca Armii / Dowódca Regionalny / dowódca korpusu / dowódca dywizji |
-| Tactical value / Command value / Artillery value | wartość taktyczna / wartość dowodzenia / wartość artyleryjska |
-| Strength marker | znacznik siły |
-| Manpower value | wartość siły (liczebność) |
-| Combat value | wartość bojowa |
-| organized / disorganized | zorganizowana / zdezorganizowana (strona znacznika siły) |
-| normal side / exhausted side | strona normalna / strona wyczerpana |
-| exhausted | wyczerpana (jednostka na rewersie) |
-| Fatigue level / Fatigue marker | poziom zmęczenia / znacznik zmęczenia (**nie** „wyczerpanie”) |
-| Movement Allowance (MA) | limit punktów ruchu (MA) |
-| Movement Point (MP) | punkt ruchu (MP) |
-| Movement Track | tor ruchu |
-| Active Movement Allowance marker | znacznik „Aktywny limit ruchu” |
-| Leader Movement Allowance marker | znacznik „Limit ruchu dowódcy” |
-| march / march action | marsz (przemarsz) / akcja marszu |
-| extended march / force march | marsz wydłużony / marsz forsowny |
-| Activate Leader (action) | aktywacja dowódcy |
-| Leader Activation marker | znacznik „Aktywacja dowódcy” |
-| Activate Army Leader | aktywacja Dowódcy Armii |
-| Assault / Grand Assault | szturm / *Grand Assault* (wielki szturm) |
-| Burn RR Station | niszczenie stacji kolejowej |
-| RR Station damaged / destroyed | stacja kolejowa uszkodzona / zniszczona |
-| Entrench / Entrenchment (action) | okopywanie się / akcja budowy umocnień |
-| entrenchments | umocnienia polowe |
-| Abatis / Breastworks / Fort ; "-Build" | zasieki (*abatis*) / przedpiersia (*breastworks*) / fort ; „w budowie” |
-| Redoubt | reduta |
-| Action Cycle / Action Phase | cykl akcji / faza akcji |
-| Initiative Segment / Activation Segment | segment inicjatywy / segment aktywacji |
-| pass | pas / spasować |
-| Random Events Phase | Faza wydarzeń losowych |
-| Leader Transfer Phase / leader transfer | Faza przemieszczania dowódców / przemieszczenie dowódcy |
-| Recovery Phase | Faza Reorganizacji |
-| Turn Indication Phase | Faza oznaczenia tury (Koniec tury) |
-| active unit / active leader / active player | jednostka aktywna / dowódca aktywny / gracz aktywny |
-| Zone of Control (ZOC) / Restricted ZOC | strefa kontroli (ZOC) / ograniczona strefa kontroli |
-| Command radius | zasięg dowodzenia |
-| hex / hexside | heks / krawędź heksu |
-| clear, rolling, rough, woods, city | równina, teren pagórkowaty, teren trudny, las, miasto |
-| swamp, provisional swamp, hill, mountain, loess | bagno, sezonowe bagno, wzgórze, góry, less |
-| river (major/minor), creek, ridge, bluff | rzeka (duża/mała), strumień, grzbiet, urwisko |
-| ford, bridge, ferry, dam, county border | bród, most, przeprawa promowa, zapora, granica hrabstwa |
-| village, pike, road, trail, landing | wioska, droga utwardzona (*pike*), droga gruntowa, szlak, przystań |
-| stacking / stack | układanie w stos / stos |
-| Force markers | znaczniki zgrupowania („Force”) |
-| attack / attacker / defender | atak / atakujący / obrońca |
-| Combat Chart | Tabela walki |
-| die / dice / die roll | kość / kości / rzut kością |
-| die roll modifier (DRM) | modyfikator rzutu |
-| Ratio / Tactical / Artillery modifier | modyfikator stosunku sił / taktyczny / artyleryjski |
-| Artillery Value Differential | różnica wartości artyleryjskich |
-| flank attack | atak z flanki (oskrzydlenie) |
-| Flanks Refused (marker) | zagięte skrzydła (znacznik „Flanks Refused”) |
-| Combat results: letter / number results | wyniki literowe / liczbowe |
-| retreat / rout | odwrót / ucieczka (*rout*) |
-| retreat priorities | priorytety odwrotu |
-| advance after combat | zajęcie pola po walce |
-| Cavalry Retreat | wycofanie kawalerii |
-| Defender's Voluntary Retreat | dobrowolny odwrót obrońcy |
-| Manpower loss | strata siły |
-| elimination | eliminacja |
-| Demoralization (Dmorlz-1/-2) | demoralizacja (stopień 1 / 2) |
-| Pontoon bridge | most pontonowy |
-| dismantling | rozbiórka |
-| repair | naprawa |
-| Rain / Rain Number | deszcz / wskaźnik deszczu |
-| fordable / unfordable | przekraczalna w bród / nieprzekraczalna w bród |
-| Limited Intelligence | ograniczony wywiad |
-| supply / out of supply | zaopatrzenie / bez zaopatrzenia |
-| Victory Points (VP) | punkty zwycięstwa (VP) |
-| OOB (order of battle) | ordre de bataille (OOB) |
-| Column of Route / Hasty / Normal / Prepared attack | atak z kolumny marszowej / pośpieszny / normalny / przygotowany |
-| Terrain Chart | Tabela terenu |
-| major terrain | teren dominujący |
-| Force Display | plansza zgrupowań |
-| Detachment / substitute | wydzielanie oddziałów / oddział zastępczy |
-| wagon train | tabor |
-| Retreat Chart / Retreat Description | Tabela odwrotu / opis odwrotu |
-| Priority Number | numer priorytetu |
-| Overriding Retreat Priorities | odstąpienie od priorytetów odwrotu |
-| Surrender | kapitulacja |
-| Defense value | wartość obronna |
-| End Action | koniec akcji |
-| forage / levy | furażować / kontrybucja |
-| refuse flanks | zaginanie skrzydeł |
-| Attachment Phase | Faza przydziału |
-| Naval Battery | bateria nadbrzeżna |
-| permanent bridge / Fort | most stały / stały fort |
-| Turn Track | tor tur |
-| Random Events Table | Tabela wydarzeń losowych |
-| dummy marker | znacznik pozorny |
-| Assault Number / Grand Assault Number | wskaźnik szturmu / wskaźnik Grand Assault |
-| basic / final flank bonus | podstawowa / końcowa premia za oskrzydlenie |
-| Ratio Chart | Tabela stosunku sił |
-| Insubordination | niesubordynacja |
-| Demi-division | półdywizja |
+## 6. Terminologia
+Glosariusz **nie** jest tabelą w tym przewodniku. Obowiązujące terminy są w warstwach terminologii
+(`wgu.yaml` → `terminology`; zasady: `references/polityka-terminologiczna.md`). Tutaj zapisz tylko:
+- warstwy używane przez projekt (np. `common`, `era/ancient`, `series/gboh`, `kb/terminology.yaml`),
+- **preferencje redakcyjne właściciela** dotyczące zapisu terminów (wielkie litery w nazwach faz i tabel, zapis
+  dwujęzyczny, pozostawianie oryginału kursywą, skróty), z datą decyzji,
+- znane konflikty między przewodnikiem a `styl-przepisow.md` i ich rozstrzygnięcie.
+Słowniczek do druku generuje `wgu terms glossary-tex`. Wcześniejszą tabelę 2-kolumnową można zaimportować
+poleceniem `wgu terms import-md`.
 
 ---
 

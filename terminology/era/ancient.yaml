@@ -1,0 +1,38 @@
+layer:
+  id: era/ancient
+  level: era
+  title: Starożytność (Grecja, Rzym, okres hellenistyczny) — realia wojskowe i nazwy własne
+  scope: {era: ancient}
+  sources: [POLIB-BPzLA, LIW-BPzLA, MEKA, GMT-SPQR-PL3, PHX-HH-PL]
+# Realia historyczne, nie mechaniki. Jeśli gra używa nazwy realiów jako typu jednostki, rekord gry/serii może je doprecyzować.
+concepts:
+- id: ancient.cynoscephalae
+  source_term: Cynoscephalae
+  sense: Pole bitwy w Tesalii (197 p.n.e.), bitwa Rzymian z Filipem V Macedońskim. Nazwa własna.
+  pl: Kynoskefalaj
+  pl_forms: [Kynoskefalaj, Kynoskefalach, Kynoskefalami, pod Kynoskefalami]
+  status: proposal
+  decided_by: analyst
+  rationale: Polska historiografia używa transkrypcji greckiej (np. tytuł w serii Bellony „Historyczne Bitwy”, K. Kęciek). Odmiana mnoga (bitwa pod Kynoskefalami) do potwierdzenia w MEKA.
+  evidence:
+  - {source: BELLONA-HB, where: "K. Kęciek, Kynoskefalaj (seria Historyczne Bitwy)", form: Kynoskefalaj, supports: military-usage, note: "stan S — tylko katalog/wyszukiwarka"}
+- id: ancient.flank
+  source_term: flank
+  variants: [flanks]
+  sense: Skrzydło szyku (bok ugrupowania wojsk) w opisie historycznym.
+  disambiguation: Komentarz historyczny. W przepisach gry „flank hex” to osobne pojęcie (heks boczny, zob. ukierunkowanie).
+  pl: skrzydło
+  pl_forms: [skrzydło, skrzydła, skrzydle, skrzydłem, skrzydeł, skrzydłom, skrzydłami, skrzydłach]
+  status: proposal
+  decided_by: analyst
+  rationale: W polskiej historiografii starożytnej mówi się o skrzydłach szyku. „Flanka” jest poprawna, ale nowsza i częstsza w języku XIX–XX w. Do decyzji, czy w komentarzach dopuszczamy oba.
+- id: ancient.formation
+  source_term: formation
+  variants: [formations]
+  sense: Ugrupowanie oddziału lub armii do walki albo marszu (komentarz historyczny).
+  pl: szyk
+  pl_forms: [szyk, szyku, szykiem, szyki, szyków, szykami, szykach]
+  status: proposal
+  decided_by: analyst
+  evidence:
+  - {source: AAP6-2005PL, where: "s. 356 (line astern → szyk w linię)", supports: against, note: "AAP-6 używa „szyk” dla ugrupowań współczesnych; nie przenosić znaczeń NATO"}

@@ -1,0 +1,2306 @@
+layer:
+  id: series/gcacw
+  level: series
+  title: 'import: przewodnik_stylu.md'
+  sources:
+  - GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+concepts:
+- id: gcacw.standard-series-rules
+  source_term: Standard (Series) Rules
+  sense: wspólne zasady Gry Podstawowej serii, v1.6; „oficjalne”
+  pl: Zasady Systemowe (ZS)
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: Zasady Systemowe (ZS)
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 4 / `01_wstep.tex:45`
+    supports: sense
+  rules:
+  - R-1.0.1
+- id: gcacw.basic-game
+  source_term: Basic Game
+  sense: scenariusze jedno-/kilkudniowe vs kampanie z dodatkowymi zasadami modułu
+  pl: Gra Podstawowa
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: Gra Podstawowa
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 2, 4 / `00_powitanie.tex:13-16`
+    supports: sense
+  rules: &id001
+  - R-1.0.1
+  - R-3.0.1
+- id: gcacw.advanced-game
+  source_term: Advanced Game
+  sense: scenariusze jedno-/kilkudniowe vs kampanie z dodatkowymi zasadami modułu
+  pl: Gra Zaawansowana
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: Gra Zaawansowana
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 2, 4 / `00_powitanie.tex:13-16`
+    supports: sense
+  rules: *id001
+- id: gcacw.scenario
+  source_term: scenario
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: scenariusz
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: scenariusz
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.union-confederate-player
+  source_term: Union / Confederate (player)
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: Unia / Konfederacja (gracz Unii / gracz Konfederacji)
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: Unia / Konfederacja (gracz Unii / gracz Konfederacji)
+    supports: usage-in-games
+    checked: '2026-10-04'
+  notes: wiersz łączy kilka pojęć — do rozbicia na osobne rekordy
+- id: gcacw.counter-playing-piece
+  source_term: counter / playing piece
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: żeton
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: żeton
+    supports: usage-in-games
+    checked: '2026-10-04'
+  notes: wiersz łączy kilka pojęć — do rozbicia na osobne rekordy
+- id: gcacw.military-unit
+  source_term: military unit
+  sense: żeton piechoty/kawalerii/artylerii z wartością taktyczną i artyleryjską; dwie strony (normal/exhausted)
+  pl: jednostka wojskowa (jednostka)
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: jednostka wojskowa (jednostka)
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 4 / `02_podstawy.tex:51-88`
+    supports: sense
+  rules:
+  - R-2.2.2
+  - R-2.2.3
+- id: gcacw.leader
+  source_term: leader
+  sense: żeton bez siły i zmęczenia; zawsze w stosie z podległą jednostką; 4 rodzaje
+  pl: dowódca
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: dowódca
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 4 / `02_podstawy.tex:90-129`
+    supports: sense
+  rules:
+  - R-2.2.4
+  - R-2.2.5
+  - R-2.2.6
+  - R-2.2.7
+- id: gcacw.informational-markers
+  source_term: informational markers
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: żetony pomocnicze / znaczniki
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: żetony pomocnicze / znaczniki
+    supports: usage-in-games
+    checked: '2026-10-04'
+  notes: wiersz łączy kilka pojęć — do rozbicia na osobne rekordy
+- id: gcacw.army
+  source_term: Army
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: Dowódca Armii
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: Dowódca Armii
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.district
+  source_term: District
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: Dowódca Regionalny
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: Dowódca Regionalny
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.corps
+  source_term: Corps
+  sense: dwie liczby; aktywuje i szturmuje; przydzielony do jednostki własnego związku
+  pl: dowódca korpusu
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: dowódca korpusu
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 4 / `02_podstawy.tex:117-129`
+    supports: sense
+  rules: &id002
+  - R-2.2.7
+  - R-5.2.1
+  - R-5.3.1
+- id: gcacw.division-leader
+  source_term: Division Leader
+  sense: dwie liczby; aktywuje i szturmuje; przydzielony do jednostki własnego związku
+  pl: dowódca dywizji
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: dowódca dywizji
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 4 / `02_podstawy.tex:117-129`
+    supports: sense
+  rules: *id002
+- id: gcacw.tactical-value
+  source_term: Tactical value
+  sense: na żetonie jednostki/dowódcy; do modyfikatora taktycznego; może być dzielona a/b (atak/obrona)
+  pl: wartość taktyczna
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: wartość taktyczna
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 4, 13 / `02_podstawy.tex:81-84`, `07_1_walka.tex:139`
+    supports: sense
+  rules:
+  - R-7.4.3
+- id: gcacw.command-value
+  source_term: Command value
+  sense: liczba dowódcy używana przy szturmie/GA (Command – rzut)
+  pl: wartość dowodzenia
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: wartość dowodzenia
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 4 / `02_podstawy.tex:98`
+    supports: sense
+  rules:
+  - R-7.1.11
+  - R-7.1.14
+- id: gcacw.artillery-value
+  source_term: Artillery value
+  sense: liczba baterii; na żetonie; nie zależy od PZ/strony znacznika siły
+  pl: wartość artyleryjska
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: wartość artyleryjska
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 4, 13 / `07_1_walka.tex:129`
+    supports: sense
+  rules:
+  - R-7.3.1
+  - R-7.4.5
+- id: gcacw.strength-marker
+  source_term: Strength marker
+  sense: jeden na jednostkę; strona zorganizowana (jedna liczba) / zdezorganizowana (dwie)
+  pl: znacznik siły
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: znacznik siły
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 5 / `02_podstawy.tex:133-145`
+    supports: sense
+  rules:
+  - R-2.2.8
+- id: gcacw.manpower-value
+  source_term: Manpower value
+  sense: większa liczba; redukowana stratami; 0 = eliminacja
+  pl: wartość siły (liczebność)
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: wartość siły (liczebność)
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 5 / `02_podstawy.tex:137`
+    supports: sense
+  rules:
+  - R-7.5.13
+  - R-7.5.16
+  - R-6.2.8
+- id: gcacw.combat-value
+  source_term: Combat value
+  sense: 'zorg.: = siła; zdezorg.: mniejsza liczba (może być ½)'
+  pl: wartość bojowa
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: wartość bojowa
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 5, 13 / `07_1_walka.tex:107`
+    supports: sense
+  rules:
+  - R-7.2.1
+- id: gcacw.organized
+  source_term: organized
+  sense: strona znacznika siły
+  pl: zorganizowana
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: zorganizowana
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 5 / `02_podstawy.tex:134-139`
+    supports: sense
+  rules: &id003
+  - R-5.1.7
+  - R-8.0.3
+- id: gcacw.disorganized
+  source_term: disorganized
+  sense: strona znacznika siły
+  pl: zdezorganizowana (strona znacznika siły)
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: zdezorganizowana (strona znacznika siły)
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 5 / `02_podstawy.tex:134-139`
+    supports: sense
+  rules: *id003
+- id: gcacw.normal-side
+  source_term: normal side
+  sense: awers/rewers żetonu jednostki (biały pas) — wpływa na próg marszu wydłużonego
+  pl: strona normalna
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: strona normalna
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 4 / `02_podstawy.tex:86-88`
+    supports: sense
+  rules: &id004
+  - R-5.1.3
+  - R-8.0.4
+- id: gcacw.exhausted-side
+  source_term: exhausted side
+  sense: awers/rewers żetonu jednostki (biały pas) — wpływa na próg marszu wydłużonego
+  pl: strona wyczerpana
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: strona wyczerpana
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 4 / `02_podstawy.tex:86-88`
+    supports: sense
+  rules: *id004
+- id: gcacw.exhausted
+  source_term: exhausted
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: wyczerpana (jednostka na rewersie)
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: wyczerpana (jednostka na rewersie)
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.fatigue-level
+  source_term: Fatigue level
+  sense: 0–4; brak znacznika = 0; PZ 4 → brak akcji
+  pl: poziom zmęczenia
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: poziom zmęczenia
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 5, 11 / `02_podstawy.tex:153-159`
+    supports: sense
+  rejected: &id005
+  - pl: wyczerpanie
+    reason: decyzja właściciela (GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026))
+  rules:
+  - R-6.5.1
+  - R-8.0.5
+- id: gcacw.fatigue-marker
+  source_term: Fatigue marker
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: znacznik zmęczenia
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: znacznik zmęczenia
+    supports: usage-in-games
+    checked: '2026-10-04'
+  rejected: *id005
+- id: gcacw.movement-allowance-ma
+  source_term: Movement Allowance (MA)
+  sense: liczba MP z rzutu (+ marsz forsowny) na daną akcję
+  pl: limit punktów ruchu (MA)
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: limit punktów ruchu (MA)
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 7 / `05_1_akcje.tex:21`
+    supports: sense
+  rules:
+  - R-5.1.2
+  - R-5.2.5
+- id: gcacw.movement-point-mp
+  source_term: Movement Point (MP)
+  sense: jednostka kosztu ruchu/ataku
+  pl: punkt ruchu (MP)
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: punkt ruchu (MP)
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 9 / `06_marsz_ruch.tex:10`
+    supports: sense
+  rules:
+  - R-6.1.1
+- id: gcacw.movement-track
+  source_term: Movement Track
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: tor ruchu
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: tor ruchu
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.active-movement-allowance-marker
+  source_term: Active Movement Allowance marker
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: znacznik „Aktywny limit ruchu”
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: znacznik „Aktywny limit ruchu”
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.leader-movement-allowance-marker
+  source_term: Leader Movement Allowance marker
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: znacznik „Limit ruchu dowódcy”
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: znacznik „Limit ruchu dowódcy”
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.march
+  source_term: march
+  sense: 'akcja jednej jednostki: ruch i/lub atak'
+  pl: marsz (przemarsz)
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: marsz (przemarsz)
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 7, 9 / `05_1_akcje.tex:18`
+    supports: sense
+  rules:
+  - R-5.1.1
+  - R-6.1.1
+- id: gcacw.march-action
+  source_term: march action
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: akcja marszu
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: akcja marszu
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.extended-march
+  source_term: extended march
+  sense: marsz podnoszący PZ do 3–4 (normal) lub 2–4 (exhausted) → Extended March Table
+  pl: marsz wydłużony
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: marsz wydłużony
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 7 / `05_1_akcje.tex:39`
+    supports: sense
+  rules:
+  - R-5.1.6
+- id: gcacw.force-march
+  source_term: force march
+  sense: dobrowolne +MP za cenę dezorganizacji i możliwych strat
+  pl: marsz forsowny
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: marsz forsowny
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 7 / `05_1_akcje.tex:51`
+    supports: sense
+  rules:
+  - R-5.1.7
+- id: gcacw.activate-leader-action
+  source_term: Activate Leader (action)
+  sense: 'akcja: seria marszów/okopań jednostek związku w zasięgu dowódcy'
+  pl: aktywacja dowódcy
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: aktywacja dowódcy
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 8 / `05_2_akcje.tex:8`
+    supports: sense
+  rules:
+  - R-5.2.1
+  - R-5.2.2
+  - R-5.2.3
+  - R-5.2.4
+  - R-5.2.5
+  - R-5.2.6
+  - R-5.2.7
+  - R-5.2.8
+  - R-5.2.9
+  - R-5.2.10
+  - R-5.2.11
+- id: gcacw.leader-activation-marker
+  source_term: Leader Activation marker
+  sense: kładziony na jednostkach wybranych w kroku 2
+  pl: znacznik „Aktywacja dowódcy”
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: znacznik „Aktywacja dowódcy”
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 8 / `05_2_akcje.tex:14`
+    supports: sense
+  rules:
+  - R-5.2.2
+- id: gcacw.activate-army-leader
+  source_term: Activate Army Leader
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: aktywacja Dowódcy Armii
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: aktywacja Dowódcy Armii
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.assault
+  source_term: Assault
+  sense: 'akcja dowódcy: atak grupą z jego heksu; +1; bez MP'
+  pl: szturm
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: szturm
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 9, 12 / `05_3_akcje.tex:6`
+    supports: sense
+  rules:
+  - R-7.1.9
+  - R-7.1.10
+  - R-7.1.11
+  - R-7.1.12
+  - R-5.3.1
+- id: gcacw.grand-assault
+  source_term: Grand Assault
+  sense: dołączenie jednostek z sąsiednich heksów dzięki Dowódcy Armii/Regionalnemu
+  pl: '*Grand Assault* (wielki szturm)'
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: '*Grand Assault* (wielki szturm)'
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 12 / `07_1_walka.tex:70`
+    supports: sense
+  rules:
+  - R-7.1.13
+  - R-7.1.14
+  - R-7.1.15
+  - R-7.1.16
+  - R-7.1.17
+  - R-7.1.18
+- id: gcacw.burn-rr-station
+  source_term: Burn RR Station
+  sense: akcja; Damage (CV 2–4) / Destroy (CV ≥ 5)
+  pl: niszczenie stacji kolejowej
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: niszczenie stacji kolejowej
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 9 / `05_3_akcje.tex:8`
+    supports: sense
+  rules:
+  - R-5.4.1
+  - R-5.4.2
+- id: gcacw.rr-station-damaged
+  source_term: RR Station damaged
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: stacja kolejowa uszkodzona
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: stacja kolejowa uszkodzona
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.destroyed
+  source_term: destroyed
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: zniszczona
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: zniszczona
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.entrench
+  source_term: Entrench
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: okopywanie się
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: okopywanie się
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.entrenchment-action
+  source_term: Entrenchment (action)
+  sense: akcja w cyklu akcji (1864+; 1863 opcjonalnie; nie TOM)
+  pl: akcja budowy umocnień
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: akcja budowy umocnień
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 9 / `05_3_akcje.tex:25`
+    supports: sense
+  rules:
+  - R-5.5.1
+  - R-5.5.2
+  - R-5.5.3
+  - R-5.5.4
+- id: gcacw.entrenchments
+  source_term: entrenchments
+  sense: abatis, breastworks, fort (+ reduty, stałe forty)
+  pl: umocnienia polowe
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: umocnienia polowe
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 18 / `09_umocnienia.tex:8`
+    supports: sense
+  rules:
+  - R-9.0.x
+- id: gcacw.abatis
+  source_term: Abatis
+  sense: poziomy umocnień; mnożniki 1,5 / 2 / 2,5 / 3
+  pl: zasieki (*abatis*)
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: zasieki (*abatis*)
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 19–20 / `09_umocnienia.tex:77-84`
+    supports: sense
+  rules: &id006
+  - R-9.0.8
+- id: gcacw.breastworks
+  source_term: Breastworks
+  sense: poziomy umocnień; mnożniki 1,5 / 2 / 2,5 / 3
+  pl: przedpiersia (*breastworks*)
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: przedpiersia (*breastworks*)
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 19–20 / `09_umocnienia.tex:77-84`
+    supports: sense
+  rules: *id006
+- id: gcacw.fort-build
+  source_term: Fort ; "-Build"
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: fort ; „w budowie”
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: fort ; „w budowie”
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.redoubt
+  source_term: Redoubt
+  sense: element heksu; ×1,5; osłabia flanki; właściciel wg gry
+  pl: reduta
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: reduta
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 20 / `09_umocnienia.tex:91`
+    supports: sense
+  rules:
+  - R-9.0.10
+  - R-9.0.11
+- id: gcacw.action-cycle
+  source_term: Action Cycle
+  sense: cykl = sekwencja faz akcji aż do podwójnego pasu; faza = inicjatywa + aktywacja
+  pl: cykl akcji
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: cykl akcji
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 6 / `04_cykl_akcji.tex:4-11`
+    supports: sense
+  rules: &id007
+  - R-4.0.1
+  - R-4.4.1
+- id: gcacw.action-phase
+  source_term: Action Phase
+  sense: cykl = sekwencja faz akcji aż do podwójnego pasu; faza = inicjatywa + aktywacja
+  pl: faza akcji
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: faza akcji
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 6 / `04_cykl_akcji.tex:4-11`
+    supports: sense
+  rules: *id007
+- id: gcacw.initiative-segment
+  source_term: Initiative Segment
+  sense: rzut o inicjatywę / jedna akcja
+  pl: segment inicjatywy
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: segment inicjatywy
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 6 / `04_cykl_akcji.tex:13, 53`
+    supports: sense
+  rules: &id008
+  - R-4.2.1
+  - R-4.3.1
+- id: gcacw.activation-segment
+  source_term: Activation Segment
+  sense: rzut o inicjatywę / jedna akcja
+  pl: segment aktywacji
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: segment aktywacji
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 6 / `04_cykl_akcji.tex:13, 53`
+    supports: sense
+  rules: *id008
+- id: gcacw.pass
+  source_term: pass
+  sense: obowiązek akcji / oddanie inicjatywy (drugi pas kończy cykl)
+  pl: pas / spasować
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: pas / spasować
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 6 / `04_cykl_akcji.tex:35-46`
+    supports: sense
+  notes: wiersz łączy kilka pojęć — do rozbicia na osobne rekordy
+  rules:
+  - R-4.2.3
+- id: gcacw.random-events-phase
+  source_term: Random Events Phase
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: Faza wydarzeń losowych
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: Faza wydarzeń losowych
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.leader-transfer-phase
+  source_term: Leader Transfer Phase
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: Faza przemieszczania dowódców
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: Faza przemieszczania dowódców
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.leader-transfer
+  source_term: leader transfer
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: przemieszczenie dowódcy
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: przemieszczenie dowódcy
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.recovery-phase
+  source_term: Recovery Phase
+  sense: 6 kroków w stałej kolejności
+  pl: Faza Reorganizacji
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: Faza Reorganizacji
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 18 / `08_reorganizacja.tex:5`
+    supports: sense
+  rules:
+  - R-8.0.1
+  - R-8.0.2
+  - R-8.0.3
+  - R-8.0.4
+  - R-8.0.5
+  - R-8.0.6
+- id: gcacw.turn-indication-phase
+  source_term: Turn Indication Phase
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: Faza oznaczenia tury (Koniec tury)
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: Faza oznaczenia tury (Koniec tury)
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.active-unit
+  source_term: active unit
+  sense: wybrany do akcji; jego właściciel
+  pl: jednostka aktywna
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: jednostka aktywna
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 6 / `04_cykl_akcji.tex:55-57`
+    supports: sense
+  rules: &id009
+  - R-4.3.1
+- id: gcacw.active-leader
+  source_term: active leader
+  sense: wybrany do akcji; jego właściciel
+  pl: dowódca aktywny
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: dowódca aktywny
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 6 / `04_cykl_akcji.tex:55-57`
+    supports: sense
+  rules: *id009
+- id: gcacw.active-player
+  source_term: active player
+  sense: wybrany do akcji; jego właściciel
+  pl: gracz aktywny
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: gracz aktywny
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 6 / `04_cykl_akcji.tex:55-57`
+    supports: sense
+  rules: *id009
+- id: gcacw.zone-of-control-zoc
+  source_term: Zone of Control (ZOC)
+  sense: 6 heksów wokół jednostki z wyjątkami krawędzi
+  pl: strefa kontroli (ZOC)
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: strefa kontroli (ZOC)
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 6 / `02_podstawy.tex:263-269`
+    supports: sense
+  rules:
+  - R-2.4.1
+- id: gcacw.restricted-zoc
+  source_term: Restricted ZOC
+  sense: ograniczona = przez krawędź leśną/lessową bez drogi; nie wpływa na ruch i wycofanie kawalerii
+  pl: ograniczona strefa kontroli
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: ograniczona strefa kontroli
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 6 / `02_podstawy.tex:271-276`
+    supports: sense
+  rules:
+  - R-2.4.2
+  - R-6.2.12
+  - R-SUM-1
+- id: gcacw.command-radius
+  source_term: Command radius
+  sense: ≤ 3 heksy od dowódcy; blokowany przez wroga/ZOC (chyba że heks własny)
+  pl: zasięg dowodzenia
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: zasięg dowodzenia
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 6 / `02_podstawy.tex:305-314`
+    supports: sense
+  rules:
+  - R-2.5.1
+- id: gcacw.hex
+  source_term: hex
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: heks
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: heks
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.hexside
+  source_term: hexside
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: krawędź heksu
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: krawędź heksu
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.clear-rolling-rough-woods-city
+  source_term: clear, rolling, rough, woods, city
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: równina, teren pagórkowaty, teren trudny, las, miasto
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: równina, teren pagórkowaty, teren trudny, las, miasto
+    supports: usage-in-games
+    checked: '2026-10-04'
+  notes: wiersz łączy kilka pojęć — do rozbicia na osobne rekordy
+- id: gcacw.swamp-provisional-swamp-hill-mountain-lo
+  source_term: swamp, provisional swamp, hill, mountain, loess
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: bagno, sezonowe bagno, wzgórze, góry, less
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: bagno, sezonowe bagno, wzgórze, góry, less
+    supports: usage-in-games
+    checked: '2026-10-04'
+  notes: wiersz łączy kilka pojęć — do rozbicia na osobne rekordy
+- id: gcacw.river-major-minor-creek-ridge-bluff
+  source_term: river (major/minor), creek, ridge, bluff
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: rzeka (duża/mała), strumień, grzbiet, urwisko
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: rzeka (duża/mała), strumień, grzbiet, urwisko
+    supports: usage-in-games
+    checked: '2026-10-04'
+  notes: wiersz łączy kilka pojęć — do rozbicia na osobne rekordy
+- id: gcacw.ford-bridge-ferry-dam-county-border
+  source_term: ford, bridge, ferry, dam, county border
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: bród, most, przeprawa promowa, zapora, granica hrabstwa
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: bród, most, przeprawa promowa, zapora, granica hrabstwa
+    supports: usage-in-games
+    checked: '2026-10-04'
+  notes: wiersz łączy kilka pojęć — do rozbicia na osobne rekordy
+- id: gcacw.village-pike-road-trail-landing
+  source_term: village, pike, road, trail, landing
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: wioska, droga utwardzona (*pike*), droga gruntowa, szlak, przystań
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: wioska, droga utwardzona (*pike*), droga gruntowa, szlak, przystań
+    supports: usage-in-games
+    checked: '2026-10-04'
+  notes: wiersz łączy kilka pojęć — do rozbicia na osobne rekordy
+- id: gcacw.stacking
+  source_term: stacking
+  sense: bez limitu
+  pl: układanie w stos
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: układanie w stos
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 11 / `06_marsz_ruch.tex:106`
+    supports: sense
+  rules: &id010
+  - R-6.4.1
+- id: gcacw.stack
+  source_term: stack
+  sense: bez limitu
+  pl: stos
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: stos
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 11 / `06_marsz_ruch.tex:106`
+    supports: sense
+  rules: *id010
+- id: gcacw.force-markers
+  source_term: Force markers
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: znaczniki zgrupowania („Force”)
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: znaczniki zgrupowania („Force”)
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.attack
+  source_term: attack
+  sense: jedna walka o jeden heks
+  pl: atak
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: atak
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 11 / `07_1_walka.tex:7-17`
+    supports: sense
+  rules: &id011
+  - R-7.1.1
+  - R-7.1.2
+  - R-7.1.3
+  - R-7.1.4
+- id: gcacw.attacker
+  source_term: attacker
+  sense: jedna walka o jeden heks
+  pl: atakujący
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: atakujący
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 11 / `07_1_walka.tex:7-17`
+    supports: sense
+  rules: *id011
+- id: gcacw.defender
+  source_term: defender
+  sense: jedna walka o jeden heks
+  pl: obrońca
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: obrońca
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 11 / `07_1_walka.tex:7-17`
+    supports: sense
+  rules: *id011
+- id: gcacw.combat-chart
+  source_term: Combat Chart
+  sense: tabela wyników (poza broszurą)
+  pl: Tabela walki
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: Tabela walki
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 15 / `07_2_walka.tex:5`
+    supports: sense
+  rules:
+  - R-7.5.1
+- id: gcacw.die
+  source_term: die
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: kość
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: kość
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.dice
+  source_term: dice
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: kości
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: kości
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.die-roll
+  source_term: die roll
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: rzut kością
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: rzut kością
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.die-roll-modifier-drm
+  source_term: die roll modifier (DRM)
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: modyfikator rzutu
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: modyfikator rzutu
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.ratio
+  source_term: Ratio
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: modyfikator stosunku sił
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: modyfikator stosunku sił
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.tactical
+  source_term: Tactical
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: taktyczny
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: taktyczny
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.artillery-modifier
+  source_term: Artillery modifier
+  sense: z Artillery Modifier Summary wg terenu obrońcy
+  pl: artyleryjski
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: artyleryjski
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 13 / `07_1_walka.tex:144`
+    supports: sense
+  rules: &id012
+  - R-7.4.5
+  - R-7.4.6
+  - R-7.4.7
+- id: gcacw.artillery-value-differential
+  source_term: Artillery Value Differential
+  sense: z Artillery Modifier Summary wg terenu obrońcy
+  pl: różnica wartości artyleryjskich
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: różnica wartości artyleryjskich
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 13 / `07_1_walka.tex:144`
+    supports: sense
+  rules: *id012
+- id: gcacw.flank-attack
+  source_term: flank attack
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: atak z flanki (oskrzydlenie)
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: atak z flanki (oskrzydlenie)
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.flanks-refused-marker
+  source_term: Flanks Refused (marker)
+  sense: 1 MP; flanka słabsza, ataki nieflankowe +1
+  pl: zagięte skrzydła (znacznik „Flanks Refused”)
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: zagięte skrzydła (znacznik „Flanks Refused”)
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 18 / `07_2_walka.tex:161`
+    supports: sense
+  rules:
+  - R-7.8.1
+  - R-7.8.2
+  - R-7.8.3
+  - R-7.8.4
+- id: gcacw.combat-results-letter
+  source_term: 'Combat results: letter'
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: wyniki literowe
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: wyniki literowe
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.number-results
+  source_term: number results
+  sense: D, F, f, E, r, R, R*, a / strata siły
+  pl: liczbowe
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: liczbowe
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 16 / `07_2_walka.tex:11-38`
+    supports: sense
+  rules:
+  - R-7.5.4
+  - R-7.5.5
+  - R-7.5.6
+  - R-7.5.7
+  - R-7.5.8
+  - R-7.5.9
+  - R-7.5.10
+  - R-7.5.11
+  - R-7.5.12
+  - R-7.5.13
+- id: gcacw.retreat
+  source_term: retreat
+  sense: 2–4 heksy / 4–6 heksów (+ demoralizacja)
+  pl: odwrót
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: odwrót
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 16 / `07_2_walka.tex:58`
+    supports: sense
+  rules: &id013
+  - R-7.6.1
+- id: gcacw.rout
+  source_term: rout
+  sense: 2–4 heksy / 4–6 heksów (+ demoralizacja)
+  pl: ucieczka (*rout*)
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: ucieczka (*rout*)
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 16 / `07_2_walka.tex:58`
+    supports: sense
+  rules: *id013
+- id: gcacw.retreat-priorities
+  source_term: retreat priorities
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: priorytety odwrotu
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: priorytety odwrotu
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.advance-after-combat
+  source_term: advance after combat
+  sense: po „a”; nie jest ruchem
+  pl: zajęcie pola po walce
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: zajęcie pola po walce
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 17 / `07_2_walka.tex:119`
+    supports: sense
+  rules:
+  - R-7.6.13
+- id: gcacw.cavalry-retreat
+  source_term: Cavalry Retreat
+  sense: unik przed piechotą/artylerią; 4–6 heksów; redukuje MA wroga
+  pl: wycofanie kawalerii
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: wycofanie kawalerii
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 17 / `07_2_walka.tex:122`
+    supports: sense
+  rules:
+  - R-7.7.1
+  - R-7.7.2
+  - R-7.7.3
+  - R-7.7.4
+  - R-7.7.5
+  - R-7.7.6
+  - R-7.7.7
+  - R-7.7.8
+- id: gcacw.defender-s-voluntary-retreat
+  source_term: Defender's Voluntary Retreat
+  sense: 1–4 heksy po wyniku bez r/R
+  pl: dobrowolny odwrót obrońcy
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: dobrowolny odwrót obrońcy
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 17–18 / `07_2_walka.tex:116`
+    supports: sense
+  rules:
+  - R-7.6.12
+- id: gcacw.manpower-loss
+  source_term: Manpower loss
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: strata siły
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: strata siły
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.elimination
+  source_term: elimination
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: eliminacja
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: eliminacja
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.demoralization-dmorlz-1-2
+  source_term: Demoralization (Dmorlz-1/-2)
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: demoralizacja (stopień 1 / 2)
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: demoralizacja (stopień 1 / 2)
+    supports: usage-in-games
+    checked: '2026-10-04'
+  notes: wiersz łączy kilka pojęć — do rozbicia na osobne rekordy
+- id: gcacw.pontoon-bridge
+  source_term: Pontoon bridge
+  sense: budowany w grze (z rzutem) / nadrukowany
+  pl: most pontonowy
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: most pontonowy
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 20 / `10_mosty.tex:8`
+    supports: sense
+  rules: &id017
+  - R-10.1.1
+- id: gcacw.dismantling
+  source_term: dismantling
+  sense: usunięcie własnego pontonu w marszu, 0 MP
+  pl: rozbiórka
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: rozbiórka
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 21 / `10_mosty.tex:89`
+    supports: sense
+  rules:
+  - R-10.2.3
+- id: gcacw.repair
+  source_term: repair
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: naprawa
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: naprawa
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.rain
+  source_term: Rain
+  sense: wyniki Random Events Table
+  pl: deszcz
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: deszcz
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 22 / `12_deszcz.tex:12-18`
+    supports: sense
+  rules:
+  - R-12.0.2
+- id: gcacw.rain-number
+  source_term: Rain Number
+  sense: liczba pól dla znaczników Unfordable
+  pl: wskaźnik deszczu
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: wskaźnik deszczu
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 23 / `12_deszcz.tex:42`
+    supports: sense
+  rules:
+  - R-12.0.11
+  - R-12.0.12
+- id: gcacw.fordable
+  source_term: fordable
+  sense: brody (i zniszczone mosty małych rzek) nieużywalne do pola znacznika
+  pl: przekraczalna w bród
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: przekraczalna w bród
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 22–23 / `12_deszcz.tex:38, 75`
+    supports: sense
+  rules:
+  - R-12.0.10
+  - R-12.0.13
+- id: gcacw.unfordable
+  source_term: unfordable
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: nieprzekraczalna w bród
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: nieprzekraczalna w bród
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.limited-intelligence
+  source_term: Limited Intelligence
+  sense: opcjonalne ukrywanie składu zgrupowań
+  pl: ograniczony wywiad
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: ograniczony wywiad
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 23 / `13_ograniczony_wywiad.tex:4`
+    supports: sense
+  rules:
+  - R-OPT-LI.1
+  - R-OPT-LI.2
+  - R-OPT-LI.3
+  - R-OPT-LI.4
+  - R-OPT-LI.5
+  - R-OPT-LI.6
+  - R-OPT-LI.7
+- id: gcacw.supply
+  source_term: supply
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: zaopatrzenie
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: zaopatrzenie
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.out-of-supply
+  source_term: out of supply
+  sense: status z Advanced; wpływa na kroki 3a i 6
+  pl: bez zaopatrzenia
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: bez zaopatrzenia
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 18 / `08_reorganizacja.tex:11, 17`
+    supports: sense
+  rules:
+  - R-8.0.3
+  - R-8.0.6
+- id: gcacw.victory-points-vp
+  source_term: Victory Points (VP)
+  sense: wg scenariusza; przyznawane m.in. za kapitulację, eliminację w bagnie, akwedukt
+  pl: punkty zwycięstwa (VP)
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: punkty zwycięstwa (VP)
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 16, 21, 22
+    supports: sense
+  rules:
+  - R-7.6.5
+  - R-10.2.8
+  - R-12.0.3
+- id: gcacw.oob-order-of-battle
+  source_term: OOB (order of battle)
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: ordre de bataille (OOB)
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: ordre de bataille (OOB)
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.column-of-route
+  source_term: Column of Route
+  sense: 'rodzaje ataku w marszu: 0/1/2/4 MP (inf), –3/–1/0/+1'
+  pl: atak z kolumny marszowej
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: atak z kolumny marszowej
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 10, 14 / `06_marsz_ruch.tex:15-18`
+    supports: sense
+  rules: &id014
+  - R-6.1.2
+  - R-7.4.16
+- id: gcacw.hasty
+  source_term: Hasty
+  sense: 'rodzaje ataku w marszu: 0/1/2/4 MP (inf), –3/–1/0/+1'
+  pl: pośpieszny
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: pośpieszny
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 10, 14 / `06_marsz_ruch.tex:15-18`
+    supports: sense
+  rules: *id014
+- id: gcacw.normal
+  source_term: Normal
+  sense: 'rodzaje ataku w marszu: 0/1/2/4 MP (inf), –3/–1/0/+1'
+  pl: normalny
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: normalny
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 10, 14 / `06_marsz_ruch.tex:15-18`
+    supports: sense
+  rules: *id014
+- id: gcacw.prepared-attack
+  source_term: Prepared attack
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: przygotowany
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: przygotowany
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.terrain-chart
+  source_term: Terrain Chart
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: Tabela terenu
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: Tabela terenu
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.major-terrain
+  source_term: major terrain
+  sense: jeden z 10 typów heksu
+  pl: teren dominujący
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: teren dominujący
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 5 / `02_podstawy.tex:164`
+    supports: sense
+  rules:
+  - R-2.3.1
+- id: gcacw.force-display
+  source_term: Force Display
+  sense: zastępuje stos; bez wpływu (poza opcją LI)
+  pl: plansza zgrupowań
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: plansza zgrupowań
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 11 / `06_marsz_ruch.tex:108-110`
+    supports: sense
+  rules:
+  - R-6.4.2
+  - R-OPT-LI.x
+- id: gcacw.detachment
+  source_term: Detachment
+  sense: Advanced (lub scenariusz Basic); wzmianka w 6.2
+  pl: wydzielanie oddziałów
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: wydzielanie oddziałów
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 10 / `06_marsz_ruch.tex:53`
+    supports: sense
+  rules: &id015
+  - R-6.2.10
+- id: gcacw.substitute
+  source_term: substitute
+  sense: Advanced (lub scenariusz Basic); wzmianka w 6.2
+  pl: oddział zastępczy
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: oddział zastępczy
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 10 / `06_marsz_ruch.tex:53`
+    supports: sense
+  rules: *id015
+- id: gcacw.wagon-train
+  source_term: wagon train
+  sense: typ jednostki z Advanced; nie forsuje marszu; kara +2/+4 za wejście do jej heksu
+  pl: tabor
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: tabor
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 7, 10 / `06_marsz_ruch.tex:63`
+    supports: sense
+  rules:
+  - R-5.1.7
+  - R-6.2.13
+- id: gcacw.retreat-chart
+  source_term: Retreat Chart
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: Tabela odwrotu
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: Tabela odwrotu
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.retreat-description
+  source_term: Retreat Description
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: opis odwrotu
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: opis odwrotu
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.priority-number
+  source_term: Priority Number
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: numer priorytetu
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: numer priorytetu
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.overriding-retreat-priorities
+  source_term: Overriding Retreat Priorities
+  sense: raz na odwrót, by uniknąć kapitulacji
+  pl: odstąpienie od priorytetów odwrotu
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: odstąpienie od priorytetów odwrotu
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 17 / `07_2_walka.tex:96`
+    supports: sense
+  rules:
+  - R-7.6.8
+- id: gcacw.surrender
+  source_term: Surrender
+  sense: brak legalnego heksu → eliminacja + VP
+  pl: kapitulacja
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: kapitulacja
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 16 / `07_2_walka.tex:71`
+    supports: sense
+  rules:
+  - R-7.6.5
+- id: gcacw.defense-value
+  source_term: Defense value
+  sense: łączna CV obrońcy **przed** umocnieniami — kolumna Combat Chart
+  pl: wartość obronna
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: wartość obronna
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 15 / `07_2_walka.tex:5`
+    supports: sense
+  rules:
+  - R-7.5.1
+  - R-7.5.15
+- id: gcacw.end-action
+  source_term: End Action
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: koniec akcji
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: koniec akcji
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.forage
+  source_term: forage
+  sense: Advanced; RTG 14.0
+  pl: furażować
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: furażować
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 18 / `08_reorganizacja.tex:7-8`
+    supports: sense
+  rules: &id016
+  - R-8.0.1
+  - R-8.0.2
+- id: gcacw.levy
+  source_term: levy
+  sense: Advanced; RTG 14.0
+  pl: kontrybucja
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: kontrybucja
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 18 / `08_reorganizacja.tex:7-8`
+    supports: sense
+  rules: *id016
+- id: gcacw.refuse-flanks
+  source_term: refuse flanks
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: zaginanie skrzydeł
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: zaginanie skrzydeł
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.attachment-phase
+  source_term: Attachment Phase
+  sense: faza Advanced (łączenie jednostek); moment automatycznego zniszczenia pontonu
+  pl: Faza przydziału
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: Faza przydziału
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 21 / `10_mosty.tex:86`
+    supports: sense
+  rules:
+  - R-10.2.2
+- id: gcacw.naval-battery
+  source_term: Naval Battery
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: bateria nadbrzeżna
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: bateria nadbrzeżna
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.permanent-bridge
+  source_term: permanent bridge
+  sense: budowany w grze (z rzutem) / nadrukowany
+  pl: most stały
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: most stały
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 20 / `10_mosty.tex:8`
+    supports: sense
+  rules: *id017
+- id: gcacw.fort
+  source_term: Fort
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: stały fort
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: stały fort
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.turn-track
+  source_term: Turn Track
+  sense: miejsce znaczników Rain/Unfordable
+  pl: tor tur
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: tor tur
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 6, 22
+    supports: sense
+  rules:
+  - R-3.0.1
+  - R-12.0.10
+- id: gcacw.random-events-table
+  source_term: Random Events Table
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: Tabela wydarzeń losowych
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: Tabela wydarzeń losowych
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.dummy-marker
+  source_term: dummy marker
+  sense: znacznik zgrupowania bez jednostek (LI)
+  pl: znacznik pozorny
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: znacznik pozorny
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 23 / `13_ograniczony_wywiad.tex:14`
+    supports: sense
+  rules:
+  - R-OPT-LI.3
+- id: gcacw.assault-number
+  source_term: Assault Number
+  sense: Command – zmodyfikowany rzut; maks. liczba jednostek
+  pl: wskaźnik szturmu
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: wskaźnik szturmu
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 12 / `07_1_walka.tex:51`
+    supports: sense
+  rules:
+  - R-7.1.11
+- id: gcacw.grand-assault-number
+  source_term: Grand Assault Number
+  sense: Command armii/regionu – rzut; maks. liczba **heksów**
+  pl: wskaźnik Grand Assault
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: wskaźnik Grand Assault
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 12 / `07_1_walka.tex:87`
+    supports: sense
+  rules:
+  - R-7.1.14
+- id: gcacw.basic
+  source_term: basic
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: podstawowa
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: podstawowa
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.final-flank-bonus
+  source_term: final flank bonus
+  sense: 6 objętych → +4, 5 → +2; redukcje
+  pl: końcowa premia za oskrzydlenie
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: końcowa premia za oskrzydlenie
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 14–15 / `07_1_walka.tex:222-249`
+    supports: sense
+  rules:
+  - R-7.4.20
+  - R-7.4.21
+  - R-7.4.22
+  - R-7.4.23
+  - R-7.4.24
+  - R-7.4.25
+- id: gcacw.ratio-chart
+  source_term: Ratio Chart
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: Tabela stosunku sił
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: Tabela stosunku sił
+    supports: usage-in-games
+    checked: '2026-10-04'
+- id: gcacw.insubordination
+  source_term: Insubordination
+  sense: zjawisko z BAC przy remisie inicjatywy
+  pl: niesubordynacja
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: niesubordynacja
+    supports: usage-in-games
+    checked: '2026-10-04'
+  - source: GCACW-PL docs/indeks/definicje.md
+    where: s. 6 / `04_cykl_akcji.tex:18`
+    supports: sense
+  rules:
+  - R-4.2.1
+- id: gcacw.demi-division
+  source_term: Demi-division
+  sense: (do uzupełnienia — import z tabeli 2-kolumnowej)
+  pl: półdywizja
+  status: approved
+  decided_by: user
+  evidence:
+  - source: GCACW-PL docs/przewodnik_stylu.md (decyzje właściciela, 2023–2026)
+    where: §6 Słowniczek
+    form: półdywizja
+    supports: usage-in-games
+    checked: '2026-10-04'

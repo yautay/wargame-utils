@@ -24,6 +24,8 @@ DEFAULTS = {
     "aids": {"specs": "kb/aids", "plan": "kb/aids/PLAN.md", "tex": "pomoce", "pdf": "pomoce/pdf",
              "style": "", "tikz": "pomoce/pomoce-tikz.sty"},
     "digital": {"dir": "kb/digital", "export": "build/wgu-kb.json"},
+    "terminology": {"layers": ["common"], "game": "kb/terminology.yaml"},
+    "translation_work": {"dir": "translation"},
     "tools": {"lualatex": ""},
 }
 
@@ -115,6 +117,11 @@ aids:
 digital:
   dir: kb/digital
   export: build/wgu-kb.json
+terminology:
+  layers: [common]         # shared layers from <wargame_utils>/terminology/: common, era/<x>, series/<x>
+  game: kb/terminology.yaml  # this game + edition (most specific layer)
+translation_work:
+  dir: translation         # chunks, per-chunk term tables, agent proposals, decision log, verification reports
 tools:
   lualatex: ""             # empty = find on PATH / MiKTeX default location
 """

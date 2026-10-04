@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/yautay/wargame-utils/schemas/terminology.schema.json",
+  "title": "wargame_utils terminology (wgu/terms@1)",
+  "description": "Concept-based glossary. The unit is a CONCEPT in a context (level + scope), not an English word: one source word may map to several concepts with different Polish equivalents. Layers: common (all wargames) < era < series < game (edition). The most specific layer wins; overriding an upper-layer concept must be explicit (`overrides`).",
+  "$defs": {
+    "evidence": {
+      "type": "object",
+      "required": ["source"],
+      "properties": {
+        "source": {"type": "string", "description": "short source id from references/zrodla.md (e.g. GMT-SPQR-PL3, WSJP, AAP6-2005PL) or a full citation"},
+        "where": {"type": "string", "description": "page / rule number / URL"},
+        "form": {"type": "string", "description": "the form attested in the source (short)"},
+        "supports": {"enum": ["existence", "sense", "usage-in-games", "military-usage", "against"], "description": "what the evidence shows: a word existing in Polish (existence) is NOT proof that it is the right equivalent of the game concept"},
+        "note": {"type": "string"},
+        "checked": {"type": "string", "description": "date checked (YYYY-MM-DD)"}
+      }
+    },
+    "concept": {
+      "type": "object",
+      "required": ["id", "source_term", "sense", "status"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z0-9]+(\\.[a-z0-9-]+)+$", "description": "<layer>.<slug>, e.g. common.zoc, gboh.cohesion-hit, gcacw.fatigue-level; stable"},
+        "source_term": {"type": "string", "description": "canonical source-language term as printed in the rules"},
+        "variants": {"type": "array", "items": {"type": "string"}, "description": "inflections, abbreviations, spellings in the source (Routed, routs, MA)"},
+        "sense": {"type": "string", "description": "definition / description of the mechanic in own words (disambiguates homonyms)"},
+        "disambiguation": {"type": "string", "description": "how to recognise THIS sense in the source text when the word has other senses"},
+        "rules": {"type": "array", "items": {"type": "string"}, "description": "rule ids/numbers where the concept is defined or used"},
+        "pl": {"type": "string", "description": "approved (or proposed) Polish equivalent — lemma"},
+        "pl_forms": {"type": "array", "items": {"type": "string"}, "description": "allowed inflected forms (used for consistency checks); may include multi-word forms"},
+        "pl_abbrev": {"type": "string"},
+        "notation": {"type": "object", "properties": {
+          "first_use": {"type": "string", "description": "e.g. 'ucieczka\\ang{rout}' — bilingual on first use in a section"},
+          "component_text": {"type": "string", "description": "text printed on counters/charts — keep as printed or translate? state it"},
+          "capitalisation": {"type": "string"},
+          "typography": {"type": "string"}
+        }},
+        "rejected": {"type": "array", "items": {"type": "object", "required": ["pl", "reason"], "properties": {
+          "pl": {"type": "string"}, "forms": {"type": "array", "items": {"type": "string"}}, "reason": {"type": "string"}}}},
+        "level": {"enum": ["common", "era", "series", "game"]},
+        "scope": {"type": "object", "properties": {
+          "era": {"type": "string"}, "series": {"type": "string"}, "game": {"type": "string"}, "edition": {"type": "string"}}},
+        "overrides": {"type": "string", "description": "id of an upper-layer concept this record replaces in this scope"},
+        "related": {"type": "array", "items": {"type": "string"}, "description": "ids of concepts easily confused with this one"},
+        "status": {"enum": ["proposal", "approved", "disputed", "deprecated"]},
+        "decided_by": {"enum": ["user", "analyst", "publisher-usage", "imported"], "description": "user = owner's editorial decision; analyst = based on evidence, awaiting owner; imported = taken over from an existing approved table"},
+        "preference": {"type": "boolean", "description": "true = owner's editorial preference (not a dictionary finding)"},
+        "rationale": {"type": "string"},
+        "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}},
+        "history": {"type": "array", "items": {"type": "object", "properties": {
+          "date": {"type": "string"}, "from": {"type": "string"}, "from_forms": {"type": "array", "items": {"type": "string"}},
+          "to": {"type": "string"}, "reason": {"type": "string"}, "by": {"type": "string"}}},
+          "description": "previous equivalents — `wgu terms impact` searches them to find passages needing update"},
+        "notes": {"type": "string"}
+      }
+    },
+    "file": {
+      "type": "object",
+      "required": ["layer", "concepts"],
+      "properties": {
+        "layer": {"type": "object", "required": ["id", "level"], "properties": {
+          "id": {"type": "string"}, "level": {"enum": ["common", "era", "series", "game"]}, "title": {"type": "string"},
+          "scope": {"type": "object"}, "sources": {"type": "array", "items": {"type": "string"}}}},
+        "concepts": {"type": "array", "items": {"$ref": "#/$defs/concept"}}
+      }
+    }
+  },
+  "$ref": "#/$defs/file"
+}
