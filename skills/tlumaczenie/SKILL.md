@@ -1,6 +1,6 @@
 ---
 name: tlumaczenie
-description: Tłumaczenie instrukcji gier planszowych/wargame'ów (PDF, zwykle angielski) na polski jako dokument LaTeX (LuaLaTeX) odwzorowujący oprawę oryginału (fonty, nagłówki, ramki, tabele, żetony), z zachowaniem stylu literackiego tłumacza, słowniczkiem EN→PL, oznaczaniem zmian wersji i notatkami tłumacza. Używaj, gdy użytkownik chce przetłumaczyć, dokończyć lub zaktualizować do nowej wersji instrukcję gry albo przygotować polską wersję rulebooka.
+description: "Tłumaczenie instrukcji gier planszowych/wargame'ów (PDF, zwykle angielski) na polski jako dokument LaTeX (LuaLaTeX) odwzorowujący oprawę oryginału (fonty, nagłówki, ramki, tabele, żetony), z zachowaniem stylu literackiego tłumacza, słowniczkiem EN→PL, oznaczaniem zmian wersji i notatkami tłumacza. Używaj, gdy użytkownik chce przetłumaczyć, dokończyć lub zaktualizować do nowej wersji instrukcję gry albo przygotować polską wersję rulebooka."
 argument-hint: "[zakres stron/rozdziałów] [--aktualizacja WERSJA]"
 ---
 

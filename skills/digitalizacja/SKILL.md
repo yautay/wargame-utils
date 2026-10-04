@@ -1,6 +1,6 @@
 ---
 name: digitalizacja
-description: Przygotowuje fundament pod komputerową implementację gry na podstawie bazy wiedzy kb/ — model stanu, punkty decyzji i reakcji, losowość, informację ukrytą, potok modyfikatorów, tabele w postaci maszynowej, scenariusze testowe given/when/then i listę blokerów — oraz eksportuje pakiet JSON (wgu/kb-bundle@1) dla repozytorium digitalizacji (np. silnik w TypeScript). Uruchamiaj ręcznie po /wgu:atomizacja, przed startem projektu digitalizacji.
+description: "Przygotowuje fundament pod komputerową implementację gry na podstawie bazy wiedzy kb/ — model stanu, punkty decyzji i reakcji, losowość, informację ukrytą, potok modyfikatorów, tabele w postaci maszynowej, scenariusze testowe given/when/then i listę blokerów — oraz eksportuje pakiet JSON (wgu/kb-bundle@1) dla repozytorium digitalizacji (np. silnik w TypeScript). Uruchamiaj ręcznie po /wgu:atomizacja, przed startem projektu digitalizacji."
 argument-hint: "[zakres, np. 'walka'] [--tylko-eksport] [--cel ../spqr]"
 disable-model-invocation: true
 ---

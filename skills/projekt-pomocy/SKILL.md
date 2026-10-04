@@ -1,6 +1,6 @@
 ---
 name: projekt-pomocy
-description: Projektuje pomoce do nauki i kontroli zasad przy stole (algorytmy, schematy blokowe, drzewa decyzyjne, tabele decyzyjne, karty-ściągi, infografiki) na podstawie bazy wiedzy kb/. Wynik to plan i specyfikacje YAML (węzły, krawędzie, ID reguł, przykład, układ, kryteria akceptacji) sprawdzane przez `wgu aids validate`, gotowe dla /wgu:pomoce i jako szkielet procedur silnika. Uruchamiaj ręcznie po /wgu:atomizacja.
+description: "Projektuje pomoce do nauki i kontroli zasad przy stole (algorytmy, schematy blokowe, drzewa decyzyjne, tabele decyzyjne, karty-ściągi, infografiki) na podstawie bazy wiedzy kb/. Wynik to plan i specyfikacje YAML (węzły, krawędzie, ID reguł, przykład, układ, kryteria akceptacji) sprawdzane przez `wgu aids validate`, gotowe dla /wgu:pomoce i jako szkielet procedur silnika. Uruchamiaj ręcznie po /wgu:atomizacja."
 argument-hint: "[zakres, np. 'walka i odwrót'] [--max N] [--odbiorca nowicjusz|weteran] [--popraw P04 P09]"
 disable-model-invocation: true
 ---

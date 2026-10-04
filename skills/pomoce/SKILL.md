@@ -1,6 +1,6 @@
 ---
 name: pomoce
-description: Rysuje pomoce do gry (schematy blokowe, drzewa decyzyjne, algorytmy, karty pomocy) jako PDF w LaTeX/TikZ według specyfikacji YAML z kb/aids/ (z /wgu:projekt-pomocy). Styl domyślnie przejmuje z instrukcji projektu; użytkownik może podać własne zalecenia. Tańszy model nie interpretuje zasad, tylko wiernie implementuje specyfikację.
+description: "Rysuje pomoce do gry (schematy blokowe, drzewa decyzyjne, algorytmy, karty pomocy) jako PDF w LaTeX/TikZ według specyfikacji YAML z kb/aids/ (z /wgu:projekt-pomocy). Styl domyślnie przejmuje z instrukcji projektu; użytkownik może podać własne zalecenia. Tańszy model nie interpretuje zasad, tylko wiernie implementuje specyfikację."
 argument-hint: "[P01 P02 … | --priorytet N | --wszystkie] [--styl \"opis stylu\"]"
 disable-model-invocation: true
 ---

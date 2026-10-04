@@ -1,6 +1,6 @@
 ---
 name: errata
-description: Wersje, errata i poprawki zasad. Porównuje wersje instrukcji, wczytuje erratę, FAQ i wyjaśnienia autora, zapisuje zmiany w kb/changes.yaml, rozstrzyga niejasności (kb/ambiguities.yaml) i, jeśli trzeba, przygotowuje lub nanosi poprawki na tłumaczenie oraz wylicza pomoce wymagające aktualizacji. Uruchamiaj ręcznie, gdy pojawi się nowa wersja, errata lub FAQ albo gdy znaleziono błąd.
+description: "Wersje, errata i poprawki zasad. Porównuje wersje instrukcji, wczytuje erratę, FAQ i wyjaśnienia autora, zapisuje zmiany w kb/changes.yaml, rozstrzyga niejasności (kb/ambiguities.yaml) i, jeśli trzeba, przygotowuje lub nanosi poprawki na tłumaczenie oraz wylicza pomoce wymagające aktualizacji. Uruchamiaj ręcznie, gdy pojawi się nowa wersja, errata lub FAQ albo gdy znaleziono błąd."
 argument-hint: "[--nowa-wersja PDF] [--errata PLIK|URL] [--nanies] [--niejasnosci N-12 N-14]"
 disable-model-invocation: true
 ---

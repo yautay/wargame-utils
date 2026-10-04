@@ -85,3 +85,14 @@ def test_legacy_import_and_lint(tmp_path: Path):
     assert kb["ambiguities"][0]["strength"] == "certain"
     errors, warnings = lint.check(kb_dir)
     assert errors == []
+
+
+def test_plugin_frontmatter_is_valid_yaml():
+    import glob
+    import yaml
+    root = Path(__file__).resolve().parent.parent
+    files = glob.glob(str(root / "skills/*/SKILL.md")) + glob.glob(str(root / "agents/*.md"))
+    assert files
+    for f in files:
+        fm = yaml.safe_load(Path(f).read_text(encoding="utf-8").split("---")[1])
+        assert fm["name"] and fm["description"], f

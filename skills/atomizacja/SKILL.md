@@ -1,6 +1,6 @@
 ---
 name: atomizacja
-description: Rozbija zasady gry na atomy. Czyta instrukcję (PDF oryginału, tłumaczenie, errata) i buduje lub aktualizuje kanoniczną bazę wiedzy YAML w repozytorium gry (kb/): reguły z cytatami, definicje, tabele, procedury, graf relacji „nadpisuje/wyjątek”, niejasności z wariantami, zmiany wersji, scenariusze kontrolne. Baza jest fundamentem tłumaczenia, pomocy do gry i digitalizacji. Uruchamiaj ręcznie po dodaniu lub zmianie instrukcji.
+description: "Rozbija zasady gry na atomy. Czyta instrukcję (PDF oryginału, tłumaczenie, errata) i buduje lub aktualizuje kanoniczną bazę wiedzy YAML w repozytorium gry (kb/): reguły z cytatami, definicje, tabele, procedury, graf relacji „nadpisuje/wyjątek”, niejasności z wariantami, zmiany wersji, scenariusze kontrolne. Baza jest fundamentem tłumaczenia, pomocy do gry i digitalizacji. Uruchamiaj ręcznie po dodaniu lub zmianie instrukcji."
 argument-hint: "[--zakres 'rozdz. 7–8'] [--import-legacy docs/indeks] [--tylko-qa]"
 disable-model-invocation: true
 ---

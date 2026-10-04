@@ -1,6 +1,6 @@
 ---
 name: czytelnosc
-description: Przygotowuje wydanie instrukcji o lepszej czytelności (np. wersja do nauki) — przebudowa kolejności wykładu, kroki, przykłady, odsyłacze, ramki z wyjątkami, zestawienia — bez zmiany treści zasad i z kontrolą wierności względem bazy wiedzy kb/. Wynik to osobne wydanie LaTeX obok tłumaczenia wiernego. Uruchamiaj ręcznie.
+description: "Przygotowuje wydanie instrukcji o lepszej czytelności (np. wersja do nauki) — przebudowa kolejności wykładu, kroki, przykłady, odsyłacze, ramki z wyjątkami, zestawienia — bez zmiany treści zasad i z kontrolą wierności względem bazy wiedzy kb/. Wynik to osobne wydanie LaTeX obok tłumaczenia wiernego. Uruchamiaj ręcznie."
 argument-hint: "[zakres rozdziałów] [--odbiorca nowicjusz|weteran] [--katalog wydania]"
 disable-model-invocation: true
 ---

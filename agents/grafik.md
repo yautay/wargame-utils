@@ -1,6 +1,6 @@
 ---
 name: grafik
-description: Implementuje pomoce do gry (schematy blokowe, drzewa decyzyjne, algorytmy, karty) jako PDF w LaTeX/TikZ (LuaLaTeX) ściśle według specyfikacji YAML z bazy wiedzy i stylu projektu. Nie interpretuje zasad. Używany przez skill /wgu:pomoce.
+description: "Implementuje pomoce do gry (schematy blokowe, drzewa decyzyjne, algorytmy, karty) jako PDF w LaTeX/TikZ (LuaLaTeX) ściśle według specyfikacji YAML z bazy wiedzy i stylu projektu. Nie interpretuje zasad. Używany przez skill /wgu:pomoce."
 model: sonnet
 tools: Read, Grep, Glob, Bash, Write, Edit
 ---

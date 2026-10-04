@@ -1,6 +1,6 @@
 ---
 name: regula
-description: Szybkie wyszukanie reguły, terminu, tabeli, procedury, niejasności lub scenariusza w bazie wiedzy kb/ projektu gry (po ID albo słowie) wraz z relacjami, które ją nadpisują, i powiązanymi niejasnościami. Używaj, gdy użytkownik pyta o konkretną zasadę gry, jej ID albo znaczenie terminu w projekcie z plikiem wgu.yaml.
+description: "Szybkie wyszukanie reguły, terminu, tabeli, procedury, niejasności lub scenariusza w bazie wiedzy kb/ projektu gry (po ID albo słowie) wraz z relacjami, które ją nadpisują, i powiązanymi niejasnościami. Używaj, gdy użytkownik pyta o konkretną zasadę gry, jej ID albo znaczenie terminu w projekcie z plikiem wgu.yaml."
 argument-hint: "<ID lub termin> [kolejne…]"
 model: haiku
 ---

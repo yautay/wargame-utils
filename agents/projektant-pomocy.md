@@ -1,6 +1,6 @@
 ---
 name: projektant-pomocy
-description: Bada logikę zasad (drzewa decyzyjne, procedury, warunki, wyjątki) na podstawie bazy wiedzy i projektuje pomoce do nauki i kontroli przepisów — algorytmy, schematy blokowe, drzewa decyzyjne, karty pomocy — jako specyfikacje YAML (węzły, krawędzie, ID reguł) dla tańszego agenta-grafika. Używany przez skill /wgu:projekt-pomocy.
+description: "Bada logikę zasad (drzewa decyzyjne, procedury, warunki, wyjątki) na podstawie bazy wiedzy i projektuje pomoce do nauki i kontroli przepisów — algorytmy, schematy blokowe, drzewa decyzyjne, karty pomocy — jako specyfikacje YAML (węzły, krawędzie, ID reguł) dla tańszego agenta-grafika. Używany przez skill /wgu:projekt-pomocy."
 model: fable
 effort: high
 tools: Read, Grep, Glob, Bash, Write, Edit

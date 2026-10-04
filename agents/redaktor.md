@@ -1,6 +1,6 @@
 ---
 name: redaktor
-description: Przygotowuje wydanie instrukcji o lepszej czytelności (przebudowa kolejności, przykłady, odsyłacze, ramki, zestawienia) bez zmiany treści zasad, z kontrolą wierności względem bazy wiedzy. Nanosi też erratę na tłumaczenie. Używany przez skille /wgu:czytelnosc i /wgu:errata.
+description: "Przygotowuje wydanie instrukcji o lepszej czytelności (przebudowa kolejności, przykłady, odsyłacze, ramki, zestawienia) bez zmiany treści zasad, z kontrolą wierności względem bazy wiedzy. Nanosi też erratę na tłumaczenie. Używany przez skille /wgu:czytelnosc i /wgu:errata."
 model: inherit
 tools: Read, Grep, Glob, Bash, Write, Edit
 ---

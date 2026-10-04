@@ -1,6 +1,6 @@
 ---
 name: nowy-projekt
-description: Zakłada projekt gry dla wargame_utils — tworzy wgu.yaml w repozytorium gry, rozpoznaje źródła (PDF instrukcji, errata, arkusze tabel), odczytuje kolor zmian i font nagłówków, proponuje kolejne kroki (atomizacja, tłumaczenie, pomoce, digitalizacja). Używaj przy pierwszym uruchomieniu narzędzia w nowym repozytorium gry.
+description: "Zakłada projekt gry dla wargame_utils — tworzy wgu.yaml w repozytorium gry, rozpoznaje źródła (PDF instrukcji, errata, arkusze tabel), odczytuje kolor zmian i font nagłówków, proponuje kolejne kroki (atomizacja, tłumaczenie, pomoce, digitalizacja). Używaj przy pierwszym uruchomieniu narzędzia w nowym repozytorium gry."
 argument-hint: "[--id gra] [--skrot GRA]"
 disable-model-invocation: true
 ---

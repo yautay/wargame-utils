@@ -1,6 +1,6 @@
 ---
 name: architekt-digitalizacji
-description: Na podstawie bazy wiedzy o zasadach przygotowuje fundament pod komputerową implementację gry — model stanu, punkty decyzji, losowość, informację ukrytą, potok modyfikatorów, tabele w postaci maszynowej, scenariusze testowe given/when/then i listę blokerów — oraz eksportuje pakiet JSON dla projektu digitalizacji. Używany przez skill /wgu:digitalizacja.
+description: "Na podstawie bazy wiedzy o zasadach przygotowuje fundament pod komputerową implementację gry — model stanu, punkty decyzji, losowość, informację ukrytą, potok modyfikatorów, tabele w postaci maszynowej, scenariusze testowe given/when/then i listę blokerów — oraz eksportuje pakiet JSON dla projektu digitalizacji. Używany przez skill /wgu:digitalizacja."
 model: fable
 effort: high
 tools: Read, Grep, Glob, Bash, Write, Edit

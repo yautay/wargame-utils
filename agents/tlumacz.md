@@ -1,6 +1,6 @@
 ---
 name: tlumacz
-description: Tłumaczy wskazany fragment instrukcji gry (tekst z markupem z `wgu pdf extract`) na język docelowy jako pliki LaTeX w oprawie projektu, zgodnie z przewodnikiem stylu i słowniczkiem. Kompiluje własny plik testowy. Używany równolegle przez skill /wgu:tlumaczenie.
+description: "Tłumaczy wskazany fragment instrukcji gry (tekst z markupem z `wgu pdf extract`) na język docelowy jako pliki LaTeX w oprawie projektu, zgodnie z przewodnikiem stylu i słowniczkiem. Kompiluje własny plik testowy. Używany równolegle przez skill /wgu:tlumaczenie."
 model: inherit
 tools: Read, Grep, Glob, Bash, Write, Edit
 ---
