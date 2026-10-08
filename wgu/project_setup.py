@@ -134,7 +134,10 @@ def setup(root: Path, gid: str | None, short: str | None, pdf: Path | None, imag
         gi.write_text("\n".join(have + add) + "\n", encoding="utf-8", newline="\n")
         log.append(f".gitignore: dodano {len(add)} wpisów")
 
-    st = root / ".claude" / "settings.json"
+    from .config import find_workspace
+    workspace = find_workspace(root)
+    settings_root = workspace.root if workspace else root
+    st = settings_root / ".claude" / "settings.json"
     if st.exists():
         log.append("pominięto .claude/settings.json (już istnieje) — włącz plugin ręcznie, jeśli go brak")
     else:
@@ -146,9 +149,13 @@ def setup(root: Path, gid: str | None, short: str | None, pdf: Path | None, imag
         log.append(f"utworzono .claude/settings.json (plugin z {plugin_path.as_posix()})")
 
     if plugin:
-        install_plugin(root, plugin_path, log)
+        install_plugin(settings_root, plugin_path, log)
 
-    if git and not (root / ".git").exists():
-        r = subprocess.run(["git", "init", "-q", "-b", "main"], cwd=root, capture_output=True, text=True)
-        log.append("git init (gałąź main)" if r.returncode == 0 else f"git init nie powiodło się: {r.stderr.strip()}")
+    if git:
+        existing = subprocess.run(["git", "rev-parse", "--show-toplevel"], cwd=root, capture_output=True, text=True)
+        if existing.returncode == 0:
+            log.append(f"pominięto git init (projekt należy do repozytorium {existing.stdout.strip()})")
+        else:
+            r = subprocess.run(["git", "init", "-q", "-b", "main"], cwd=root, capture_output=True, text=True)
+            log.append("git init (gałąź main)" if r.returncode == 0 else f"git init nie powiodło się: {r.stderr.strip()}")
     return log

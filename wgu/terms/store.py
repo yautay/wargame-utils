@@ -33,7 +33,8 @@ class Terminology:
 def layer_paths(project) -> list[Path]:
     cfg = project.data.get("terminology", {}) if project else {}
     layers = cfg.get("layers", ["common"])
-    paths = [TOOL_ROOT / "terminology" / f"{l}.yaml" for l in layers]
+    shared_root = project.terminology_root if project and project.terminology_root else TOOL_ROOT / "terminology"
+    paths = [shared_root / f"{l}.yaml" for l in layers]
     game = cfg.get("game", "kb/terminology.yaml")
     if project and game:
         paths.append(project.root / game)

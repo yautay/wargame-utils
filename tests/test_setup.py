@@ -1,4 +1,5 @@
 import json
+import subprocess
 
 import pymupdf
 
@@ -82,3 +83,18 @@ def test_find_claude_msix_location(tmp_path, monkeypatch):
     monkeypatch.delenv("APPDATA", raising=False)
     monkeypatch.setenv("LOCALAPPDATA", str(tmp_path))
     assert project_setup.find_claude() == str(exe)
+
+
+def test_setup_does_not_create_nested_git_repository(tmp_path, monkeypatch):
+    from wgu import project_setup
+    subprocess.run(["git", "init", "-q", "-b", "main"], cwd=tmp_path, check=True)
+    game = tmp_path / "games" / "test"
+    game.mkdir(parents=True)
+    pdf = game / "Rules.pdf"
+    pdf.write_bytes(b"not inspected in this test")
+    monkeypatch.setattr(project_setup, "measure_pdf", lambda _: {
+        "pages": 1, "body_font": "", "heading_font": "", "accent_color": ""
+    })
+    log = setup(game, "test", "T", pdf, [], git=True, plugin=False)
+    assert not (game / ".git").exists()
+    assert any("pominięto git init" in line for line in log)

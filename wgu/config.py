@@ -1,7 +1,8 @@
-"""Project configuration (`wgu.yaml` in the root of a game repository).
+"""Project and workspace configuration.
 
 Every skill and CLI command resolves paths through this file, so nothing game-specific is hard-coded
-in the tool. `find_project()` walks up from the current directory like git does.
+in the tool. `find_project()` walks up from the current directory like git does. A workspace may contain
+many game directories, each with its own `wgu.yaml`.
 """
 from __future__ import annotations
 
@@ -12,6 +13,7 @@ from pathlib import Path
 import yaml
 
 CONFIG_NAME = "wgu.yaml"
+WORKSPACE_NAME = "wgu-workspace.yaml"
 
 DEFAULTS = {
     "schema": "wgu/project@1",
@@ -41,6 +43,8 @@ def _merge(base: dict, over: dict) -> dict:
 class Project:
     root: Path
     data: dict
+    workspace_root: Path | None = None
+    workspace_data: dict | None = None
 
     def path(self, *keys: str) -> Path:
         """Resolve a config value (dotted keys) to an absolute path inside the project."""
@@ -64,6 +68,39 @@ class Project:
                 return self.root / s["path"]
         return None
 
+    @property
+    def terminology_root(self) -> Path | None:
+        configured = self.data.get("terminology", {}).get("root")
+        if configured:
+            return (self.root / configured).resolve()
+        if self.workspace_root and self.workspace_data:
+            configured = self.workspace_data.get("terminology_root")
+            if configured:
+                return (self.workspace_root / configured).resolve()
+        return None
+
+
+@dataclass
+class Workspace:
+    root: Path
+    data: dict
+
+    @property
+    def project_paths(self) -> list[Path]:
+        return [(self.root / p).resolve() for p in self.data.get("projects", [])]
+
+
+def find_workspace(start: Path | None = None, required: bool = False) -> Workspace | None:
+    p = (start or Path.cwd()).resolve()
+    for d in [p, *p.parents]:
+        f = d / WORKSPACE_NAME
+        if f.exists():
+            raw = yaml.safe_load(f.read_text(encoding="utf-8")) or {}
+            return Workspace(d, raw)
+    if required:
+        raise SystemExit(f"{WORKSPACE_NAME} not found in {p} or its parents")
+    return None
+
 
 def find_project(start: Path | None = None) -> Project:
     p = (start or Path.cwd()).resolve()
@@ -71,8 +108,43 @@ def find_project(start: Path | None = None) -> Project:
         f = d / CONFIG_NAME
         if f.exists():
             raw = yaml.safe_load(f.read_text(encoding="utf-8")) or {}
-            return Project(d, _merge(DEFAULTS, raw))
-    raise SystemExit(f"{CONFIG_NAME} not found in {p} or its parents — run `wgu init` in the game repository.")
+            workspace = find_workspace(d)
+            return Project(d, _merge(DEFAULTS, raw), workspace.root if workspace else None,
+                           workspace.data if workspace else None)
+    raise SystemExit(f"{CONFIG_NAME} not found in {p} or its parents — run `wgu init` in the game directory.")
+
+
+def workspace_projects(workspace: Workspace) -> list[Project]:
+    projects: list[Project] = []
+    seen: dict[str, Path] = {}
+    for root in workspace.project_paths:
+        project = find_project(root)
+        if project.root != root:
+            raise SystemExit(f"workspace project has no {CONFIG_NAME}: {root}")
+        gid = project.data["game"]["id"]
+        if not gid:
+            raise SystemExit(f"workspace project has an empty game.id: {root}")
+        if gid in seen:
+            raise SystemExit(f"duplicate game.id {gid!r}: {seen[gid]} and {root}")
+        seen[gid] = root
+        projects.append(project)
+    return projects
+
+
+def resolve_project(selector: str | None, start: Path | None = None) -> Project:
+    base = (start or Path.cwd()).resolve()
+    if selector is None:
+        return find_project(base)
+    candidate = Path(selector)
+    if not candidate.is_absolute():
+        candidate = base / candidate
+    if candidate.exists():
+        return find_project(candidate)
+    workspace = find_workspace(base, required=True)
+    for project in workspace_projects(workspace):
+        if selector in (project.data["game"]["id"], project.root.name):
+            return project
+    raise SystemExit(f"unknown workspace project {selector!r}")
 
 
 INIT_TEMPLATE = """\

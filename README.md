@@ -81,7 +81,7 @@ pip install -r C:/dev/wargame_utils/requirements.txt
 ```
 Potrzebny też **LuaLaTeX** (MiKTeX lub TeX Live). Pułapki środowiska: [templates/docs/pulapki.md](templates/docs/pulapki.md).
 
-**2. Repozytorium gry** (jedno repo na jedną grę, w nim tylko PDF instrukcji)
+**2. Katalog gry** (osobne repo albo `games/<id>` w monorepo, początkowo z PDF-em instrukcji)
 ```text
 mojagra/
 ├── docs/rules.pdf
@@ -251,6 +251,8 @@ flowchart LR
 
 ```text
 wgu init [--setup --pdf F --image F… --no-git --no-plugin] | config
+wgu workspace list | check [--strict]
+wgu -C GAME config                         # wybór gry z workspace
 wgu pdf    analyze | extract | images | render | layout | compare
 wgu kb     import-legacy | lint | render | show ID… | stats | export
 wgu terms  lint | show | check TEX… | impact ID --tex … --src … | for-chunk SRC | glossary-tex OUT | import-md

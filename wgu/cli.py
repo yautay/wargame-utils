@@ -5,6 +5,8 @@
                                              also sort sources into docs/ png/, measure the PDF, write
                                              .gitignore, .claude/settings.json, installs the plugin (project scope), git init
     wgu config                               print the resolved project configuration
+    wgu -C GAME config                       select a workspace game by id, directory name or path
+    wgu workspace list|check                 list or validate all games in wgu-workspace.yaml
     wgu help [TOPIC]                         short procedures (e.g. `wgu help nowa-gra`: start a new game)
     wgu pdf analyze|extract|images|render …  PDF tools (fonts/colours, text with markup, images, page renders)
     wgu kb import-legacy DIR [--specs DIR]   convert an old Markdown index (docs/indeks) to the YAML KB
@@ -26,6 +28,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -35,6 +38,13 @@ def _forward(module: str, argv: list[str]):
     mod = importlib.import_module(f"wgu.{module}")
     sys.argv = [module] + argv
     mod.main()
+
+
+def _project(a):
+    if getattr(a, "_project", None) is not None:
+        return a._project
+    from .config import resolve_project
+    return resolve_project(getattr(a, "project", None))
 
 
 def cmd_init(a):
@@ -59,16 +69,14 @@ def cmd_help(a):
 
 
 def cmd_config(a):
-    from .config import find_project
-    pr = find_project()
+    pr = _project(a)
     print(f"# root: {pr.root}")
     from .kb.store import dump
     print(dump(pr.data))
 
 
 def cmd_kb(a):
-    from .config import find_project
-    pr = find_project()
+    pr = _project(a)
     kb_dir = pr.kb_dir
     if a.action == "import-legacy":
         from .kb import legacy_import
@@ -111,8 +119,7 @@ def cmd_kb(a):
 
 
 def cmd_aids(a):
-    from .config import find_project
-    pr = find_project()
+    pr = _project(a)
     if a.action == "validate":
         from .aids import validate
         sys.exit(validate.run(pr, a.ids))
@@ -132,11 +139,10 @@ def cmd_tex(a):
 
 
 def cmd_terms(a):
-    from .config import find_project
     from .terms import ops
     pr = None
     try:
-        pr = find_project()
+        pr = _project(a)
     except SystemExit:
         if a.action not in ("import-md",):
             raise
@@ -167,12 +173,37 @@ def cmd_check(a):
     terms = None
     if not a.no_terms:
         try:
-            from .config import find_project
             from .terms.store import layer_paths, load
-            terms = load(layer_paths(find_project()))
+            terms = load(layer_paths(_project(a)))
         except SystemExit:
             terms = None
     sys.exit(fidelity.run(Path(a.src), [Path(x) for x in a.tex], terms))
+
+
+def cmd_workspace(a):
+    from .config import find_workspace, workspace_projects
+    workspace = find_workspace(required=True)
+    projects = workspace_projects(workspace)
+    if a.action == "list":
+        for project in projects:
+            print(f"{project.data['game']['id']:<16} {project.root.relative_to(workspace.root)}")
+        return
+    errors = 0
+    for project in projects:
+        missing = []
+        for group in ("rules", "errata", "charts", "scenarios"):
+            for item in project.data["sources"].get(group, []):
+                path = item if isinstance(item, str) else item.get("path")
+                if path and not (project.root / path).exists():
+                    missing.append(path)
+        for path in project.terminology_root.glob("**/*.yaml") if project.terminology_root else []:
+            if not path.is_file():
+                missing.append(str(path))
+        status = "OK" if not missing else f"missing {len(missing)} local source(s)"
+        print(f"{project.data['game']['id']:<16} {status}")
+        if missing and a.strict:
+            errors += 1
+    raise SystemExit(errors)
 
 
 def main(argv=None):
@@ -187,12 +218,15 @@ def main(argv=None):
         return _forward("latex.glossary", argv[1:])
 
     ap = argparse.ArgumentParser(prog="wgu", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("-C", "--project", help="workspace game id, directory name or path")
     sp = ap.add_subparsers(dest="cmd", required=True)
     p = sp.add_parser("init"); p.add_argument("--id"); p.add_argument("--short"); p.set_defaults(fn=cmd_init)
     p.add_argument("--setup", action="store_true"); p.add_argument("--pdf"); p.add_argument("--image", action="append", default=[])
     p.add_argument("--no-git", action="store_true"); p.add_argument("--no-plugin", action="store_true")
     p = sp.add_parser("config"); p.set_defaults(fn=cmd_config)
     p = sp.add_parser("help"); p.add_argument("topic", nargs="?"); p.set_defaults(fn=cmd_help)
+    p = sp.add_parser("workspace"); p.add_argument("action", choices=["list", "check"])
+    p.add_argument("--strict", action="store_true"); p.set_defaults(fn=cmd_workspace)
     p = sp.add_parser("kb"); p.set_defaults(fn=cmd_kb)
     p.add_argument("action", choices=["import-legacy", "lint", "render", "show", "stats", "export"])
     p.add_argument("dir", nargs="?"); p.add_argument("ids", nargs="*")
@@ -216,6 +250,10 @@ def main(argv=None):
     p.add_argument("action", choices=["fidelity"]); p.add_argument("src"); p.add_argument("tex", nargs="+")
     p.add_argument("--no-terms", action="store_true")
     a = ap.parse_args(argv)
+    if a.project and a.cmd not in ("init", "workspace", "help"):
+        from .config import resolve_project
+        a._project = resolve_project(a.project)
+        os.chdir(a._project.root)
     if a.cmd == "kb" and a.action == "show" and a.dir:
         a.ids = [a.dir] + a.ids
     a.fn(a)

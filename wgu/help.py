@@ -3,15 +3,16 @@ from __future__ import annotations
 
 TOPICS: dict[str, tuple[str, str]] = {
     "nowa-gra": ("Start tłumaczenia zasad nowej gry", """\
-Jedno repozytorium (katalog) na jedną grę. Dane gry żyją tam, a nie w wargame_utils.
+Jeden katalog projektu na jedną grę. Może to być osobne repozytorium albo `games/<id>` w workspace.
+Dane gry żyją tam, a nie w wargame_utils.
 
-1. Katalog gry obok innych (np. C:/dev/mojagra), a w nim PDF instrukcji.
+1. Katalog gry obok innych (np. C:/dev/mojagra) albo w monorepo (np. games/mojagra), a w nim PDF instrukcji.
    Gdy w katalogu jest kilka PDF-ów, wskaż właściwy przez --pdf. Pozostałe PDF-y
    (scenariusze, karty, tabele) przenieś ręcznie do docs/.
-   Gdy gra ma już własne repozytorium (kod, zadania), nie dokładaj do niego wgu.yaml:
+   Gdy gra ma już własne repozytorium implementacji cyfrowej (kod, zadania), nie dokładaj do niego wgu.yaml:
    zrób osobny katalog gry i skopiuj tam tylko PDF.
 
-2. Przygotowanie katalogu (z katalogu gry):
+2. Przygotowanie katalogu (z katalogu gry; WGU nie utworzy zagnieżdżonego Git-a w workspace):
      python C:/dev/wargame_utils/wgu.py init --setup --id ID --short SKROT --pdf "plik.pdf"
    Tworzy docs/, kb/, translation/, wgu.yaml (z pomiarem koloru i fontu nagłówków),
    .gitignore, .claude/settings.json, instaluje plugin wgu (zakres: projekt) i robi git init.
@@ -38,6 +39,12 @@ Jedno repozytorium (katalog) na jedną grę. Dane gry żyją tam, a nie w wargam
 
 6. Dodatkowe materiały (moduł Vassal, skany): zostaw jako źródło tylko do odczytu, np. w
    vassal_module/. Sprawdź licencję grafik przed publikacją.
+
+Workspace wielu gier:
+  - w katalogu głównym utwórz wgu-workspace.yaml z listą `projects`;
+  - `wgu workspace list` pokazuje gry;
+  - `wgu -C ID config` i pozostałe polecenia wybierają grę z katalogu głównego;
+  - `terminology_root` wskazuje współdzielone warstwy terminologii.
 
 Zob. też: README.md (Szybki start), docs/MODELE.md (przypisanie modeli).
 """),
