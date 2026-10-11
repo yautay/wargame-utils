@@ -337,3 +337,22 @@ działa bez SDK, a CLAUDE.md („zależności tylko z requirements.txt”) dosta
 6. **Cache z badania.** Surowe odpowiedzi api.geekdo.com z badania leżą tylko w scratchpadzie sesji. Proponuję
    ich nie używać (ani jako fixtures, ani jako danych) i pozwolić im zniknąć razem z sesją. Dotyczy to też
    zrzutu `bgg-3263.md` z sesji Ukraine '43.
+
+## 8. Prototyp i test akceptacyjny
+
+Stan 2026-10-11: moduł zbudowany według [projektu](../design/bgg-mcp.md) (`wgu/bgg/`, `wgu bgg …`, serwer MCP
+`bgg` rejestrowany w `.mcp.json`, pole `evidence`, skill `/wgu:dowody`).
+
+- Testy bez sieci (`tests/test_bgg.py`, 22 testy na syntetycznych próbkach XML i symulatorze XML API2): naprawa
+  XML, parsowanie sześciu poleceń, odstępy i ponowienia klienta, przerwanie przy 401/403/HTML, sync przyrostowy
+  z `minarticleid`, paginacja i wznowienie po limicie zapytań, FTS5 ze stemmingiem, role i podpowiedzi
+  autorytetów, ramka danych niezaufanych, limity rozmiaru, walidacja `evidence`, serwer MCP.
+- Serwer uruchamia się poleceniem z `.mcp.json` (`uv run --with-requirements requirements-mcp.txt …`) i odpowiada
+  na `initialize` i `tools/list`. Pierwsze uruchomienie trwa ok. 11 s (uv instaluje SDK do swojego cache).
+- **Test akceptacyjny na Ukraine '43 czeka na token XML API2** (D-14): `tests/test_bgg_acceptance.py`, uruchomienie
+  `WGU_BGG_ACCEPTANCE=1 python -m pytest tests/test_bgg_acceptance.py -s`. Oczekiwane: sync forów 63–69
+  ≈ 215 zapytań i ≈ 18 min; `search "retreat priority"` zwraca post Simon7itch z 2016-12-17 w wątku 1679334
+  z rolą `designer`. Faktyczny czas i liczbę zapytań wpisać tutaj po pierwszym przebiegu.
+- Pierwszy krok po otrzymaniu tokenu: sprawdzić, czy `forumlist`/`forum`/`thread` nadal działają w XML API2
+  (wiki opisuje je, ale bez tokenu nie dało się tego potwierdzić).
+

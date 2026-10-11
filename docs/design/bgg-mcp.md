@@ -33,16 +33,17 @@ flowchart LR
     SV <--> ST
     AU --> SV --> RD
     RD --> CLI["wgu bgg …<br/>(cli.py)"]
-    RD --> MCP["serwer MCP „bgg”<br/>(server.py, FastMCP, stdio)"]
+    RD --> MCP["serwer MCP „bgg”<br/>(server.py, MCPServer, stdio)"]
     CFG[/wgu.yaml → bgg:/] --> SV
     ENV[/WGU_BGG_TOKEN/] --> CL
 ```
 
 - **Jedno jądro.** `service.py` robi wszystko; CLI i MCP tylko formatują argumenty i wynik. Agenci pluginu (bez
   narzędzi MCP) używają CLI przez Bash, sesja główna może używać narzędzi MCP.
+- **SDK.** `mcp` 2.x (2.3): FastMCP z wersji 1.x nazywa się teraz `MCPServer` (`mcp.server.mcpserver`). Narzędzia synchroniczne SDK uruchamia w wątkach, a `ToolError` trafia do modelu jako czytelny błąd.
 - **Zależności.** Rdzeń wyłącznie z biblioteki standardowej (`urllib.request`, `xml.etree.ElementTree`, `sqlite3`,
   `html`). SDK `mcp` tylko w `server.py`, importowane leniwie; zależność opcjonalna (`requirements-mcp.txt`,
-  `pyproject` → `[project.optional-dependencies] mcp`). `wgu` działa bez SDK.
+  `pyproject` → `[project.optional-dependencies] mcp`, `mcp>=2.3,<3`). `wgu` działa bez SDK.
 
 ## 3. Konfiguracja
 

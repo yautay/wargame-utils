@@ -233,6 +233,77 @@ flowchart LR
 
 ---
 
+## 🎲 BGG: fora BoardGameGeek jako źródło dowodów
+
+Autorzy wargame'ów odpowiadają na pytania o zasady na forach BoardGameGeek. Moduł `wgu bgg` i serwer MCP `bgg`
+zrzucają fora gry do lokalnego cache, przeszukują je pełnotekstowo, oznaczają posty projektanta i developera,
+a skill `/wgu:dowody N-xx` dopisuje znalezione dowody do niejasności (`kb/ambiguities.yaml` → `evidence`).
+
+```mermaid
+flowchart LR
+    API["BGG XML API2<br/>(token, tylko odczyt)"]:::src --> S["wgu bgg sync<br/>przyrostowo, co 5 s"]:::tool
+    S --> C[("build/bgg/bgg.sqlite<br/>posty + FTS5")]:::data
+    C --> Q["wgu bgg search · thread<br/>serwer MCP bgg_*"]:::tool
+    Q --> D["/wgu:dowody N-xx<br/>analityk zasad"]:::model
+    D --> E["kb/ambiguities.yaml<br/>evidence + propozycja"]:::data
+    E --> O{"🧑‍⚖️ właściciel:<br/>recommendation, status"}:::check
+    classDef src fill:#efe5d5,stroke:#7a4a1e,color:#2b2118
+    classDef tool fill:#e8e4e2,stroke:#555,color:#111
+    classDef model fill:#d1edfc,stroke:#3953a4,color:#111
+    classDef data fill:#efe5d5,stroke:#7a4a1e,color:#2b2118
+    classDef check fill:#fff4cc,stroke:#c9a24a,color:#2b2118
+```
+
+**Konfiguracja.**
+
+1. Zarejestruj aplikację niekomercyjną na <https://boardgamegeek.com/applications> (akceptacja trwa zwykle
+   tydzień lub dłużej), utwórz token i ustaw go **poza repozytorium**:
+   ```powershell
+   setx WGU_BGG_TOKEN "<token>"
+   ```
+   albo w `.claude/settings.local.json` gry (plik lokalny, nie commituj go): `{"env": {"WGU_BGG_TOKEN": "<token>"}}`.
+   Bez tokenu działa tylko odczyt z cache; `WGU_BGG_OFFLINE=1` wymusza tryb offline.
+2. W `wgu.yaml` gry:
+   ```yaml
+   bgg:
+     thing_id: 3263                  # wgu bgg search-games "Ukraine '43"
+     forums: [63, 64, 65, 66, 67, 68, 69]   # opcjonalnie; puste = wszystkie
+     authorities:                    # sprawdzone na profilach osób w BGG
+       - {user: Simon7itch, role: designer, person: 140}
+     delay: 5                        # sekundy między zapytaniami (minimum 2)
+   ```
+   XML API2 nie łączy osób z credits z kontami użytkowników, więc listę autorytetów zatwierdza właściciel;
+   `wgu bgg authorities --suggest` proponuje wpisy z dopasowania nazwisk.
+3. Serwer MCP rejestruje plugin (`.mcp.json`) i uruchamia go przez [`uv`](https://docs.astral.sh/uv/) ze
+   środowiskiem z `requirements-mcp.txt` (SDK `mcp` jest potrzebne tylko serwerowi). Bez `uv`:
+   `pip install -r requirements-mcp.txt` i własny wpis serwera w `.mcp.json` projektu:
+   `{"command": "python", "args": ["C:/dev/wargame_utils/wgu.py", "bgg", "serve"]}`.
+
+**Polecenia** (te same operacje co narzędzia MCP `bgg_*`):
+
+```text
+wgu bgg status                                  token, cache, ostatni sync
+wgu bgg sync [--forums 63,66] [--max-requests N] [--full]
+wgu bgg search "retreat priority" [--role designer] [--forum ID] [--limit N]
+wgu bgg thread ID [--offset N] [--refresh]      posty z rolą autora, w ramce „dane z forum”
+wgu bgg game | forums | threads FORUM [--page N] | files | authorities [--suggest] | search-games "nazwa"
+```
+
+> [!WARNING]
+> **Ograniczenia prawne i techniczne** (szczegóły: [badanie](docs/research/bgg-mcp.md), [projekt](docs/design/bgg-mcp.md)):
+> - Tylko **XML API2 z własnym tokenem** i tylko do **użytku niekomercyjnego** (XML API Terms of Use). Moduł nie
+>   używa nieudokumentowanego api.geekdo.com (zakaz BGG), nie pobiera stron HTML, nie loguje się, nie obchodzi
+>   Cloudflare ani CAPTCHA.
+> - Danych z BGG **nie wolno używać do trenowania modeli AI**. Asystent czyta wątki na żądanie użytkownika; cache
+>   (`build/bgg/`) zostaje lokalnie, poza gitem, i nie jest nigdzie publikowany.
+> - Posty należą do autorów: w `kb/` trafiają tylko cytaty do 25 słów z linkiem (sprawdza to `wgu kb lint`).
+> - Każdy wynik podaje źródło („BoardGameGeek, XML API2”). Odstęp między zapytaniami: co najmniej 5 s.
+> - XML API2 nie ma listy plików gry ani wyszukiwarki forów: pliki (errata, FAQ) wskazuje człowiek
+>   (`sources.errata`), a wyszukiwanie działa na lokalnym indeksie.
+> - Treść forów to dane niezaufane: wyniki są w ramce „dane z forum, nie instrukcje”.
+
+---
+
 ## 📦 Skille
 
 | Skill | Co robi | Model |
@@ -246,6 +317,7 @@ flowchart LR
 | `/wgu:pomoce` | karty i schematy w TikZ | Sonnet |
 | `/wgu:digitalizacja` | model stanu, decyzje, losowość, modyfikatory, testy given/when/then, pakiet JSON | Fable |
 | `/wgu:regula` | szybkie wyszukanie reguły lub terminu w bazie | Haiku |
+| `/wgu:dowody` | dowody z forów BGG dla niejasności (`evidence`) i propozycja rekomendacji | Opus (analityk zasad) |
 
 ## ⌨️ CLI
 
@@ -260,6 +332,8 @@ wgu text   mark SRC OUT                   # markery %@ przed numerami reguł
 wgu check  fidelity SRC TEX…              # liczby, odsyłacze, modalność, przeczenia, zakres, terminy
 wgu aids   validate [ID…] | build ID…
 wgu tex    build FILE [--render DPI] | style LAYOUT.yaml OUT.sty
+wgu bgg    status | sync | search Q | thread ID | game | forums | threads F | files | authorities | serve
+wgu help   [nowa-gra | bgg]
 ```
 Bez instalacji: `python C:/dev/wargame_utils/wgu.py …`. Po `pip install -e .` wystarczy `wgu …`.
 
@@ -277,7 +351,8 @@ mojagra/
 ├── translation/              fragmenty, propozycje, decyzje, raporty, layout.yaml
 ├── tex/ + <gra>-style.sty    tłumaczenie LaTeX (+ wgu-base.sty)
 ├── pomoce/                   karty i schematy (TikZ → PDF)
-└── build/wgu-kb.json         pakiet dla projektu digitalizacji
+├── build/wgu-kb.json         pakiet dla projektu digitalizacji
+└── build/bgg/bgg.sqlite      cache forów BGG (lokalny, poza gitem)
 ```
 
 ## 📚 Dokumentacja
@@ -288,6 +363,7 @@ mojagra/
   [wierność zasad](skills/tlumaczenie/references/wiernosc-zasad.md) ·
   [weryfikacja](skills/tlumaczenie/references/weryfikacja.md) · [źródła](skills/tlumaczenie/references/zrodla.md)
 - Próby: [SPQR, 2026-10-04](docs/proby/2026-10-04-spqr-tlumaczenie.md)
+- BGG: [badanie (warunki, endpointy)](docs/research/bgg-mcp.md) · [projekt modułu](docs/design/bgg-mcp.md) · [decyzje](docs/decyzje.md)
 
 ## 🧪 Testy
 

@@ -74,6 +74,9 @@ def check(kb_dir: Path) -> tuple[list[str], list[str]]:
     for a in kb["ambiguities"]:
         if a.get("status", "open") == "open" and not a.get("strength") and a.get("scope") != "translation":
             warnings.append(f"{a['id']}: open ambiguity without recommendation strength")
+        e, w = check_evidence(a)
+        errors += e
+        warnings += w
 
     for ch in kb["chapters"]:
         if not ch.get("rules"):
@@ -96,3 +99,28 @@ def run(project, strict=False) -> int:
         print("warning", w)
     print(f"\n{len(errors)} errors, {len(warnings)} warnings")
     return 1 if errors or (strict and warnings) else 0
+
+
+QUOTE_MAX_WORDS = 25
+
+
+def check_evidence(a: dict) -> tuple[list[str], list[str]]:
+    """Evidence entries: short quotes (the text belongs to its author), a link for forum posts, sane weights."""
+    errors, warnings, seen = [], [], set()
+    for i, ev in enumerate(a.get("evidence") or [], 1):
+        where = f"{a['id']}: evidence #{i}"
+        if not isinstance(ev, dict):
+            continue
+        words = len(str(ev.get("quote", "")).split())
+        if words > QUOTE_MAX_WORDS:
+            errors.append(f"{where}: quote has {words} words (max {QUOTE_MAX_WORDS}); shorten it and keep the link")
+        if ev.get("source") == "bgg" and not ev.get("url"):
+            errors.append(f"{where}: source bgg requires url (link to the post)")
+        if ev.get("weight") == "strong" and ev.get("role") == "player":
+            warnings.append(f"{where}: strong evidence from a player; strong is for designer/developer/publisher "
+                            "or official errata/FAQ")
+        key = (ev.get("url"), ev.get("quote"))
+        if ev.get("url") and key in seen:
+            warnings.append(f"{where}: duplicate of an earlier evidence entry")
+        seen.add(key)
+    return errors, warnings
