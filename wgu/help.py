@@ -48,6 +48,33 @@ Workspace wielu gier:
 
 Zob. też: README.md (Szybki start), docs/MODELE.md (przypisanie modeli).
 """),
+    "bgg": ("Fora BoardGameGeek jako źródło dowodów dla niejasności", """\
+Tylko odczyt, przez XML API2 z tokenem zarejestrowanej aplikacji (niekomercyjnej). Bez tokenu działa
+wyłącznie lokalny cache. Warunki i ograniczenia: README.md, sekcja BGG.
+
+1. Token (raz na komputerze, nigdy w repozytorium):
+     setx WGU_BGG_TOKEN "<token z https://boardgamegeek.com/applications>"
+   Potem otwórz nowy terminal lub zrestartuj Claude Code.
+
+2. W wgu.yaml gry:
+     bgg:
+       thing_id: 3263          # wgu bgg search-games "Ukraine '43"
+       forums: [63, 66]        # opcjonalnie; puste = wszystkie fora gry
+       authorities:            # konta projektanta/developera, sprawdzone na BGG
+         - {user: <login>, role: designer, person: <id osoby z credits>}
+   Kandydaci z dopasowania nazwisk: wgu bgg authorities --suggest
+
+3. Pierwszy zrzut forów (z terminala; odstęp 5 s między zapytaniami, przerwany sync się wznawia):
+     wgu bgg sync
+   Kolejne synce są przyrostowe (tylko zmienione wątki i nowe posty).
+
+4. Szukanie i czytanie:
+     wgu bgg search "retreat priority" --role designer
+     wgu bgg thread 1679334
+   W Claude Code: serwer MCP „bgg” (narzędzia bgg_*) i skill /wgu:dowody N-xx.
+
+Cache: build/bgg/bgg.sqlite w katalogu gry (poza gitem). Cytaty w kb/ ≤ 25 słów z linkiem.
+"""),
 }
 
 

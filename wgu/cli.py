@@ -23,6 +23,8 @@
     wgu terms glossary-tex OUT | import-md MD OUT --layer ID --level L --prefix P --label SRC
     wgu text mark SRC OUT [--pattern RX]     insert `%@ KEY` segment markers before numbered rule headings
     wgu check fidelity SRC TEX… [--no-terms] numbers / cross-refs / modality cues / terms per aligned segment
+    wgu bgg status|game|forums|threads F|thread T|sync|search Q|files|authorities|search-games Q|serve
+                                             BoardGameGeek (XML API2 + cache, read-only); MCP server: bgg serve
 """
 from __future__ import annotations
 
@@ -180,6 +182,11 @@ def cmd_check(a):
     sys.exit(fidelity.run(Path(a.src), [Path(x) for x in a.tex], terms))
 
 
+def cmd_bgg(a):
+    from .bgg.cli import run
+    sys.exit(run(a, lambda: _project(a)))
+
+
 def cmd_workspace(a):
     from .config import find_workspace, workspace_projects
     workspace = find_workspace(required=True)
@@ -249,6 +256,8 @@ def main(argv=None):
     p = sp.add_parser("check"); p.set_defaults(fn=cmd_check)
     p.add_argument("action", choices=["fidelity"]); p.add_argument("src"); p.add_argument("tex", nargs="+")
     p.add_argument("--no-terms", action="store_true")
+    from .bgg.cli import add_parser as add_bgg_parser
+    add_bgg_parser(sp).set_defaults(fn=cmd_bgg)
     a = ap.parse_args(argv)
     if a.project and a.cmd not in ("init", "workspace", "help"):
         from .config import resolve_project

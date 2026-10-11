@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
+    <item type="boardgame" id="900001">
+        <thumbnail>https://example.invalid/thumb.jpg</thumbnail>
+        <name type="primary" sortindex="1" value="Testowa Ofensywa '43" />
+        <name type="alternate" sortindex="1" value="Test Offensive 43" />
+        <description>Syntetyczna gra do testów wgu&nbsp;bgg. R&D edition.</description>
+        <yearpublished value="2001" />
+        <link type="boardgamecategory" id="1019" value="Wargame" />
+        <link type="boardgamedesigner" id="7001" value="Anna Testowa" />
+        <link type="boardgamedesigner" id="7003" value="Jan Drugi (I)" />
+        <link type="boardgamedeveloper" id="7002" value="Piotr Próbny" />
+        <link type="boardgamepublisher" id="5001" value="Wydawnictwo Testowe" />
+        <link type="boardgameartist" id="7004" value="Ewa Rysunek" />
+        <versions>
+            <item type="boardgameversion" id="800001">
+                <thumbnail>https://example.invalid/v1.jpg</thumbnail>
+                <link type="boardgameversion" id="900001" value="Testowa Ofensywa '43" inbound="true" />
+                <name type="primary" sortindex="1" value="First edition" />
+                <link type="boardgamepublisher" id="5001" value="Wydawnictwo Testowe" />
+                <link type="language" id="2184" value="English" />
+                <yearpublished value="2001" />
+                <productcode value="WT-01" />
+            </item>
+            <item type="boardgameversion" id="800002">
+                <name type="primary" sortindex="1" value="Second edition (living rules)" />
+                <link type="boardgamepublisher" id="5001" value="Wydawnictwo Testowe" />
+                <link type="language" id="2199" value="Polish" />
+                <yearpublished value="2017" />
+                <productcode value="" />
+            </item>
+        </versions>
+    </item>
+</items>

@@ -29,6 +29,7 @@ DEFAULTS = {
     "terminology": {"layers": ["common"], "game": "kb/terminology.yaml"},
     "translation_work": {"dir": "translation"},
     "tools": {"lualatex": ""},
+    "bgg": {"thing_id": None, "forums": [], "authorities": [], "cache": "build/bgg", "delay": 5},
 }
 
 
@@ -196,4 +197,8 @@ translation_work:
   dir: translation         # chunks, per-chunk term tables, agent proposals, decision log, verification reports
 tools:
   lualatex: ""             # empty = find on PATH / MiKTeX default location
+bgg:                       # BoardGameGeek (wgu bgg …, MCP server "bgg"); token: env WGU_BGG_TOKEN, never here
+  thing_id: null           # BGG game id (wgu bgg search-games "title")
+  forums: []               # forum ids to sync; empty = all forums of the game
+  authorities: []          # [{{user: <BGG login>, role: designer|developer|publisher, person: <id>, note: ""}}]
 """

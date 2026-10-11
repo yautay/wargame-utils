@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items total="2" termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
+    <item type="boardgame" id="900001">
+        <name type="primary" value="Testowa Ofensywa '43" />
+        <yearpublished value="2001" />
+    </item>
+    <item type="boardgame" id="900002">
+        <name type="alternate" value="Testowa Ofensywa '44" />
+    </item>
+</items>

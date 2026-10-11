@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<user id="700101" name="atest" termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
+    <firstname value="Anna" />
+    <lastname value="Testowa" />
+    <avatarlink value="N/A" />
+    <yearregistered value="2005" />
+    <lastlogin value="2026-09-30" />
+    <stateorprovince value="" />
+    <country value="Poland" />
+    <webaddress value="" />
+    <traderating value="0" />
+</user>
