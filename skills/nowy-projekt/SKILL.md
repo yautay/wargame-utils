@@ -25,5 +25,14 @@ CLI: `python "${CLAUDE_PLUGIN_ROOT}/wgu.py"` (dalej `wgu`). Zależności: `pip i
 4. Stara baza Markdown (`docs/indeks/` z dawnego `/indeksacja`) → zaproponuj `/wgu:atomizacja --import-legacy docs/indeks`.
 5. `wgu config`: pokaż użytkownikowi wynik i zaproponuj kolejność:
    `/wgu:atomizacja` → (`/wgu:tlumaczenie`) → `/wgu:errata` → `/wgu:projekt-pomocy` → `/wgu:pomoce` → `/wgu:digitalizacja`.
-6. `.gitignore` zawiera już `build/`, `kb/_views/` i `pomoce/pdf/_png/` (usuń `kb/_views/`, jeśli widoki mają być w repo).
-   Prywatne źródła (PDF-y wydawcy) commituj tylko, jeśli użytkownik tak robi dotychczas.
+6. `.gitignore` wyklucza wyłącznie sekrety (`.claude/settings.local.json`), cache BGG (`build/bgg/`) i pliki pośrednie
+   (aux/log LaTeX-a, `__pycache__`, `_t_*`). Wszystko inne — także PDF-y wydawcy, PNG, `kb/_views/`, `build/` — trafia
+   do repo (zasada właściciela: na remote 100% plików lokalnych; zob. „Git” niżej).
+
+## Git (zasada właściciela)
+Po zakończeniu pracy i po każdym zamkniętym etapie commituj **wszystkie** zmiany w katalogu gry — także wygenerowane
+PDF-y, PNG, podglądy `_png/`, tła, `kb/_views/`, `build/` i brudnopisy — i wypchnij bieżącą gałąź roboczą (`git push`),
+bez osobnej prośby. Poza gitem zostają wyłącznie: sekrety (`.claude/settings.local.json`), cache BGG (`build/bgg/`,
+bez redystrybucji) i pliki pośrednie (aux/log LaTeX-a, `__pycache__`, `_t_*`). Nie przełączaj gałęzi, nie pushuj na
+`main` i nie używaj `--force` bez polecenia właściciela. Commit dotyczy tylko repo gry (i wskaźnika podmodułu, jeśli
+commit podmodułu jest już na jego remote).

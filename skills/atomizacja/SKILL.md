@@ -30,3 +30,11 @@ CLI narzędzia: `python "${CLAUDE_PLUGIN_ROOT}/wgu.py"` (dalej `wgu`). Agenci ni
    i porównanie ze źródłem.
 5. **Raport dla użytkownika (≤ 200 słów):** liczby z `wgu kb stats`, najważniejsze niejasności, blokery
    (np. brakujący arkusz tabel), proponowane kolejne kroki: `/wgu:projekt-pomocy`, `/wgu:digitalizacja`, `/wgu:errata`.
+
+## Git (zasada właściciela)
+Po zakończeniu pracy i po każdym zamkniętym etapie commituj **wszystkie** zmiany w katalogu gry — także wygenerowane
+PDF-y, PNG, podglądy `_png/`, tła, `kb/_views/`, `build/` i brudnopisy — i wypchnij bieżącą gałąź roboczą (`git push`),
+bez osobnej prośby. Poza gitem zostają wyłącznie: sekrety (`.claude/settings.local.json`), cache BGG (`build/bgg/`,
+bez redystrybucji) i pliki pośrednie (aux/log LaTeX-a, `__pycache__`, `_t_*`). Nie przełączaj gałęzi, nie pushuj na
+`main` i nie używaj `--force` bez polecenia właściciela. Commit dotyczy tylko repo gry (i wskaźnika podmodułu, jeśli
+commit podmodułu jest już na jego remote).

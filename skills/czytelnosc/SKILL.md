@@ -18,3 +18,11 @@ Wymagania: baza `kb/` (fundament kontroli wierności) i tłumaczenie lub orygina
    robi jeden.
 3. Po powrocie: `wgu tex build <plik główny wydania> --render 45`, przegląd 2–3 stron, raport wierności od agenta.
    Pokaż użytkownikowi: plan struktury, przykład przed/po, rozbieżności do decyzji.
+
+## Git (zasada właściciela)
+Po zakończeniu pracy i po każdym zamkniętym etapie commituj **wszystkie** zmiany w katalogu gry — także wygenerowane
+PDF-y, PNG, podglądy `_png/`, tła, `kb/_views/`, `build/` i brudnopisy — i wypchnij bieżącą gałąź roboczą (`git push`),
+bez osobnej prośby. Poza gitem zostają wyłącznie: sekrety (`.claude/settings.local.json`), cache BGG (`build/bgg/`,
+bez redystrybucji) i pliki pośrednie (aux/log LaTeX-a, `__pycache__`, `_t_*`). Nie przełączaj gałęzi, nie pushuj na
+`main` i nie używaj `--force` bez polecenia właściciela. Commit dotyczy tylko repo gry (i wskaźnika podmodułu, jeśli
+commit podmodułu jest już na jego remote).

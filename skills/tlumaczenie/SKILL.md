@@ -98,7 +98,7 @@ Raport: `translation/reports/<tag>.md` według szablonu, z sekcją „Nie zweryf
 - `wgu terms lint`, `wgu terms check <translation.dir>` (0 błędów, 0 „update”), `wgu check fidelity` dla całości.
 - Słowniczek: `wgu terms glossary-tex <translation.dir>/14_slowniczek.tex`.
 - Rozbieżności oryginał↔przekład i niejasności → `kb/ambiguities.yaml` (`scope: translation` / `original`).
-- Commit na gałęzi roboczej. Push tylko na prośbę właściciela.
+- Commit wszystkich plików i push gałęzi roboczej (zob. „Git” niżej).
 - Raport dla właściciela: co zrobione, decyzje do podjęcia (terminy sporne, konflikty z przewodnikiem), niejasności oryginału,
   czego nie zweryfikowano.
 
@@ -113,3 +113,11 @@ jednego terminu (`wgu terms impact`).
 - Jedno pojęcie = jeden zatwierdzony termin. Bez synonimów, neologizmów i kalk. Propozycje nie są decyzjami.
 - Decyzje właściciela (przewodnik, glosariusz) mają pierwszeństwo przed regułami ogólnymi. Konflikty pokazujesz osobno.
 - Nie podszywaj się pod wydawcę: bez logo, stopka „tłumaczenie nieoficjalne”. Pliki UTF-8 bez BOM.
+
+## Git (zasada właściciela)
+Po zakończeniu pracy i po każdym zamkniętym etapie commituj **wszystkie** zmiany w katalogu gry — także wygenerowane
+PDF-y, PNG, podglądy `_png/`, tła, `kb/_views/`, `build/` i brudnopisy — i wypchnij bieżącą gałąź roboczą (`git push`),
+bez osobnej prośby. Poza gitem zostają wyłącznie: sekrety (`.claude/settings.local.json`), cache BGG (`build/bgg/`,
+bez redystrybucji) i pliki pośrednie (aux/log LaTeX-a, `__pycache__`, `_t_*`). Nie przełączaj gałęzi, nie pushuj na
+`main` i nie używaj `--force` bez polecenia właściciela. Commit dotyczy tylko repo gry (i wskaźnika podmodułu, jeśli
+commit podmodułu jest już na jego remote).

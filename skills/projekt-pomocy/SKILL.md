@@ -16,3 +16,11 @@ Argumenty: `$ARGUMENTS`. CLI: `python "${CLAUDE_PLUGIN_ROOT}/wgu.py"` (dalej `wg
    `${CLAUDE_PLUGIN_ROOT}/skills/projekt-pomocy/procedura.md`, pełna ścieżka CLI, katalog projektu, argumenty.
 4. Po powrocie: `wgu aids validate` (0 błędów) i `wgu kb render`. Pokaż użytkownikowi listę pomocy
    (ID, tytuł, typ, priorytet), ostrzeżenia walidatora i polecenie, np. `/wgu:pomoce P01 P04` lub `/wgu:pomoce --priorytet 1`.
+
+## Git (zasada właściciela)
+Po zakończeniu pracy i po każdym zamkniętym etapie commituj **wszystkie** zmiany w katalogu gry — także wygenerowane
+PDF-y, PNG, podglądy `_png/`, tła, `kb/_views/`, `build/` i brudnopisy — i wypchnij bieżącą gałąź roboczą (`git push`),
+bez osobnej prośby. Poza gitem zostają wyłącznie: sekrety (`.claude/settings.local.json`), cache BGG (`build/bgg/`,
+bez redystrybucji) i pliki pośrednie (aux/log LaTeX-a, `__pycache__`, `_t_*`). Nie przełączaj gałęzi, nie pushuj na
+`main` i nie używaj `--force` bez polecenia właściciela. Commit dotyczy tylko repo gry (i wskaźnika podmodułu, jeśli
+commit podmodułu jest już na jego remote).

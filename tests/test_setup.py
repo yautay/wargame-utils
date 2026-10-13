@@ -27,7 +27,9 @@ def test_setup_sorts_files_and_writes_project(tmp_path):
     pr = find_project(tmp_path)
     assert pr.get("sources")["rules"][0]["path"] == "docs/Rules.pdf"
     assert pr.get("pdf")["accent_color"] == "0000FF"
-    assert "build/" in (tmp_path / ".gitignore").read_text()
+    gi = (tmp_path / ".gitignore").read_text().splitlines()
+    assert "build/bgg/" in gi and ".claude/settings.local.json" in gi
+    assert not {"build/", "kb/_views/", "pomoce/pdf/_png/"} & set(gi)   # wyniki trafiają do repo
     cfg = json.loads((tmp_path / ".claude" / "settings.json").read_text())
     assert cfg["enabledPlugins"] == {"wgu@wargame-utils": True}
     assert log
