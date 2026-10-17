@@ -233,6 +233,55 @@ flowchart LR
 
 ---
 
+## 🎲 BGG: źródła, CLI i lokalny indeks
+
+MCP i `wgu bgg` korzystają z jednego klienta XML API2 i rejestru dowodów.
+Najpierw szukaj lokalnie: FTS5 obsługuje angielski stemming, frazy w cudzysłowie i OR.
+Indeks obejmuje tylko wcześniej pobrane wpisy. Brak trafienia nie oznacza braku odpowiedzi na BGG.
+
+W `wgu.yaml` gry ustaw `bgg: {thing_id: 3263, cache: build/bgg}`.
+Token przekazuj przez `BGG_API_TOKEN`, rejestr przez `BGG_AUTHORITY_FILE`.
+`WGU_BGG_TOKEN` i `WGU_BGG_OFFLINE` pozostają aliasami zgodności;
+nowy kod używa `BGG_API_TOKEN` i `BGG_OFFLINE=1`. Nie zapisuj tokenu w repozytorium.
+`bgg.authorities` i dopasowanie nazwiska nie potwierdzają roli; nie są używane do weryfikacji.
+
+```text
+wgu bgg status
+wgu bgg search "retreat priority" --role designer
+wgu bgg forums
+wgu bgg threads 125746 --page 1
+wgu bgg sync --forum 125746 --threads ID1,ID2 --max-batches 1
+wgu bgg thread ID --count 100 --min-article-id 1
+wgu bgg game | files | authorities | search-games "nazwa"
+wgu bgg serve
+```
+
+Wpis pluginu `.mcp.json` uruchamia ten sam serwer przez `uv`, które musi być zainstalowane.
+Można też użyć własnego środowiska Python z `requirements.txt`, zgodnie z przykładem konfiguracji MCP poniżej.
+
+`sync` wymaga wybranych 1–5 ID wątków z jednej strony zweryfikowanego forum.
+Domyślnie pobiera jedną partię, maksymalnie pięć po 100 wpisów, plus metadane forum.
+Zwraca `pending_thread_ids`; kolejne uruchomienie ręcznie wznawia od kursora.
+Nie ma pełnej synchronizacji forum ani automatycznego odświeżania po upływie czasu.
+W razie błędu pobieranie ustaje; poprzednie partie pozostają w indeksie.
+
+CLI zwraca JSON z oryginalnymi wpisami i oddzielną oceną `authority_verification`.
+`search` nie wykonuje żadnych żądań sieciowych; filtr roli jest sprawdzany na nowo z rejestru.
+Nieznane konto to `unverified`, nie potwierdzony gracz. `verified_role_statement` nie jest
+oficjalną klaryfikacją; ta wymaga dowodu dla konkretnego wpisu.
+
+Indeks CLI jest w `<gra>/build/bgg/bgg.sqlite`; MCP uruchomione w katalogu tej gry używa tego
+samego pliku. MCP uruchomione poza grą domyślnie używa `~/.cache/wgu/bgg/index.sqlite`.
+`BGG_INDEX_PATH` pozwala wskazać wspólny plik obu interfejsom. Cache i indeks pozostają lokalne,
+poza Git. Stary indeks z brancha bez oryginalnych metadanych wymaga celowanego ponownego
+pobrania; zapisane dawniej role nie są uznawane za dowód.
+
+Skill `/wgu:dowody N-xx` zapisuje krótkie cytaty z linkami w opcjonalnym polu `evidence`.
+`wgu kb lint` sprawdza długość cytatu, linki i dowody weryfikacji. Samo znalezienie źródła
+nie zmienia statusu ani rekomendacji niejasności.
+
+---
+
 ## 📦 Skille
 
 | Skill | Co robi | Model |
@@ -246,6 +295,7 @@ flowchart LR
 | `/wgu:pomoce` | karty i schematy w TikZ | Sonnet |
 | `/wgu:digitalizacja` | model stanu, decyzje, losowość, modyfikatory, testy given/when/then, pakiet JSON | Fable |
 | `/wgu:regula` | szybkie wyszukanie reguły lub terminu w bazie | Haiku |
+| `/wgu:dowody` | dowody z forów BGG dla niejasności (`evidence`) i propozycja rekomendacji | Opus (analityk zasad) |
 
 ## ⌨️ CLI
 
@@ -260,10 +310,12 @@ wgu text   mark SRC OUT                   # markery %@ przed numerami reguł
 wgu check  fidelity SRC TEX…              # liczby, odsyłacze, modalność, przeczenia, zakres, terminy
 wgu aids   validate [ID…] | build ID…
 wgu tex    build FILE [--render DPI] | style LAYOUT.yaml OUT.sty
+wgu bgg    status | sync | search Q | thread ID | game | forums | threads F | files | authorities | serve
+wgu help   [nowa-gra | bgg]
 ```
 Bez instalacji: `python C:/dev/wargame_utils/wgu.py …`. Po `pip install -e .` wystarczy `wgu …`.
 
-## 🔌 BGG: planowany serwer MCP
+## 🔌 BGG: serwer MCP
 
 <p align="center">
   <a href="https://boardgamegeek.com/">
@@ -303,8 +355,8 @@ Przykład konfiguracji klienta MCP (token dziedziczony ze środowiska, ścieżki
 }
 ```
 
-Narzędzia: `bgg_search_games`, `bgg_forums`, `bgg_find_clarifications`, `bgg_search_posts`, `bgg_threads`, `bgg_thread`, `bgg_verify_authority`.
-Najpierw znajdź grę i jej forum Rules, potem szukaj oryginalnych terminów w tytułach i pobierz wybrane
+Narzędzia: `bgg_game`, `bgg_search_cached_posts`, `bgg_sync`, `bgg_search_games`, `bgg_forums`, `bgg_find_clarifications`, `bgg_search_posts`, `bgg_threads`, `bgg_thread`, `bgg_verify_authority`.
+Najpierw sprawdź lokalny indeks przez `bgg_search_cached_posts`. W razie potrzeby znajdź grę i jej forum Rules, potem szukaj oryginalnych terminów w tytułach i pobierz wybrane
 wątki. `bgg_find_clarifications` przeszukuje tytuły, do 3 stron po 50 wątków na wywołanie.
 `bgg_search_posts` szuka frazy w **treści wpisów**, również przy niepasującym tytule. Dopasowanie ignoruje
 wielkość liter, normalizuje odstępy i odczytuje tekst HTML tylko do wyszukania; zwracana treść pozostaje oryginalna.
@@ -350,9 +402,9 @@ Planowany przebieg:
 
 [BGG XML API2](https://boardgamegeek.com/wiki/page/BGG_XML_API2) udostępnia listę forów gry (`forumlist`),
 listy wątków (`forum`) i wpisy wątku (`thread`). Endpoint `search` wyszukuje po nazwach obiektów,
-nie w treści dyskusji. Wyszukiwanie klaryfikacji będzie więc wymagało selekcji wątków i przeszukiwania
+nie w treści dyskusji. Wyszukiwanie klaryfikacji wymaga selekcji wątków i przeszukiwania
 pobranych treści, z jawnym zakresem przeszukania — brak trafienia nie dowodzi braku odpowiedzi na BGG.
-Pobieranie będzie ograniczone do potrzeb pytania, z cache, ograniczeniem częstotliwości i obsługą ponowień.
+Pobieranie jest ograniczone do potrzeb pytania, z cache, ograniczeniem częstotliwości i obsługą ponowień.
 
 Metadane gier i wydań służą identyfikacji właściwych źródeł. Statystyki i kolekcje użytkowników
 są zakresem dodatkowym, po obsłudze klaryfikacji zasad.
@@ -408,7 +460,8 @@ mojagra/
 ├── translation/              fragmenty, propozycje, decyzje, raporty, layout.yaml
 ├── tex/ + <gra>-style.sty    tłumaczenie LaTeX (+ wgu-base.sty)
 ├── pomoce/                   karty i schematy (TikZ → PDF)
-└── build/wgu-kb.json         pakiet dla projektu digitalizacji
+├── build/wgu-kb.json         pakiet dla projektu digitalizacji
+└── build/bgg/bgg.sqlite      cache forów BGG (lokalny, poza gitem)
 ```
 
 ## 📚 Dokumentacja
@@ -419,6 +472,7 @@ mojagra/
   [wierność zasad](skills/tlumaczenie/references/wiernosc-zasad.md) ·
   [weryfikacja](skills/tlumaczenie/references/weryfikacja.md) · [źródła](skills/tlumaczenie/references/zrodla.md)
 - Próby: [SPQR, 2026-10-04](docs/proby/2026-10-04-spqr-tlumaczenie.md)
+- BGG: [badanie (warunki, endpointy)](docs/research/bgg-mcp.md) · [projekt modułu](docs/design/bgg-mcp.md) · [decyzje](docs/decyzje.md)
 
 ## 🧪 Testy
 

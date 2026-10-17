@@ -20,3 +20,11 @@ Argumenty: `$ARGUMENTS`. CLI: `python "${CLAUDE_PLUGIN_ROOT}/wgu.py"` (dalej `wg
 4. Po powrocie: `wgu aids build <ID…>` dla kontroli i obejrzenie 1–2 PNG. Zeszyt zbiorczy (jeśli agent go
    zaktualizował): `wgu tex build "<aids.tex>/Pomoce PL.tex"`. Raport dla użytkownika: ścieżki PDF,
    odstępstwa od specyfikacji, problemy do `/wgu:projekt-pomocy`.
+
+## Git (zasada właściciela)
+Po zakończeniu pracy i po każdym zamkniętym etapie commituj **wszystkie** zmiany w katalogu gry — także wygenerowane
+PDF-y, PNG, podglądy `_png/`, tła, `kb/_views/`, `build/` i brudnopisy — i wypchnij bieżącą gałąź roboczą (`git push`),
+bez osobnej prośby. Poza gitem zostają wyłącznie: sekrety (`.env`, `.env.*`, `.claude/settings.local.json`), cache BGG (`build/bgg/`,
+bez redystrybucji) i pliki pośrednie (aux/log LaTeX-a, `__pycache__`, `_t_*`). Nie przełączaj gałęzi, nie pushuj na
+`main` i nie używaj `--force` bez polecenia właściciela. Commit dotyczy tylko repo gry (i wskaźnika podmodułu, jeśli
+commit podmodułu jest już na jego remote).

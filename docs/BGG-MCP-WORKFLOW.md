@@ -8,6 +8,9 @@ udokumentowanego XML API BGG, a nie wyszukiwarką całej witryny.
 1. Przeczytaj `wgu.yaml`: tytuł, wydanie, wersję instrukcji i lokalne źródła. Sprawdź `kb/`,
    istniejące niejasności, erratę i wcześniej zapisane linki. Nie powtarzaj zakończonej kwerendy
    bez nowego pytania, nowego źródła lub potrzeby sprawdzenia aktualizacji.
+   Następnie `bgg_search_cached_posts` (lub CLI `wgu bgg search`): lokalny SQLite/FTS5,
+   bez tokenu i bez sieci, ze stemmingiem angielskim, frazami i OR. Indeks zawiera tylko
+   pobrane wcześniej wpisy; pusta lista trafień nie uzasadnia pełnego pobrania forum.
 2. Jeśli potrzebne są dane BGG, korzystaj najpierw z narzędzi MCP WGU. Nie otwieraj wyszukiwarki,
    przeglądarki ani stron BGG tylko po to, aby ponownie pobrać treść dostępną przez MCP.
    Znany ID gry/forum/wątku wykorzystaj ponownie; nazwy gry szukaj przez `bgg_search_games`
@@ -32,6 +35,9 @@ udokumentowanego XML API BGG, a nie wyszukiwarką całej witryny.
   pomiędzy procesami.
 - Cache jest obsługiwany przez klienta; nie usuwaj go i nie omijaj przed ponownym zapytaniem.
   Nie pobieraj całego forum na zapas ani nie twórz masowego archiwum.
+  `bgg_sync` i `wgu bgg sync` wymagają 1–5 wybranych ID wątków z jednej strony forum gry;
+  domyślnie jedna partia, maksymalnie pięć po 100 wpisów, plus metadane forum.
+  Kontynuuj ręcznie po `pending_thread_ids`; bez pełnego sync i automatycznego odświeżania.
 - Domyślny budżet pracy AI nad jednym pytaniem: do 5 pobrań partii wpisów łącznie, również
   gdy rozbijasz je na kilka wywołań. Dodatkowo tylko potrzebne listy forów/wątków. Narzędzie
   ogranicza pojedyncze wywołanie do 5 partii po 100 wpisów, ale nie pilnuje łącznego budżetu rozmowy.
@@ -50,6 +56,9 @@ udokumentowanego XML API BGG, a nie wyszukiwarką całej witryny.
 `bgg_search_posts` dodaje `authority_verification`; przy `bgg_thread` podaj sprawdzone `game_id`.
 W razie potrzeby wywołaj `bgg_verify_authority` z oryginalnymi metadanymi konta, daty i ID wpisu.
 Powiązania kont pochodzą z rejestru `BGG_AUTHORITY_FILE`, którego zakres jest specyficzny dla gry.
+Lokalny FTS sprawdza ten rejestr na nowo przy każdym zapytaniu. Dawne `bgg.authorities`,
+`designer?` i dopasowania nazwiska nie nadają roli. Wiersze starego indeksu bez oryginalnych
+metadanych wymagają celowanego ponownego pobrania, a nie migracji dawnych oznaczeń.
 
 - `unverified` oznacza brak potwierdzenia, a nie dowód, że osoba jest zwykłym graczem.
 - `verified_role_statement` potwierdza rolę autora/wydawcy, ale nie oficjalność rozstrzygnięcia.

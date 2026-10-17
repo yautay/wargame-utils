@@ -15,7 +15,9 @@ from pathlib import Path
 from .config import CONFIG_NAME, INIT_TEMPLATE
 
 IMAGE_EXT = {".png", ".jpg", ".jpeg"}
-GITIGNORE = ["build/", "kb/_views/", "pomoce/pdf/_png/", "__pycache__/", "*.aux", "*.log", "*.out", "*.toc",
+# Zasada właściciela (2026-10-13): na remote 100% plików projektu, także wyniki (PDF, PNG, kb/_views, build/).
+# Ignorowane są wyłącznie sekrety, cache BGG (bez redystrybucji) i pliki pośrednie, które build sam usuwa.
+GITIGNORE = [".claude/settings.local.json", ".env", ".env.*", "build/bgg/", ".bgg-cache/", "__pycache__/", "*.aux", "*.log", "*.out", "*.toc",
              "*.fls", "*.fdb_latexmk", "*.synctex.gz", "_t_*"]
 PLUGIN_ROOT = Path(__file__).resolve().parent.parent
 

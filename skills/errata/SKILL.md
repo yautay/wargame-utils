@@ -27,3 +27,11 @@ Jeśli agent nie ma narzędzi MCP, przekaż mu zebrane źródła, metadane, ocen
    według `kb/changes.yaml` (oznaczenie zgodne z przewodnikiem stylu, np. `\nowe{}` lub ramka errata), kompiluje
    (`wgu tex build`) i raportuje. Pomoce do zmiany oznacz w specyfikacjach `status: issues` z opisem
    i zaproponuj `/wgu:projekt-pomocy --popraw …`.
+
+## Git (zasada właściciela)
+Po zakończeniu pracy i po każdym zamkniętym etapie commituj **wszystkie** zmiany w katalogu gry — także wygenerowane
+PDF-y, PNG, podglądy `_png/`, tła, `kb/_views/`, `build/` i brudnopisy — i wypchnij bieżącą gałąź roboczą (`git push`),
+bez osobnej prośby. Poza gitem zostają wyłącznie: sekrety (`.env`, `.env.*`, `.claude/settings.local.json`), cache BGG (`build/bgg/`,
+bez redystrybucji) i pliki pośrednie (aux/log LaTeX-a, `__pycache__`, `_t_*`). Nie przełączaj gałęzi, nie pushuj na
+`main` i nie używaj `--force` bez polecenia właściciela. Commit dotyczy tylko repo gry (i wskaźnika podmodułu, jeśli
+commit podmodułu jest już na jego remote).

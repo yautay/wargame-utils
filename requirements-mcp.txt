@@ -1,0 +1,2 @@
+-r requirements.txt
+# Compatibility entry point; one SDK range is defined in requirements.txt.

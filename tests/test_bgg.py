@@ -28,6 +28,7 @@ def test_cache_auth_and_rate_limit(tmp_path, monkeypatch):
     client.forums(1)
     assert len(opener.calls) == 1
     assert opener.calls[0].get_header('Authorization') == 'Bearer test-secret'
+    opener.data = b'<forums><forum id="4" name="Other game"/></forums>'
     client.forums(3)
     assert sleeps == [5]
     assert all('test-secret' not in p.name and b'test-secret' not in p.read_bytes()
@@ -74,7 +75,7 @@ def test_mcp_tools():
     import asyncio
     server = create_server()
     names = {tool.name for tool in asyncio.run(server.list_tools())}
-    assert names == {'bgg_search_games', 'bgg_forums', 'bgg_find_clarifications', 'bgg_threads', 'bgg_thread', 'bgg_search_posts', 'bgg_verify_authority'}
+    assert names == {'bgg_search_games', 'bgg_forums', 'bgg_find_clarifications', 'bgg_threads', 'bgg_thread', 'bgg_search_posts', 'bgg_verify_authority', 'bgg_search_cached_posts', 'bgg_sync', 'bgg_game'}
 
 
 def post_search_client(tmp_path, monkeypatch, threads):

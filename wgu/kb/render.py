@@ -71,6 +71,12 @@ def amb_md(a):
         out += _bullet(k, v)
     if a.get("body"):
         out += a["body"] + "\n"
+    for ev in a.get("evidence") or []:
+        who = " · ".join(str(x) for x in [ev.get("author"), ev.get("role"), ev.get("date")] if x)
+        link = f" ({ev['url']})" if ev.get("url") else ""
+        note = f" — {ev['note']}" if ev.get("note") else ""
+        out += (f"- **Dowód** [{ev.get('source')}, waga {ev.get('weight')}, wspiera {ev.get('supports')}] {who}: "
+                f"„{ev.get('quote', '')}”{link}{note}\n")
     meta = ", ".join(x for x in [a.get("status"), a.get("strength")] if x)
     return out + (f"- *status: {meta}*\n" if meta else "")
 

@@ -13,7 +13,7 @@ from urllib.request import Request, build_opener, HTTPRedirectHandler
 
 from defusedxml import ElementTree as ET
 from defusedxml.common import DefusedXmlException
-from .bgg_authority import AuthorityRegistry
+from ..bgg_authority import AuthorityRegistry
 
 BASE = "https://boardgamegeek.com"
 MAX_BYTES = 4 * 1024 * 1024
@@ -59,18 +59,26 @@ def positive(value: int, maximum: int = 2**31 - 1) -> int:
 
 
 class BGGClient:
-    def __init__(self, cache_dir=None, *, opener=None, sleep=time.sleep, clock=time.monotonic):
+    def __init__(self, cache_dir=None, *, opener=None, sleep=time.sleep, clock=time.monotonic, index_path=None):
         self.cache = Path(cache_dir or os.environ.get("BGG_CACHE_DIR") or
                           Path.home() / ".cache" / "wgu" / "bgg")
         self.opener = opener or build_opener(NoRedirect())
         self.sleep, self.clock = sleep, clock
         self.lock = threading.Lock()
         self.last_request = None
+        configured_index = os.environ.get('BGG_INDEX_PATH') or index_path
+        self.index_path = Path(configured_index) if configured_index else self.cache / 'index.sqlite'
+
+    def local_index(self):
+        from .index import LocalIndex
+        return LocalIndex(self.index_path)
 
     def xml(self, endpoint, **params):
-        if endpoint not in {"search", "forumlist", "forum", "thread"}:
+        if endpoint not in {"search", "thing", "forumlist", "forum", "thread"}:
             raise ValueError("Niedozwolony endpoint.")
-        token = os.environ.get("BGG_API_TOKEN", "").strip()
+        if os.environ.get('BGG_OFFLINE', os.environ.get('WGU_BGG_OFFLINE', '0')) not in ('', '0'):
+            raise BGGError('Tryb offline: korzystaj z lokalnego indeksu BGG.')
+        token = os.environ.get("BGG_API_TOKEN", os.environ.get('WGU_BGG_TOKEN', '')).strip()
         if not token:
             raise BGGError("Ustaw zmienną środowiskową BGG_API_TOKEN.")
         url = f"{BASE}/xmlapi2/{endpoint}?{urlencode(sorted(params.items()))}"
@@ -126,27 +134,59 @@ class BGGClient:
 
     def forums(self, game_id):
         root = self.xml("forumlist", id=positive(game_id), type="thing")
-        return [dict(n.attrib) for n in root.findall("forum")]
+        forums = [dict(n.attrib) for n in root.findall("forum")]
+        with self.local_index() as index:
+            index.register_forums(game_id, forums)
+        return forums
 
     def threads(self, forum_id, page=1):
         root = self.xml("forum", id=positive(forum_id), page=positive(page, 10000))
-        return [dict(n.attrib, url=f"{BASE}/thread/{n.get('id')}")
-                for n in root.findall(".//thread")]
+        threads = [dict(n.attrib, url=f"{BASE}/thread/{n.get('id')}")
+                   for n in root.findall(".//thread")]
+        with self.local_index() as index:
+            index.register_threads(forum_id, threads)
+        return threads
 
     def thread(self, thread_id, count=100, min_article_id=1, game_id=None):
         if game_id is not None:
             positive(game_id)
+            with self.local_index() as index:
+                index.check_game(thread_id, game_id)
         root = self.xml("thread", id=positive(thread_id), count=positive(count, 100),
                         minarticleid=positive(min_article_id))
         posts = [{"metadata": dict(n.attrib), "body": n.findtext("body", ""),
                   "subject": n.findtext("subject", ""),
                   "url": f"{BASE}/article/{n.get('id')}", "authority": "unverified"}
                  for n in root.findall(".//article")]
+        if posts and min(int(p['metadata']['id']) for p in posts) < min_article_id:
+            raise BGGError('BGG nie respektuje kursora wpisów; zapytanie zatrzymane.')
         if game_id is not None:
             AuthorityRegistry().annotate(posts, game_id)
-        return {"thread_id": thread_id, "posts": posts,
+        result = {"thread_id": thread_id, "posts": posts,
                 "possibly_more": len(posts) == count,
-                "next_min_article_id": max((int(p['metadata']['id']) for p in posts), default=0) + 1}
+                "next_min_article_id": max((int(p['metadata']['id']) for p in posts), default=min_article_id - 1) + 1}
+        if game_id is not None:
+            with self.local_index() as index:
+                index.ingest(game_id, thread_id, result, min_article_id)
+        return result
+
+    def search_cached_posts(self, game_id, query, forum_id=None, author_role=None, limit=10):
+        """Local FTS5 only: no token, metadata fetch, sync or implicit network request."""
+        positive(game_id)
+        positive(limit, 50)
+        if forum_id is not None:
+            positive(forum_id)
+        if not query.strip() or len(query) > 200:
+            raise ValueError('Podaj zapytanie (1–200 znaków).')
+        with self.local_index() as index:
+            return index.search(game_id, query, forum_id, author_role, limit)
+
+    def game(self, game_id):
+        from .xmlapi import thing
+        data = thing(self.xml('thing', id=positive(game_id), versions=1))
+        if data is None:
+            raise BGGError('BGG nie zwróciło danych gry.')
+        return data
 
     def find_clarifications(self, game_id, query, forum_id, pages=1):
         positive(pages, 3)
@@ -208,6 +248,8 @@ class BGGClient:
                                 "posts_scanned": len(data["posts"])})
                 posts_scanned += len(data["posts"])
                 registry.annotate(data['posts'], game_id)
+                with self.local_index() as index:
+                    index.ingest(game_id, int(thread['id']), data, article_id)
                 for post in data["posts"]:
                     if needle in search_text(post["body"]):
                         matches.append({"thread": thread, "post": post})

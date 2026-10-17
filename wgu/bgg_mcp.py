@@ -15,13 +15,23 @@ operatora. verified_role_statement nie oznacza oficjalnej klaryfikacji. unverifi
 nie oznacza potwierdzonego gracza. Nie dopisuj samodzielnie dowodów do rejestru.
 Nie używaj danych do treningu AI/LLM. Nie zmieniaj danych źródłowych ani nie
 zapisuj automatycznie rozstrzygnięć w kb/. Zgłaszaj sprzeczności i zakres wyszukania.
+Najpierw bgg_search_cached_posts: lokalny FTS5 bez sieci. Pobierane wątki są
+indeksowane po ustaleniu przynależności przez bgg_forums i bgg_threads.
+bgg_sync wymaga 1–5 wybranych ID wątków i maksymalnie 5 partii; bez zrzutu forum.
 Warunki: https://boardgamegeek.com/xmlapi/termsofuse
 Instrukcja: https://boardgamegeek.com/using_the_xml_api
 """
 
 
 def create_server(client=None):
-    client = client or BGGClient()
+    if client is None:
+        from .config import find_project
+        try:
+            project = find_project()
+        except SystemExit:
+            project = None
+        client = (BGGClient(index_path=project.root / project.data['bgg']['cache'] / 'bgg.sqlite')
+                  if project else BGGClient())
     server = FastMCP("WGU BGG", instructions=INSTRUCTIONS)
 
     def result(data):
@@ -37,6 +47,34 @@ def create_server(client=None):
     def bgg_forums(game_id: int) -> dict:
         """Lista forów gry. Wybierz forum zasad (Rules) na podstawie nazwy."""
         return result(client.forums(game_id))
+
+    @server.tool()
+    def bgg_game(game_id: int) -> dict:
+        """Metadane gry i wydań z XML API2. Credits nie potwierdzają kont autorów wpisów."""
+        return result(client.game(game_id))
+
+    @server.tool()
+    def bgg_search_cached_posts(game_id: int, query: str, forum_id: int | None = None,
+                                author_role: str | None = None, limit: int = 10) -> dict:
+        """FTS5 tylko w lokalnie pobranych wpisach: stemming, frazy i OR, bez sieci i tokenu.
+        Rola jest sprawdzana na nowo z BGG_AUTHORITY_FILE; brak dowodu to unverified.
+        Pozostałe role: designer, publisher_representative, community_member. Nie zgaduj po nicku.
+        """
+        return result(client.search_cached_posts(game_id, query, forum_id, author_role, limit))
+
+    @server.tool()
+    def bgg_sync(game_id: int, forum_id: int, thread_ids: list[int],
+                 max_batches: int = 1, page: int = 1) -> dict:
+        """Indeksuj wyłącznie wskazane 1–5 wątków z jednej strony forum tej gry.
+        Do 5 partii po 100 wpisów plus forumlist/forum. Domyślnie jedna partia.
+        Kontynuacja jest ręczna: pending_thread_ids, bez powtarzania zakończonych wątków.
+        Po błędzie zatrzymaj kwerendę; nie uruchamiaj pełnej synchronizacji forum.
+        """
+        from pathlib import Path
+        from types import SimpleNamespace
+        from .bgg.service import Bgg
+        project = SimpleNamespace(root=Path.cwd(), data={'bgg': {'thing_id': game_id}})
+        return result(Bgg(project, client=client).sync(thread_ids, forum_id, max_batches, page))
 
     @server.tool()
     def bgg_find_clarifications(game_id: int, query: str, forum_id: int, pages: int = 1) -> dict:
@@ -83,9 +121,9 @@ def create_server(client=None):
     return server
 
 
-def main():
+def main(argv=None):
     parser = argparse.ArgumentParser(description="Lokalny MCP BGG (stdio). Wymaga BGG_API_TOKEN.")
-    parser.parse_args()
+    parser.parse_args(argv)
     create_server().run(transport="stdio")
 
 

@@ -113,7 +113,27 @@
         "resolution_source": {"$ref": "#/$defs/md"}, "impact": {"$ref": "#/$defs/md"},
         "status": {"enum": ["open", "resolved", "house-rule", "wont-fix"]},
         "resolution": {"$ref": "#/$defs/md", "description": "how/when resolved (errata, FAQ, owner decision)"},
-        "refs": {"$ref": "#/$defs/ids"}, "extra": {"type": "object"}, "body": {"$ref": "#/$defs/md"}
+        "refs": {"$ref": "#/$defs/ids"}, "extra": {"type": "object"}, "body": {"$ref": "#/$defs/md"},
+        "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"},
+                     "description": "external evidence for a reading: forum posts (BGG), errata, FAQ, e-mails from the designer"}
+      }
+    },
+    "evidence": {
+      "type": "object", "required": ["source", "quote", "supports", "weight"],
+      "properties": {
+        "source": {"type": "string", "description": "bgg | errata | faq | email | other"},
+        "url": {"type": "string"},
+        "author": {"type": "string", "description": "login or name of the author"},
+        "role": {"enum": ["designer", "developer", "publisher", "player", "other", "publisher_representative", "community_member", "unverified"]},
+        "verification": {"enum": ["unverified", "community_interpretation", "verified_role_statement", "official_clarification"],
+                         "description": "verification of this specific post, separate from the author's claimed role"},
+        "verification_evidence": {"type": "array", "items": {"type": "object", "required": ["url", "description"],
+          "properties": {"url": {"type": "string", "pattern": "^https://"}, "description": {"type": "string", "minLength": 1}}}},
+        "date": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"},
+        "quote": {"type": "string", "description": "verbatim, in the source language, at most 25 words (wgu kb lint)"},
+        "supports": {"type": "string", "description": "reading the evidence supports: a, b, … or none"},
+        "weight": {"enum": ["strong", "medium", "weak"]},
+        "note": {"$ref": "#/$defs/md"}
       }
     },
     "ambiguitiesFile": {"type": "object", "properties": {"ambiguities": {"type": "array", "items": {"$ref": "#/$defs/ambiguity"}}}},

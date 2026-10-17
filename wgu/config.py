@@ -29,6 +29,7 @@ DEFAULTS = {
     "terminology": {"layers": ["common"], "game": "kb/terminology.yaml"},
     "translation_work": {"dir": "translation"},
     "tools": {"lualatex": ""},
+    "bgg": {"thing_id": None, "cache": "build/bgg"},
 }
 
 
@@ -196,4 +197,7 @@ translation_work:
   dir: translation         # chunks, per-chunk term tables, agent proposals, decision log, verification reports
 tools:
   lualatex: ""             # empty = find on PATH / MiKTeX default location
+bgg:                       # BoardGameGeek (wgu bgg …, MCP server "bgg"); token: env BGG_API_TOKEN, never here
+  thing_id: null           # BGG game id (wgu bgg search-games "title")
+  cache: build/bgg          # local FTS5 index, outside git; sync requires explicit --forum and --threads
 """

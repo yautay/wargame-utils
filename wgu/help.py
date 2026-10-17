@@ -48,6 +48,25 @@ Workspace wielu gier:
 
 Zob. też: README.md (Szybki start), docs/MODELE.md (przypisanie modeli).
 """),
+    "bgg": ("BGG: celowane źródła i lokalny FTS5", """\
+Token: BGG_API_TOKEN w środowisku, rejestr dowodów: BGG_AUTHORITY_FILE.
+W wgu.yaml: bgg: {thing_id: 3263, cache: build/bgg}.
+Najpierw lokalnie (bez sieci): wgu bgg search "retreat priority" --role designer
+Selekcja: wgu bgg forums; wgu bgg threads FORUM_ID --page 1
+Celowane pobranie: wgu bgg sync --forum FORUM_ID --threads ID1,ID2 --max-batches 1
+Oryginały: wgu bgg thread ID --count 100 --min-article-id 1
+MCP: wgu mcp lub wgu bgg serve (jeden serwer, SDK MCP 1.x).
+Sync: 1–5 wskazanych wątków, domyślnie jedna partia, najwyżej 5 po 100 wpisów;
+metadane osobno. Kontynuacja ręczna przez pending_thread_ids; bez pełnego zrzutu forum.
+Odstęp >=5 s, cache XML 1 h, maksymalnie 3 próby HTTP. Po błędzie zatrzymaj kwerendę.
+BGG_OFFLINE=1 blokuje sieć. WGU_BGG_TOKEN/OFFLINE to aliasy zgodności.
+Role wyłącznie z BGG_AUTHORITY_FILE; bgg.authorities i nazwisko nie są dowodem.
+Nieznane konto: unverified. Rola autora nie potwierdza oficjalności konkretnego wpisu.
+Indeks: build/bgg/bgg.sqlite w grze; MCP poza grą: ~/.cache/wgu/bgg/index.sqlite.
+BGG_INDEX_PATH pozwala użyć tego samego indeksu w CLI i MCP.
+Oryginały, metadane, linki i daty są zachowane; FTS5 jest osobną pochodną do wyszukiwania.
+Cache poza Git, cytaty evidence <=25 słów. Protokół: docs/BGG-MCP-WORKFLOW.md.
+"""),
 }
 
 
