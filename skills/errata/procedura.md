@@ -13,6 +13,9 @@
 4. Zaktualizuj `relations.yaml`, `tables.yaml`, `scenarios.yaml` (odpowiedzi mogą się zmienić — sprawdź każdą z `refs`).
 
 ## B. Errata, FAQ, wyjaśnienia autora
+Przy źródłach BGG stosuj `docs/BGG-MCP-WORKFLOW.md` z repo WGU (orkiestrator przekazuje pełną
+ścieżkę lub pakiet źródeł). Sama obecność odpowiedzi w MCP nie nadaje jej statusu oficjalnego.
+Nie rozstrzygaj niejasności na podstawie `unverified` lub samego `verified_role_statement`.
 1. Każdy punkt → `kb/changes.yaml` z `kind: errata | faq | clarification` i `source` (dokument, data, strona/link).
 2. Jeśli punkt rozstrzyga niejasność: w `kb/ambiguities.yaml` ustaw `status: resolved`, dopisz `resolution`
    (co i na jakiej podstawie) i ID zmiany w `refs`.

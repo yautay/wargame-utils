@@ -1,3 +1,5 @@
 pyyaml>=6
 jsonschema>=4.18
 pymupdf>=1.24
+mcp>=1.12,<2
+defusedxml>=0.7.1

@@ -9,6 +9,12 @@ disable-model-invocation: true
 
 Argumenty: `$ARGUMENTS`. CLI: `python "${CLAUDE_PLUGIN_ROOT}/wgu.py"` (dalej `wgu`).
 
+Klaryfikacje BGG wyszukuj przez MCP zgodnie z `${CLAUDE_PLUGIN_ROOT}/docs/BGG-MCP-WORKFLOW.md`:
+najpierw źródła lokalne, potem małe partie MCP, bez ponownego otwierania stron BGG dla dostępnych wpisów.
+Zlecenie użytkownika szukania klaryfikacji obejmuje potrzebne zapytania MCP w tym zakresie;
+nie pytaj ponownie o każde zapytanie. Nie obejmuje masowego archiwizowania ani publikacji.
+Jeśli agent nie ma narzędzi MCP, przekaż mu zebrane źródła, metadane, ocenę autorstwa i zakres kwerendy.
+
 1. `wgu config`, `wgu kb stats`. Brak bazy → najpierw `/wgu:atomizacja`. Nowe źródła (PDF wersji, errata)
    dopisz do `wgu.yaml` (`sources.rules` z `role`, `sources.errata`). Materiały z sieci pobieraj tylko za zgodą
    użytkownika (podaj adres i rozmiar).

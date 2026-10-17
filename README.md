@@ -263,6 +263,137 @@ wgu tex    build FILE [--render DPI] | style LAYOUT.yaml OUT.sty
 ```
 Bez instalacji: `python C:/dev/wargame_utils/wgu.py …`. Po `pip install -e .` wystarczy `wgu …`.
 
+## 🔌 BGG: planowany serwer MCP
+
+<p align="center">
+  <a href="https://boardgamegeek.com/">
+    <img src="https://dm1i7q1ruvbhg.cloudfront.net/assets/powered_by_bgg-9f2993c7fad826d5407c35b5c8117b08d2a6cdf5beb1f0c02d06a7dc7f5cdd7f.png" alt="Powered by BGG" width="300">
+  </a>
+</p>
+
+Serwer MCP do BoardGameGeek jest częścią WGU w **tym repozytorium**. Pierwsza wersja działa lokalnie
+przez stdio. Dane poszczególnych gier nadal należą do repozytoriów gier.
+
+### Uruchomienie MCP
+
+AI szukające klaryfikacji musi stosować [protokół korzystania z MCP BGG](docs/BGG-MCP-WORKFLOW.md):
+najpierw lokalne źródła i MCP, bez zbędnego przeglądania witryny BGG, z budżetem i oceną dowodów.
+
+Zainstaluj zależności przez `pip install -r requirements.txt`. Ustaw `BGG_API_TOKEN` w środowisku procesu
+uruchamiającego MCP (po zmianie zmiennych systemowych może być potrzebne ponowne uruchomienie klienta).
+Token nie jest odczytywany z repozytorium ani wypisywany przez narzędzia.
+
+```bash
+python -m wgu.bgg_mcp
+# albo po instalacji WGU:
+wgu mcp
+```
+
+Przykład konfiguracji klienta MCP (token dziedziczony ze środowiska, ścieżki dostosuj do instalacji):
+
+```json
+{
+  "mcpServers": {
+    "wgu-bgg": {
+      "command": "F:/repo/wargame-utils/.venv/Scripts/python.exe",
+      "args": ["-m", "wgu.bgg_mcp"],
+      "cwd": "F:/repo/wargame-utils"
+    }
+  }
+}
+```
+
+Narzędzia: `bgg_search_games`, `bgg_forums`, `bgg_find_clarifications`, `bgg_search_posts`, `bgg_threads`, `bgg_thread`, `bgg_verify_authority`.
+Najpierw znajdź grę i jej forum Rules, potem szukaj oryginalnych terminów w tytułach i pobierz wybrane
+wątki. `bgg_find_clarifications` przeszukuje tytuły, do 3 stron po 50 wątków na wywołanie.
+`bgg_search_posts` szuka frazy w **treści wpisów**, również przy niepasującym tytule. Dopasowanie ignoruje
+wielkość liter, normalizuje odstępy i odczytuje tekst HTML tylko do wyszukania; zwracana treść pozostaje oryginalna.
+Jedno wywołanie sprawdza fragment jednej strony forum, maksymalnie 5 partii po 100 wpisów
+(`max_batches`: 1–5), plus listę forów gry i stronę listy wątków. Każde pobranie używa wspólnego
+cache i ogranicznika zapytań; limit 3 prób HTTP nadal obowiązuje. To ograniczenia WGU, nie gwarantowany limit BGG.
+Wynik zawiera `visited`, liczbę sprawdzonych wpisów, powód zatrzymania oraz `next_cursor`.
+Kontynuuj ręcznie parametrami kursora, zachowując tę samą grę, forum i frazę. Lista wątków jest zmienna:
+przesunięcia po aktualizacjach mogą powodować powtórzenia lub pominięcia. Błąd BGG zatrzymuje pobieranie
+i zwraca dotychczasowe trafienia; nie należy automatycznie kontynuować po błędzie.
+Brak trafień w sprawdzonym fragmencie nie oznacza braku klaryfikacji na całym forum.
+Pobranie wpisów przez `bgg_thread` jest ograniczone do 100 na wywołanie z kontynuacją po ID.
+Autorstwo i daty pochodzą z BGG. Weryfikacja roli korzysta z lokalnego rejestru dowodów
+`BGG_AUTHORITY_FILE`: powiązanie konta z konkretną grą musi zatwierdzić operator na podstawie źródeł.
+Wyniki wyszukiwania wpisów automatycznie zawierają ocenę roli i osobną ocenę oficjalności wypowiedzi.
+Brak dowodu pozostawia `unverified`, a sama potwierdzona rola nie nadaje wpisowi statusu oficjalnej klaryfikacji.
+Konfiguracja, wymagane dowody i format rejestru: [weryfikacja autorstwa BGG](docs/BGG-AUTHORITY.md).
+
+Cache oryginalnych odpowiedzi XML jest ważny godzinę i znajduje się w `~/.cache/wgu/bgg`
+(można zmienić przez `BGG_CACHE_DIR`). Każdy proces wykonuje najwyżej jedno zapytanie co 5 sekund,
+z maksymalnie 3 próbami dla przejściowych błędów HTTP. Uruchamiaj jedną instancję dla tokenu — limit
+nie jest współdzielony między procesami. Błędy autoryzacji i przekierowania zatrzymują zapytanie.
+Przed przekazaniem treści zewnętrznemu klientowi LLM uwzględnij jego politykę używania danych;
+danych BGG nie wolno używać do treningu.
+
+**Główny cel MCP: znajdowanie klaryfikacji zasad konkretnej gry**, przede wszystkim odpowiedzi autorów
+i wydawców oraz wyjaśnień i dyskusji graczy. Ma wspierać rozstrzyganie niejasności podczas atomizacji,
+tłumaczenia, weryfikacji zasad i pracy z erratą.
+
+Planowany przebieg:
+
+1. Ustalenie gry, jej identyfikatora BGG oraz wydania i wersji instrukcji, której dotyczy pytanie.
+2. Odnalezienie forum zasad gry, wybór wątków pasujących do pytania, terminu lub numeru reguły
+   i pobranie dyskusji wraz z kontekstem odpowiedzi.
+3. Zwrócenie źródeł: linku do konkretnego wpisu, autora, daty, istotnego fragmentu i kontekstu wydania.
+   Status autora/projektanta lub przedstawiciela wydawcy wymaga potwierdzenia dla danej gry;
+   sama nazwa konta ani ogólne oznaczenie „Designer” nie wystarczają.
+4. Rozróżnienie oficjalnej erraty/FAQ, potwierdzonej odpowiedzi autora lub wydawcy, interpretacji gracza
+   i reguły domowej. Sprzeczne odpowiedzi i brak rozstrzygnięcia mają być jawnie wskazane;
+   popularność wpisu nie nadaje mu oficjalnego statusu.
+5. Przygotowanie materiału do oceny i powiązania z regułami w `kb/`, z zachowaniem pochodzenia źródeł.
+   Znalezienie wypowiedzi nie oznacza automatycznej zmiany zasad w bazie wiedzy.
+
+[BGG XML API2](https://boardgamegeek.com/wiki/page/BGG_XML_API2) udostępnia listę forów gry (`forumlist`),
+listy wątków (`forum`) i wpisy wątku (`thread`). Endpoint `search` wyszukuje po nazwach obiektów,
+nie w treści dyskusji. Wyszukiwanie klaryfikacji będzie więc wymagało selekcji wątków i przeszukiwania
+pobranych treści, z jawnym zakresem przeszukania — brak trafienia nie dowodzi braku odpowiedzi na BGG.
+Pobieranie będzie ograniczone do potrzeb pytania, z cache, ograniczeniem częstotliwości i obsługą ponowień.
+
+Metadane gier i wydań służą identyfikacji właściwych źródeł. Statystyki i kolekcje użytkowników
+są zakresem dodatkowym, po obsłudze klaryfikacji zasad.
+
+### Dostęp i wymagania BGG
+
+Punktem wyjścia jest wskazana w mailu zatwierdzającym
+[instrukcja Using the XML API](https://boardgamegeek.com/using_the_xml_api), wraz z powiązanymi
+[XML API Terms of Use](https://boardgamegeek.com/xmlapi/termsofuse) i
+[dokumentacją XML API2](https://boardgamegeek.com/wiki/page/BGG_XML_API2).
+Przed implementacją i wydaniem należy ponownie sprawdzić aktualne zasady oraz zakres zgłoszonej aplikacji.
+
+- **Wierność danych:** warunki zabraniają modyfikowania danych pobranych przez API, w tym wpisów
+  użytkowników. Zachowujemy oryginalną treść i pochodzenie; własne adnotacje i oceny źródeł muszą być
+  wyraźnie oddzielone. Nie przedstawiamy parafrazy ani tłumaczenia jako oryginalnej wypowiedzi.
+- **AI/LLM:** zabronione jest używanie danych BGG do trenowania systemów AI lub LLM. Nie tworzymy z nich
+  zbiorów treningowych. Zakazu treningu nie utożsamiamy z zakazem każdego użycia przy odpowiadaniu,
+  ale samo zatwierdzenie aplikacji nie rozstrzyga wszystkich kwestii MCP, streszczeń i materiałów
+  pochodnych — ich dopuszczalność trzeba ocenić względem pełnych warunków i faktycznego zgłoszenia.
+- **Źródło i obciążenie:** wyniki muszą wskazywać BoardGameGeek jako źródło. Pobieramy tylko potrzebne
+  dane przez udokumentowane XML API, korzystamy z cache i ograniczonej liczby ponowień; nie obchodzimy
+  blokad ani ograniczeń i nie budujemy masowego archiwum forum.
+- **Zgoda:** 16 października 2026 BGG zatwierdziło zgłoszoną aplikację niekomercyjną. Zgoda dotyczy tej
+  aplikacji; nie oznacza automatycznego zatwierdzenia innych aplikacji korzystających z kodu WGU.
+- **Token:** po zatwierdzeniu należy wygenerować token w
+  [Applications → Tokens](https://boardgamegeek.com/applications). Konfiguracja WGU używa zmiennej
+  środowiskowej `BGG_API_TOKEN`. Token przechowuj poza repozytorium; nie dodawaj go do kodu, przykładów,
+  logów ani plików konfiguracji gier. Żądania HTTPS wymagają nagłówka `Authorization: Bearer <token>`.
+- **Zakres użycia:** planujemy lokalny MCP na potrzeby zatwierdzonej aplikacji. BGG zabrania usług
+  pośredniczących udostępniających dane innym aplikacjom. Publiczny serwer MCP dla innych aplikacji wymaga
+  osobnego uzgodnienia z BGG; każda odrębna aplikacja używająca biblioteki powinna mieć własny token.
+- **Oznaczenie:** publiczna aplikacja musi wyświetlać czytelne logo **„Powered by BGG”** z odnośnikiem do
+  BoardGameGeek. Sam tekst w README nie zastępuje logo w aplikacji. Oficjalne pliki logo są wskazane
+  w [instrukcji używania XML API](https://boardgamegeek.com/using_the_xml_api).
+- **Opłaty i wsparcie:** według otrzymanego zatwierdzenia aplikacja niekomercyjna obecnie nie podlega
+  opłatom. BGG nie zapewnia wsparcia technicznego XML API; zasady i limity mogą się zmieniać.
+
+Implementację i użycie integracji należy opierać na aktualnych
+[zasadach BGG XML API](https://boardgamegeek.com/using_the_xml_api), z minimalizowaniem liczby zapytań
+i bez korzystania z prywatnych endpointów serwisu.
+
 ## 📁 Repozytorium gry po pełnym przebiegu
 
 ```text

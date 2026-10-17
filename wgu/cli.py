@@ -208,6 +208,8 @@ def cmd_workspace(a):
 
 def main(argv=None):
     argv = sys.argv[1:] if argv is None else argv
+    if argv and argv[0] == "mcp":
+        return _forward("bgg_mcp", argv[1:])
     if argv and argv[0] == "pdf":
         sub = {"analyze": "pdf.analyze", "extract": "pdf.extract_source", "images": "pdf.extract_images",
                "render": "pdf.render_pages", "layout": "pdf.layout", "compare": "pdf.compare"}

@@ -13,3 +13,6 @@ Uruchom: `python "${CLAUDE_PLUGIN_ROOT}/wgu.py" kb show $ARGUMENTS`
   werdykt → łańcuch reguł z ID → zastrzeżenia (niejasności, zasady tytułu, opcje).
 - „not found”: spróbuj `grep -ril "<słowo>" kb/rules kb/terms.yaml` i pokaż znalezione ID przez `kb show`.
 - Nie czytaj PDF instrukcji. Jeśli baza nie wystarcza, powiedz to i zaproponuj `/wgu:atomizacja` dla uzupełnienia.
+- Jeśli użytkownik zleca znalezienie zewnętrznej klaryfikacji, zastosuj protokół
+  `${CLAUDE_PLUGIN_ROOT}/docs/BGG-MCP-WORKFLOW.md`: lokalna baza → MCP → źródła i zakres.
+  Nie szukaj ponownie po stronie BGG treści już zwróconej przez MCP; nie zmieniaj bazy w tym skillu.

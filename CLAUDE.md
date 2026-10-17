@@ -2,6 +2,9 @@
 
 - To repo **narzędzia**: plugin Claude Code (`skills/`, `agents/`, `.claude-plugin/`) i CLI Python (`wgu/`).
   Dane gier żyją w repozytoriach gier (`wgu.yaml` + `kb/`). Nie dodawaj tu niczego specyficznego dla jednej gry.
+- Klaryfikacje z BGG: najpierw lokalna baza i MCP WGU, według
+  [protokołu dla AI](docs/BGG-MCP-WORKFLOW.md). Nie otwieraj ponownie stron BGG dla treści
+  już dostępnej przez MCP. Jedna instancja, małe partie, bez obchodzenia cache, blokad lub limitów.
 - Kontrakt danych: `wgu/schemas/kb.schema.json`. Zmiana schematu = zmiana kontraktu z projektami digitalizacji.
   Dodawaj pola opcjonalne. Pola usuwane lub przemianowane wymagają podbicia wersji (`wgu/kb@2`) i opisu migracji.
 - Kod: Python ≥ 3.10, zależności tylko z `requirements.txt`. Nazwy pól i kod po angielsku. Skille, agenci i
